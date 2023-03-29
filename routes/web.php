@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('{any}', function () {
     return view('app');
 })->where('any','.*');
+
+//Acceder a la tienda para visualizar los productos
+Route::get('/tienda', function () {
+    return view('tienda');
+});
+
+Route::get('/test', function () { 
+    return 'test'; 
+});

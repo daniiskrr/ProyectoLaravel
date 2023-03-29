@@ -8,5 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
-
+class ProductoController extends Controller{
+    public function index()
+    {
+        return view('index');
+    }
+}
 ?>
