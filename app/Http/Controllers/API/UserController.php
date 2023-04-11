@@ -36,29 +36,29 @@ class UserController extends Controller{
     }
 
     public function register(Request $request){
-
         try{
             $user = new User();
-            $user->name = $request->name;
+            $user->nombre = $request->nombre;
+            $user->apellidos = $request->apellidos;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
+            $user->fecha_nacimiento = $request->fecha_nacimiento;
+            $user->direccion = $request->direccion;
+            $user->telefono = $request->telefono;
             $user->save();
-   
+    
             $success = true;
             $message = "Usuario registrado correctamente";
-        }catch(\Illuminate\Database\QueryException $ex){
+        } catch(\Illuminate\Database\QueryException $ex){
             $success = false;
             $message = $ex->getMessage();
         }
-       
-
-
+    
         $response=[
             'success' => $success,
             'message' => $message,
         ];
-
-
+    
         return response()->json($response);
     }
 

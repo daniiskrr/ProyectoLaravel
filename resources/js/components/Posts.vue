@@ -1,6 +1,5 @@
 <template>
 
-
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">

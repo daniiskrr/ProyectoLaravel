@@ -1,5 +1,5 @@
 <template>
-    <p>Home</p>
+    <p>fcgc  tcttctcf </p>
 </template>
 
 <script>

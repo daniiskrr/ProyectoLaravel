@@ -10,25 +10,55 @@
  
  
                 <div class="card card-default">
-                    <div class="card-header"><h5>Register New User</h5></div>
+                    <div class="card-header"><h5>Registrarme</h5></div>
                     <div class="card-body">
                         <form>
- 
- 
                             <div class="form-group row">
-                                <label for="name" class="col-sm-4 col-form-label text-md-right">Name</label>
+                                <label for="nombre" class="col-sm-4 col-form-label text-md-right">Nombre</label>
                                 <div class="col-md-8">
-                                    <input id="name" type="text" class="form-control" v-model="name" required
-                                           autofocus autocomplete="off"  placeholder="Enter your name">
+                                    <input id="nombre" type="text" class="form-control" v-model="nombre" required
+                                        autofocus autocomplete="off"  placeholder="Introduce tu nombre">
+                                </div>
+                            </div>
+ 
+                            <div class="form-group row mt-1">
+                                <label for="apellidos" class="col-sm-4 col-form-label text-md-right">Apellidos</label>
+                                <div class="col-md-8">
+                                    <input id="apellidos" type="text" class="form-control" v-model="apellidos" required
+                                           autofocus autocomplete="off" placeholder="Introduce tus apellidos">
+                                </div>
+                            </div>
+ 
+                            <div class="form-group row mt-1">
+                                <label for="fecha_nacimiento" class="col-sm-4 col-form-label text-md-right">Fecha de nacimiento</label>
+                                <div class="col-md-8">
+                                    <input id="fecha_nacimiento" type="date" class="form-control" v-model="fecha_nacimiento" required
+                                           autofocus autocomplete="off" placeholder="Enter your birth date">
+                                </div>
+                            </div>
+ 
+                            <div class="form-group row mt-1">
+                                <label for="direccion" class="col-sm-4 col-form-label text-md-right">Direccion</label>
+                                <div class="col-md-8">
+                                    <input id="direccion" type="text" class="form-control" v-model="direccion" required
+                                           autofocus autocomplete="off" placeholder="Introduce tu direccion">
+                                </div>
+                            </div>
+ 
+                            <div class="form-group row mt-1">
+                                <label for="telefono" class="col-sm-4 col-form-label text-md-right">Telefono</label>
+                                <div class="col-md-8">
+                                    <input id="telefono" type="text" class="form-control" v-model="telefono" required
+                                           autofocus autocomplete="off" placeholder="Introduce tu número de teléfono">
                                 </div>
                             </div>
  
  
                             <div class="form-group row mt-1">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
+                                <label for="email" class="col-sm-4 col-form-label text-md-right">Correo electrónico</label>
                                 <div class="col-md-8">
                                     <input id="email" type="email" class="form-control" v-model="email" required
-                                           autofocus autocomplete="off" placeholder="Enter your email">
+                                           autofocus autocomplete="off" placeholder="Introduce tu correo electrónico">
                                 </div>
                             </div>
  
@@ -39,7 +69,7 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-8">
                                     <input id="password" type="password" class="form-control" v-model="password"
-                                           required autocomplete="off" placeholder="Enter your password">
+                                           required autocomplete="off" placeholder="Introduce tu contraseña">
                                 </div>
                             </div>
  
@@ -56,15 +86,11 @@
                             <div class="row mt-1">
                                 <div class="col-md-8 offset-md-4">
                                     <small class="text-muted">
-                                        Have an account? Please
-                                        <router-link to="/login" >login</router-link>
+                                        Ya tienes cuenta? Haz clic
+                                        <router-link to="/login" >aquí</router-link>
                                     </small>
                                 </div>
                             </div>
- 
- 
- 
- 
                         </form>
                     </div>
                 </div>
@@ -77,44 +103,55 @@
  
  
  <script>
- export default {
-    name: "Register"
-    ,data() {
-        return {
-            name:"",
-            email:"",
-            password:"",
-            error: null
-        }
-    },
-    methods: {
-        register(e){
-            e.preventDefault()
-            if(this.password.length > 0) {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.post('api/register', {
-                        name: this.name,
-                        email: this.email,
-                        password: this.password
-                    })
-                        .then(response => {
-                            if (response.data.success) {
-                                window.location.href = "/login"
-                            } else {
-                                this.error = response.data.message
-                            }
-                        })
-                        .catch(function (error) {
-                            console.error(error);
-                        });
-                })
-            }
-        }
+export default {
+  name: "Register",
+  data() {
+    return {
+      nombre: "",
+      apellidos: "",
+      fecha_nacimiento: "",
+      direccion: "",
+      telefono: "",
+      tipo_suscripcion: "",
+      duracion: "",
+      email: "",
+      password: "",
+      error: null
+    };
+  },
+  methods: {
+    register(e) {
+      e.preventDefault();
+      if (this.password.length > 0) {
+        this.$axios.get("/sanctum/csrf-cookie").then(response => {
+          this.$axios
+            .post("api/register", {
+              nombre: this.nombre,
+              apellidos: this.apellidos,
+              fecha_nacimiento: this.fecha_nacimiento,
+              direccion: this.direccion,
+              telefono: this.telefono,
+              tipo_suscripcion: this.tipo_suscripcion,
+              duracion: this.duracion,
+              email: this.email,
+              password: this.password
+            })
+            .then(response => {
+              if (response.data.success) {
+                window.location.href = "/login";
+              } else {
+                this.error = response.data.message;
+              }
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
+        });
+      }
     }
- 
- 
- }
- </script>
+  }
+};
+</script>
  
  
  <style scoped>
