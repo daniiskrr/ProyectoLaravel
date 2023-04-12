@@ -17,11 +17,11 @@ class PostController extends Controller
     public function add(Request $request){
 
         $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-                'price' => 'required',
-            ]);
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);    
         
         $input = $request->all();
         $imageName = NULL;

@@ -72,6 +72,7 @@
             name: '',
             description: '',
             img: '',
+            price: '',
             strSuccess: '',
             strError: '',
             imgPreview: null
@@ -110,7 +111,9 @@
                 const formData = new FormData();
                 formData.append('name', this.name);
                 formData.append('description', this.description);
+                formData.append('price', this.price);
                 formData.append('file', this.img);
+                
  
  
                 this.$axios.post('/api/posts/add', formData, config)
