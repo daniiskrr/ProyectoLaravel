@@ -9,6 +9,8 @@ class Posts extends Model
 {
     use HasFactory;
 
+    protected $table = 'productos';
+    
     protected $fillable = [
         'name',
         'description',
