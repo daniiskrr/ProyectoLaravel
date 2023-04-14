@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('producto', function (Blueprint $table) {
-            $table->id();
+            $table->id(); //ya tiene autoincrement
+            $table->string('nombre');
+            $table->longText('descripcion')->nullable(); //para que no sea obligatorio
             $table->unsignedBigInteger('id_suscripcion');
-            $table->string('nombre_producto', 50);
-            $table->decimal('precio_unidad', 10, 2);
-            $table->string('imagen', 100);
+            $table->string('image');
+            $table->integer('precio');
             $table->timestamps();
-            
+
             $table->foreign('id_suscripcion')->references('id')->on('suscripcion');
         });
-        
     }
 
     /**

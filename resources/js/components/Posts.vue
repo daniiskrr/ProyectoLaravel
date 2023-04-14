@@ -14,19 +14,21 @@
                 <thead class="bg-dark text-light">
                 <tr>
                     <th width="50" class="text-center">#</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th class="text-center" width="120">Image</th>
-                    <th class="text-center" width="200">Actions</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Suscripcion</th>
+                    <th>Precio</th>
+                    <th class="text-center" width="120">Imagen</th>
+                    <th class="text-center" width="200">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="(post, index) in posts" :key="post.id">
                     <td class="text-center">{{index}}</td>
-                    <td>{{post.name}}</td>
-                    <td>{{post.description}}</td>
-                    <td>{{post.price}}</td>
+                    <td>{{post.nombre}}</td>
+                    <td>{{post.descripcion}}</td>
+                    <td>{{post.id_suscripcion}}</td>
+                    <td>{{post.precio}}€</td>
                     <td class="text-center">
                         <div v-if="post.image">
                             <img alt="post-img" width="100" v-bind:src="'/img/' + post.image">

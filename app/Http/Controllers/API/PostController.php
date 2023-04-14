@@ -17,9 +17,10 @@ class PostController extends Controller
     public function add(Request $request){
 
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'id_suscripcion' => 'required',
+            'precio' => 'required',
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);    
         

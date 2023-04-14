@@ -27,23 +27,28 @@
  
             <form @submit.prevent="addPost" enctype="multipart/form-data">
                 <div class="form-group mb-2">
-                    <label>Name</label><span class="text-danger"> *</span>
-                    <input type="text" class="form-control" v-model="name" placeholder="Enter post name">
+                    <label>Nombre</label><span class="text-danger"> *</span>
+                    <input type="text" class="form-control" v-model="nombre" placeholder="Introduce el nombre">
                 </div>
  
  
                 <div class="form-group mb-2">
-                    <label>Description</label><span class="text-danger"> *</span>
-                    <textarea class="form-control" rows="3" v-model="description" placeholder="Enter post description"></textarea>
+                    <label>Descripcion</label><span class="text-danger"> *</span>
+                    <textarea class="form-control" rows="3" v-model="descripcion" placeholder="Introduce la descripcion"></textarea>
                 </div>
 
                 <div class="form-group mb-2">
-                    <label>Price</label><span class="text-danger"> *</span>
-                    <textarea class="form-control" rows="3" v-model="price" placeholder="Enter Price"></textarea>
+                    <label>Suscripcion</label><span class="text-danger"> *</span>
+                    <input type="text" class="form-control" v-model="id_suscripcion" placeholder="Introduce la suscripcion">
+                </div>
+
+                <div class="form-group mb-2">
+                    <label>Precio</label><span class="text-danger"> *</span>
+                    <textarea class="form-control" rows="3" v-model="precio" placeholder="Introduce el precio"></textarea>
                 </div>
  
  
-                <div class="form-gorup mb-2">
+                <div class="form-group mb-2">
                     <label>Image</label><span class="text-danger"> *</span>
                     <input type="file" class="form-control mb-2" v-on:change="onChangeImg">
  
@@ -69,10 +74,11 @@
  export default {
     data() {
         return {
-            name: '',
-            description: '',
+            nombre: '',
+            descripcion: '',
+            id_suscripcion: '',
             img: '',
-            price: '',
+            precio: '',
             strSuccess: '',
             strError: '',
             imgPreview: null
@@ -109,9 +115,10 @@
  
  
                 const formData = new FormData();
-                formData.append('name', this.name);
-                formData.append('description', this.description);
-                formData.append('price', this.price);
+                formData.append('nombre', this.nombre);
+                formData.append('descripcion', this.descripcion);
+                formData.append('id_suscripcion', this.id_suscripcion);
+                formData.append('precio', this.precio);
                 formData.append('file', this.img);
                 
  
@@ -129,8 +136,6 @@
                     );
             });
         }
-        /* FIN*/
- 
  
     }
  }

@@ -9,12 +9,13 @@ class Posts extends Model
 {
     use HasFactory;
 
-    protected $table = 'productos';
+    protected $table = 'producto';
     
     protected $fillable = [
-        'name',
-        'description',
+        'nombre',
+        'descripcion',
+        'id_suscripcion',
         'image',
-        'price',
+        'precio',
     ];
 }
