@@ -38,8 +38,13 @@
                 </div>
 
                 <div class="form-group mb-2">
-                    <label>Suscripcion</label><span class="text-danger"> *</span>
-                    <input type="text" class="form-control" v-model="id_suscripcion" placeholder="Introduce la suscripcion">
+                    <label for="suscripcion">Suscripción</label><span class="text-danger"> *</span>
+                    <select class="form-control" v-model="id_suscripcion" id="suscripcion">
+                        <option value="1">No tiene Suscripcion</option>
+                        <option value="2">Playstation Plus Essential</option>
+                        <option value="3">Playstation Plus Extra</option>
+                        <option value="4">Playstation Plus Premium</option>
+                    </select>
                 </div>
 
                 <div class="form-group mb-2">
