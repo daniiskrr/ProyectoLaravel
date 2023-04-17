@@ -51,15 +51,9 @@
                                     </small>
                                 </div>
                             </div>
- 
- 
- 
- 
                         </form>
                     </div>
                 </div>
- 
- 
             </div>
         </div>
     </div>
@@ -89,7 +83,7 @@
                                 console.error('OK');
                                 this.$router.go('/login')
                             } else {
-                                console.error('No loggin');
+                                console.error('No login');
                                 this.error = response.data.message
                             }
                         })

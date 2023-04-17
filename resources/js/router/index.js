@@ -7,6 +7,7 @@ import Dashboard from '../components/Dashboard.vue'; //Al iniciar sesión, será
 import Posts from '../components/Posts.vue'; //Nuestra Tienda
 import AddPost from '../components/AddPost.vue'; //Añadir Producto
 import EditPost from '../components/EditPost.vue'; //Editar Producto
+import Prueba from '../components/Prueba.vue'; //Editar Producto
 export const routes = [
    {
        name: 'home',
@@ -43,6 +44,11 @@ export const routes = [
         path: '/posts/edit',
         component: EditPost
     },
+    {
+        name: 'prueba',
+        path: '/prueba',
+        component: Prueba
+    }
     
 
 ];
