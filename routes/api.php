@@ -20,7 +20,6 @@ use App\Http\Controllers\API\PostController;
 Route::post('login',[UserController::class,'login']);
 Route::post('register',[UserController::class,'register']);
 Route::post('logout',[UserController::class,'logout'])->middleware(middleware:'auth:sanctum');
-Route::get('/', [UserController::class, 'index']);
 
 Route::group(['prefix' => 'posts','middleware' => 'auth:sanctum'], function(){
     Route::get('/', [PostController::class, 'index']);

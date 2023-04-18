@@ -21,11 +21,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(post, index) in posts" :key="post.id">
+                <tr v-for="(usuario, index) in users" :key="usuario.id">
                     <td class="text-center">{{index}}</td>
-                    <td>{{post.nombre}}</td>
-                    <td>{{post.descripcion}}</td>
-                    <td>{{post.precio}}€</td>
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.apellidos}}</td>
+                    <td>{{usuario.fecha_nacimiento}}</td>
+                    <td>{{usuario.direccion}}</td>
+                    <td>{{usuario.telefono}}</td>
+                    <td>{{usuario.tipo_suscripcion}}</td>
+                    <td>{{usuario.duracion}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td>{{usuario.apellidos}}</td>
                     <td class="text-center">
                         <router-link :to="{name:'edituser'}" class="btn btn-warning">Edit</router-link>
                         <button class="btn btn-danger">Delete</button>
