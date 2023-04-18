@@ -7,6 +7,7 @@
             <div class="navbar-nav" v-if="isLoggedin">
                 <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
                 <router-link to="/posts" class="nav-item nav-link">xxxx</router-link>
+                <router-link to="/prueba" class="nav-item nav-link">Pruebita</router-link>
                 <a class="nav-item nav-link" style="cursor: pointer;" @click="logout">Logout</a>
             </div>
             <div class="navbar-nav" v-else>
