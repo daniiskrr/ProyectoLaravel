@@ -7,7 +7,8 @@ import Dashboard from '../components/Dashboard.vue'; //Al iniciar sesión, será
 import Posts from '../components/Posts.vue'; //Nuestra Tienda
 import AddPost from '../components/AddPost.vue'; //Añadir Producto
 import EditPost from '../components/EditPost.vue'; //Editar Producto
-import Prueba from '../components/Prueba.vue'; //Editar Producto
+import PanelUsuarios from '../components/PanelUsuarios.vue'; //Editar Producto
+import AddUser from '../components/AddUser.vue'; //Añadir Usuario desde panel de usuarios
 export const routes = [
    {
        name: 'home',
@@ -45,9 +46,14 @@ export const routes = [
         component: EditPost
     },
     {
-        name: 'prueba',
-        path: '/prueba',
-        component: Prueba
+        name: 'PanelUsuarios',
+        path: '/panelusuarios',
+        component: PanelUsuarios
+    },
+    {
+        name: 'AddUser',
+        path: '/adduser',
+        component: AddUser
     }
     
 

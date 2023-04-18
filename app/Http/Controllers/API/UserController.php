@@ -81,6 +81,12 @@ class UserController extends Controller{
 
         return response()->json($response);
     }
+
+    //Cojer todos los datos
+    public function index(){
+        $usuario = Users::all()->toArray();
+        return $usuario;
+    }
 }
 
 

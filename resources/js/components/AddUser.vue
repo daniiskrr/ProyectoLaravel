@@ -10,14 +10,14 @@
  
  
                 <div class="card card-default">
-                    <div class="card-header"><h5>Registrarme</h5></div>
+                    <div class="card-header"><h5>Crear Usuario</h5></div>
                     <div class="card-body">
                         <form>
                             <div class="form-group row">
                                 <label for="nombre" class="col-sm-4 col-form-label text-md-right">Nombre</label>
                                 <div class="col-md-8">
                                     <input id="nombre" type="text" class="form-control" v-model="nombre" required
-                                        autofocus autocomplete="off"  placeholder="Introduce tu nombre">
+                                        autofocus autocomplete="off"  placeholder="Introduce el nombre">
                                 </div>
                             </div>
  
@@ -25,7 +25,7 @@
                                 <label for="apellidos" class="col-sm-4 col-form-label text-md-right">Apellidos</label>
                                 <div class="col-md-8">
                                     <input id="apellidos" type="text" class="form-control" v-model="apellidos" required
-                                           autofocus autocomplete="off" placeholder="Introduce tus apellidos">
+                                           autofocus autocomplete="off" placeholder="Introduce los apellidos">
                                 </div>
                             </div>
  
@@ -33,7 +33,7 @@
                                 <label for="fecha_nacimiento" class="col-sm-4 col-form-label text-md-right">Fecha de nacimiento</label>
                                 <div class="col-md-8">
                                     <input id="fecha_nacimiento" type="date" class="form-control" v-model="fecha_nacimiento" required
-                                           autofocus autocomplete="off" placeholder="Introduce tu fecha de nacimiento">
+                                           autofocus autocomplete="off" placeholder="Introduce la fecha de nacimiento">
                                 </div>
                             </div>
  
@@ -41,7 +41,7 @@
                                 <label for="direccion" class="col-sm-4 col-form-label text-md-right">Direccion</label>
                                 <div class="col-md-8">
                                     <input id="direccion" type="text" class="form-control" v-model="direccion" required
-                                           autofocus autocomplete="off" placeholder="Introduce tu direccion">
+                                           autofocus autocomplete="off" placeholder="Introduce la direccion">
                                 </div>
                             </div>
  
@@ -49,7 +49,7 @@
                                 <label for="telefono" class="col-sm-4 col-form-label text-md-right">Telefono</label>
                                 <div class="col-md-8">
                                     <input id="telefono" type="text" class="form-control" v-model="telefono" required
-                                           autofocus autocomplete="off" placeholder="Introduce tu número de teléfono">
+                                           autofocus autocomplete="off" placeholder="Introduce el número de teléfono">
                                 </div>
                             </div>
  
@@ -58,7 +58,7 @@
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">Correo electrónico</label>
                                 <div class="col-md-8">
                                     <input id="email" type="email" class="form-control" v-model="email" required
-                                           autofocus autocomplete="off" placeholder="Introduce tu correo electrónico">
+                                           autofocus autocomplete="off" placeholder="Introduce el correo electrónico">
                                 </div>
                             </div>
  
@@ -69,7 +69,7 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-8">
                                     <input id="password" type="password" class="form-control" v-model="password"
-                                           required autocomplete="off" placeholder="Introduce tu contraseña">
+                                           required autocomplete="off" placeholder="Introduce la contraseña">
                                 </div>
                             </div>
  
@@ -77,20 +77,11 @@
                             <div class="form-group row mt-1 mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-success" @click="register">
-                                        Register
+                                        Crear Usuario
                                     </button>
                                 </div>
                             </div>
  
- 
-                            <div class="row mt-1">
-                                <div class="col-md-8 offset-md-4">
-                                    <small class="text-muted">
-                                        Ya tienes cuenta? Haz clic
-                                        <router-link to="/login" >aquí</router-link>
-                                    </small>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -152,9 +143,9 @@ export default {
   }
 };
 </script>
-
+ 
+ 
  <style scoped>
  
  
  </style>
- 
