@@ -21,10 +21,17 @@ Route::post('login',[UserController::class,'login']);
 Route::post('register',[UserController::class,'register']);
 Route::post('logout',[UserController::class,'logout'])->middleware(middleware:'auth:sanctum');
 
-Route::group(['prefix' => 'posts','middleware' => 'auth:sanctum'], function(){
-    Route::get('/', [PostController::class, 'index']);
-    Route::post('add', [PostController::class, 'add']);
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    Route::group(['prefix' => 'posts'], function(){
+        Route::get('/', [PostController::class, 'index']);
+        Route::post('add', [PostController::class, 'add']);
+    });
+
+    Route::group(['prefix' => 'users'], function(){
+        Route::get('/', [UserController::class, 'index']);
+    });
 });
+
 
 
 /*

@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller{
+    // Obtener todos los usuarios
+    public function index(){
+        $users = User::all()->toArray();
+        return $users;
+    }
+
     public function login(Request $request){
         $credentials=[
             'email' => $request->email,

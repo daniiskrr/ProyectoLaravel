@@ -23,15 +23,13 @@
                 <tbody>
                 <tr v-for="(usuario, index) in users" :key="usuario.id">
                     <td class="text-center">{{index}}</td>
-                    <td>{{usuario.nombre}}</td>
-                    <td>{{usuario.apellidos}}</td>
-                    <td>{{usuario.fecha_nacimiento}}</td>
-                    <td>{{usuario.direccion}}</td>
-                    <td>{{usuario.telefono}}</td>
-                    <td>{{usuario.tipo_suscripcion}}</td>
-                    <td>{{usuario.duracion}}</td>
+                    <td>{{usuario.nombre}}{{usuario.apellidos}}</td>
                     <td>{{usuario.email}}</td>
-                    <td>{{usuario.apellidos}}</td>
+                    <td>{{usuario.fecha_nacimiento}}
+                        {{usuario.direccion}}
+                        {{usuario.telefono}}
+                        {{usuario.tipo_suscripcion}}
+                        {{usuario.duracion}}</td>
                     <td class="text-center">
                         <router-link :to="{name:'edituser'}" class="btn btn-warning">Edit</router-link>
                         <button class="btn btn-danger">Delete</button>
@@ -39,9 +37,6 @@
                 </tr>
                 </tbody>
             </table>
- 
- 
- 
  
         </div>
     </div>
