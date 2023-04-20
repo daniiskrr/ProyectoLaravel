@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller{
     public function login(Request $request){
-        
-
         $credentials=[
             'email' => $request->email,
             'password' => $request->password
