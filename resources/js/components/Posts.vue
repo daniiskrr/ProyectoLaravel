@@ -36,7 +36,7 @@
                     </td>
                     <td class="text-center">
                         <router-link :to="{name:'editpost'}" class="btn btn-warning">Edit</router-link>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger" @click="eliminaProducto(post.id)">Delete</button>
                     </td>
                 </tr>
                 </tbody>
@@ -75,11 +75,23 @@
             }
         );
     },
-    methods: {
- 
- 
+        methods: {
+    eliminaProducto(id) {
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            axios.delete('http://127.0.0.1:8000/api/posts/' + id)
+            .then(response => {
+                const index = this.posts.findIndex(post => post.id === id);
+                this.posts.splice(index, 1);
+                // Aquí puedes mostrar un mensaje de éxito si lo deseas
+            })
+            .catch(error => {
+                console.log(error);
+                // Aquí puedes mostrar un mensaje de error si lo deseas
+            });
+        })
     }
  }
+}
  
  
  </script>

@@ -13,5 +13,6 @@ class ProductoController extends Controller{
     {
         return view('index');
     }
+
 }
 ?>

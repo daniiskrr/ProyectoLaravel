@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::group(['prefix' => 'posts'], function(){
         Route::get('/', [PostController::class, 'index']);
         Route::post('add', [PostController::class, 'add']);
+        Route::delete('{id}', [PostController::class, 'eliminaProducto']);
     });
 
     Route::group(['prefix' => 'users'], function(){

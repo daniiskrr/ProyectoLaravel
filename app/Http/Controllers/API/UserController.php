@@ -48,14 +48,10 @@ class UserController extends Controller{
             $user->password = Hash::make($request->password);
             $user->fecha_nacimiento = $request->fecha_nacimiento;
             $user->direccion = $request->direccion;
-            $user->telefono = $request->telefono;
-            echo $request->rol;
-            
-            
-            //$user->assignRole($request->rol);
-           
+            $user->telefono = $request->telefono;           
+            //$user->assignRole($request->rol);   
             $user->save();
-
+            $user->roles()->attach(2);
 
             $success = true;
             $message = "Usuario registrado correctamente";

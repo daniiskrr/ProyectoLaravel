@@ -38,4 +38,11 @@ class PostController extends Controller
 
         return response()->json(['success' => 'Post creado correctamente']);
     }
+
+    public function eliminaProducto($id)
+    {
+        $producto = Posts::findOrFail($id);
+        $producto->delete();
+        //return redirect('/posts')->with('success', 'Producto eliminado con éxito');
+    }
 }

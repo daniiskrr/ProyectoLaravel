@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('inicio');
             $table->date('fin');
             
-            $table->foreign('id_usuario')->references('id')->on('usuario');
+            $table->foreign('id_usuario')->references('id')->on('users');
             $table->foreign('id_suscripcion')->references('id')->on('suscripcion');
         });
         
