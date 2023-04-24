@@ -116,6 +116,7 @@ export default {
       duracion: "",
       email: "",
       password: "",
+      //rol: "",
       error: null
     };
   },
@@ -134,7 +135,8 @@ export default {
               tipo_suscripcion: this.tipo_suscripcion,
               duracion: this.duracion,
               email: this.email,
-              password: this.password
+              password: this.password,
+              //rol: "cliente"
             })
             .then(response => {
               if (response.data.success) {

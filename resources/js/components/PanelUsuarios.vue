@@ -48,19 +48,20 @@
  
  
  <script>
+ 
  export default {
     data() {
         return {
-            posts: [],
+            users: [],
             strSuccess: '',
             strError: ''
         }
     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/posts')
+            this.$axios.get('/api/users')
                 .then(response => {
-                    this.posts = response.data;
+                    this.users = response.data;
                 })
                 .catch(function (error) {
                     console.log(error);

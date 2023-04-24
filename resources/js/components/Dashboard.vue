@@ -1,11 +1,12 @@
-<template>
+<template >
     <p>Dashboard</p>
+    <!-- v-if="user && user.roles.includes('cliente')" -->
 </template>
 
 <script>
-export default{
-    name: "Dashboard"
-}
+
+
+
 </script>
 
 <style scoped>

@@ -49,8 +49,14 @@ class UserController extends Controller{
             $user->fecha_nacimiento = $request->fecha_nacimiento;
             $user->direccion = $request->direccion;
             $user->telefono = $request->telefono;
+            echo $request->rol;
+            
+            
+            //$user->assignRole($request->rol);
+           
             $user->save();
-    
+
+
             $success = true;
             $message = "Usuario registrado correctamente";
         } catch(\Illuminate\Database\QueryException $ex){
@@ -84,6 +90,10 @@ class UserController extends Controller{
 
 
         return response()->json($response);
+    }
+
+    public function getUser(){
+        
     }
 
 }

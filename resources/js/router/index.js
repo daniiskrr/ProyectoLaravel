@@ -9,6 +9,7 @@ import AddPost from '../components/AddPost.vue'; //Añadir Producto
 import EditPost from '../components/EditPost.vue'; //Editar Producto
 import PanelUsuarios from '../components/PanelUsuarios.vue'; //Editar Producto
 import AddUser from '../components/AddUser.vue'; //Añadir Usuario desde panel de usuarios
+import EditUser from '../components/EditUser.vue'; //Editar Usuario
 export const routes = [
    {
        name: 'home',
@@ -54,6 +55,11 @@ export const routes = [
         name: 'AddUser',
         path: '/adduser',
         component: AddUser
+    },
+    {
+        name: 'edituser',
+        path: '/users/edit',
+        component: EditUser
     }
     
 
