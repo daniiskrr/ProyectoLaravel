@@ -16,14 +16,6 @@ return new class extends Migration
             $table->string('nombre');
         });
 
-        DB::table('roles')->insert([
-            'nombre' => 'Administrador'
-        ]);
-    
-        DB::table('roles')->insert([
-            'nombre' => 'Usuario'
-        ]);
-        
     }
 
     /**
