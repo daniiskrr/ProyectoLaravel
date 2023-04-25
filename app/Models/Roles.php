@@ -1,18 +1,20 @@
 <?php
- 
+
 namespace App\Models;
- 
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
- 
-class User extends Model
+
+class Role extends Model
 {
+    use HasFactory;
+
     /**
      * The roles that belong to the user.
      */
-    public function roles(): BelongsToMany
+    public function users()
     {
-        return $this->belongsToMany(User::class, 'users_roles', 'id_rol', 'id_usuario');
+        return $this->belongsToMany(User::class, 'users_roles');
     }
 }
-?>
