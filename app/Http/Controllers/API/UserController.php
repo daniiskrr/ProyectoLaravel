@@ -28,7 +28,7 @@ class UserController extends Controller{
             $message = "Usuario logeado correctamente";
         }else {
             $success = false;
-            $message = "Usuario no autorizado";  
+            $message = "Usuario no autorizado";
         }
 
         $response = [
@@ -48,10 +48,10 @@ class UserController extends Controller{
             $user->password = Hash::make($request->password);
             $user->fecha_nacimiento = $request->fecha_nacimiento;
             $user->direccion = $request->direccion;
-            $user->telefono = $request->telefono;           
-            //$user->assignRole($request->rol);   
+            $user->telefono = $request->telefono;
+            //$user->assignRole($request->rol);
             $user->save();
-            $user->roles()->attach(2);
+            $user->roles()->sync(2);
 
             $success = true;
             $message = "Usuario registrado correctamente";
@@ -59,26 +59,26 @@ class UserController extends Controller{
             $success = false;
             $message = $ex->getMessage();
         }
-    
+
         $response=[
             'success' => $success,
             'message' => $message,
         ];
-    
+
         return response()->json($response);
     }
 
     public function logout(){
         try{
             Session::flush();
-   
+
             $success = true;
             $message = "Logout correcto";
         }catch(\Illuminate\Database\QueryException $ex){
             $success = false;
             $message = $ex->getMessage();
         }
-       
+
         $response=[
             'success' => $success,
             'message' => $message,
@@ -89,7 +89,7 @@ class UserController extends Controller{
     }
 
     public function getUser(){
-        
+
     }
 
 }
