@@ -8,8 +8,8 @@
                     <button class="btn btn-success" type="button" @click="this.$router.push('/adduser')">New User</button>
                 </div>
             </div>
- 
- 
+
+
             <table class="table table-hover table-sm">
                 <thead class="bg-dark text-light">
                 <tr>
@@ -32,23 +32,23 @@
                         {{usuario.duracion}}</td>
                     <td class="text-center">
                         <router-link :to="{name:'edituser'}" class="btn btn-warning">Edit</router-link>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger" @click="eliminaUsuario(usuario.id)">Delete</button>
                     </td>
                 </tr>
                 </tbody>
             </table>
- 
+
         </div>
     </div>
- 
- 
- 
- 
+
+
+
+
  </template>
- 
- 
+
+
  <script>
- 
+
  export default {
     data() {
         return {
@@ -70,11 +70,32 @@
         );
     },
     methods: {
- 
- 
+        eliminaUsuario(id) {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.delete('http://127.0.0.1:8000/api/users/' + id)
+                    .then(response => {
+                        const index = this.users.findIndex(user => user.id === id);
+                        this.users.splice(index, 1);
+                        alert('¡Usuario eliminado con éxito!');
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        // Aquí puedes mostrar un mensaje de error si lo deseas
+                    });
+            });
+        }
     }
+
+
+
+
+
+
+
+
+
  }
- 
- 
+
+
  </script>
- 
+

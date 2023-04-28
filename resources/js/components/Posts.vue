@@ -8,8 +8,8 @@
                     <button class="btn btn-success" type="button" @click="this.$router.push('/posts/add')">New Post</button>
                 </div>
             </div>
- 
- 
+
+
             <table class="table table-hover table-sm">
                 <thead class="bg-dark text-light">
                 <tr>
@@ -41,19 +41,19 @@
                 </tr>
                 </tbody>
             </table>
- 
- 
- 
- 
+
+
+
+
         </div>
     </div>
- 
- 
- 
- 
+
+
+
+
  </template>
- 
- 
+
+
  <script>
  export default {
     data() {
@@ -82,7 +82,7 @@
             .then(response => {
                 const index = this.posts.findIndex(post => post.id === id);
                 this.posts.splice(index, 1);
-                // Aquí puedes mostrar un mensaje de éxito si lo deseas
+                alert('¡Producto eliminado con éxito!');
             })
             .catch(error => {
                 console.log(error);
@@ -92,7 +92,6 @@
     }
  }
 }
- 
- 
+
+
  </script>
- 

@@ -22,8 +22,8 @@ class PostController extends Controller
             'id_suscripcion' => 'required',
             'precio' => 'required',
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-        ]);    
-        
+        ]);
+
         $input = $request->all();
         $imageName = NULL;
 
@@ -36,13 +36,13 @@ class PostController extends Controller
 
         Posts::create($input);
 
-        return response()->json(['success' => 'Post creado correctamente']);
+        return response()->json(['success' => 'Producto creado correctamente']);
     }
 
     public function eliminaProducto($id)
     {
         $producto = Posts::findOrFail($id);
         $producto->delete();
-        //return redirect('/posts')->with('success', 'Producto eliminado con éxito');
+        return response()->json(['success' => 'Producto eliminado correctamente']);
     }
 }

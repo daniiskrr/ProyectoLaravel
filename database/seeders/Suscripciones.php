@@ -44,7 +44,7 @@ $suscripciones = [
     'id' => 4,
     'nombre_suscripcion' => 'PlayStation Plus Premium',
     'precio_suscripcion' => 119.99,
-    'duracion' => 3,
+    'duracion' => 12,
     'created_at' => \Carbon\Carbon::now(),
     'updated_at' => \Carbon\Carbon::now()
 ]

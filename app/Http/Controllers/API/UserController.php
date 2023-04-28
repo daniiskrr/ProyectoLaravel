@@ -51,7 +51,7 @@ class UserController extends Controller{
             $user->telefono = $request->telefono;
             //$user->assignRole($request->rol);
             $user->save();
-            $user->roles()->sync(2);
+            $user->roles()->sync(1);
 
             $success = true;
             $message = "Usuario registrado correctamente";
@@ -88,9 +88,16 @@ class UserController extends Controller{
         return response()->json($response);
     }
 
-    public function getUser(){
+    public function eliminaUsuario($id)
+    {
+        $usuario = User::findOrFail($id);
 
+        // Elimina todos los registros en la tabla `users_roles` para este usuario
+        $usuario->roles()->detach();
+
+        $usuario->delete();
     }
+
 
 }
 
