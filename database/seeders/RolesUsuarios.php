@@ -17,13 +17,18 @@ class RolesUsuarios extends Seeder
         $roles = [
             [
                 'id' => 1,
-                'nombre' => 'Administrador'
+                'nombre' => 'Administrador',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
             ],
             [
                 'id' => 2,
-                'nombre' => 'Usuario'
+                'nombre' => 'Usuario',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
             ]
         ];
+
 
         Role::insert($roles);
     }

@@ -10,7 +10,6 @@ class Suscripcion extends Model
 {
     use HasFactory;
 
-    /**
-     * The Suscripcion that belong to the products.
-     */
+    protected $table = 'suscripcion';
+
 }
