@@ -42,7 +42,7 @@ export const routes = [
         component: AddPost
     },
     {
-        name: 'editpost',
+        name: 'EditPost',
         path: '/posts/edit',
         component: EditPost
     },
@@ -57,11 +57,11 @@ export const routes = [
         component: AddUser
     },
     {
-        name: 'edituser',
+        name: 'EditUser',
         path: '/users/edit',
         component: EditUser
     }
-    
+
 
 ];
 

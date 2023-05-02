@@ -31,7 +31,7 @@
                         {{usuario.tipo_suscripcion}}
                         {{usuario.duracion}}</td>
                     <td class="text-center">
-                        <router-link :to="{name:'edituser'}" class="btn btn-warning">Edit</router-link>
+                        <router-link :to="{name:'EditUser'}" class="btn btn-warning">Edit</router-link>
                         <button class="btn btn-danger" @click="eliminaUsuario(usuario.id)">Delete</button>
                     </td>
                 </tr>
