@@ -19,19 +19,21 @@
             </div>
 
             <form @submit.prevent="editarProducto" enctype="multipart/form-data">
+
+                <input type="hidden" name="id" v-model="postData.id" />
                 <div class="form-group mb-2">
                     <label>Nombre</label><span class="text-danger"> *</span>
-                    <input type="text" class="form-control" v-model="post.nombre">
+                    <input type="text" class="form-control" v-model="postData.nombre">
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Descripcion</label><span class="text-danger"> *</span>
-                    <textarea class="form-control" rows="3" v-model="post.descripcion" placeholder="Introduce la descripcion"></textarea>
+                    <textarea class="form-control" rows="3" v-model="postData.descripcion"></textarea>
                 </div>
 
                 <div class="form-group mb-2">
                     <label for="suscripcion">Suscripción</label><span class="text-danger"> *</span>
-                    <select class="form-control" v-model="post.id_suscripcion" id="suscripcion">
+                    <select class="form-control" v-model="postData.id_suscripcion" id="suscripcion">
                         <option value="1">No tiene Suscripcion</option>
                         <option value="2">Playstation Plus Essential</option>
                         <option value="3">Playstation Plus Extra</option>
@@ -41,12 +43,12 @@
 
                 <div class="form-group mb-2">
                     <label>Precio</label><span class="text-danger"> *</span>
-                    <input type="text" class="form-control" v-model="post.precio" placeholder="Introduce el precio">
+                    <input type="text" class="form-control" v-model="postData.precio">
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Image</label><span class="text-danger"> *</span>
-                    <input type="file" class="form-control mb-2" v-on:change="onChangeImg">
+                    <input type="file" class="form-control mb-2" v-on:change="onChangeImg" name="file">
 
                     <div v-if="imgPreview">
                         <img v-bind:src="imgPreview" width="100" height="100"/>
@@ -63,50 +65,59 @@
 export default {
     data() {
         return {
-            post: {},
-            image: null,
-            imgPreview: null,
+            postData: {
+                id: '',
+                nombre: '',
+                descripcion: '',
+                id_suscripcion: '',
+                image: '',
+                precio: ''
+            },
             strSuccess: '',
             strError: ''
         }
     },
+    created() {
+        // Obtener el id del producto desde la URL
+        const id = this.$route.params.id;
+        this.obtenerProducto(id);
+    },
     methods: {
-        onChangeImg(e) {
-            this.image = e.target.files[0];
-            this.imgPreview = URL.createObjectURL(this.image);
-        },
-        editarProducto() {
-            let formData = new FormData();
-            formData.append('nombre', this.post.nombre);
-            formData.append('descripcion', this.post.descripcion);
-            formData.append('id_suscripcion', this.post.id_suscripcion);
-            formData.append('precio', this.post.precio);
-            formData.append('file', this.image);
-
-            this.$axios.post(`/api/posts/${this.$route.params.id}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-                .then(response => {
-                    this.strSuccess = response.data.success;
-                })
-                .catch(error => {
-                    this.strError = error.response.data.errors;
-                });
-        },
-        loadPost() {
-            this.$axios.get(`/api/posts/${this.$route.params.id}`)
-                .then(response => {
-                    this.post = response.data;
-                })
-                .catch(error => {
+        obtenerProducto(id) {
+            // Hacer la petición al servidor para obtener los datos del producto
+                this.$axios.get('http://127.0.0.1:8000/posts/' + id).then(response => {
+                    // Asignar los datos del producto al objeto postData
+                    this.postData.id = response.data.id;
+                    this.postData.nombre = response.data.nombre;
+                    this.postData.descripcion = response.data.descripcion;
+                    this.postData.id_suscripcion = response.data.id_suscripcion;
+                    this.postData.image = response.data.image;
+                    this.postData.precio = response.data.precio;
+                    console.log(this.postData.id);
+                    console.log(this.postData.nombre);
+                    console.log(this.postData.descripcion);
+                }).catch(error => {
                     console.log(error);
                 });
+        },
+        onFileChange(e) {
+            let files = e.target.files || e.dataTransfer.files;
+            if (!files.length) return;
+            this.createImage(files[0]);
+        },
+        createImage(file) {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                this.postData.image = e.target.result;
+            }
+            reader.readAsDataURL(file);
         }
-    },
-    mounted() {
-        this.loadPost();
     }
 }
 </script>
+
+
+
+
+
+

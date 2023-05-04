@@ -5,14 +5,18 @@
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                     aria-expanded="false" aria-label="Toggle navigation"></button>
             <div class="navbar-nav" v-if="isLoggedin">
-                <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
-                <router-link to="/posts" class="nav-item nav-link">xxxx</router-link>
+                <router-link to="/" class="nav-item nav-link">Inicio</router-link>
+                <router-link to="/dashboard" class="nav-item nav-link">Datos</router-link>
+                <router-link to="/tienda" class="nav-item nav-link">Tienda</router-link>
+                <router-link to="/psplus" class="nav-item nav-link">PsPlus</router-link>
+                <router-link to="/posts" class="nav-item nav-link">Panel Productos</router-link>
                 <router-link to="/panelusuarios" class="nav-item nav-link">Panel Usuarios</router-link>
                 <a class="nav-item nav-link" style="cursor: pointer;" @click="logout">Logout</a>
             </div>
             <div class="navbar-nav" v-else>
-                <router-link to="/" class="nav-item nav-link">Home</router-link>
+                <router-link to="/" class="nav-item nav-link">Inicio</router-link>
                 <router-link to="/tienda" class="nav-item nav-link">Tienda</router-link>
+                <router-link to="/psplus" class="nav-item nav-link">PsPlus</router-link>
                 <router-link to="/login" class="nav-item nav-link">Login</router-link>
                 <router-link to="/register" class="nav-item nav-link">Register</router-link>
             </div>
@@ -50,10 +54,9 @@
                         console.error(error);
                     });
             })
- 
- 
+
+
         }
     },
  }
- </script> 
- 
+ </script>

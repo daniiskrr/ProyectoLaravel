@@ -26,8 +26,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::get('/', [PostController::class, 'index']);
         Route::post('add', [PostController::class, 'add']);
         Route::delete('{id}', [PostController::class, 'eliminaProducto']);
-        Route::put('{id}', [ProductoController::class, 'editarProducto']);
-
+        Route::get('{id}', [PostController::class, 'obtenerProducto']);
     });
 
     Route::group(['prefix' => 'users'], function(){

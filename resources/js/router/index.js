@@ -10,6 +10,8 @@ import EditPost from '../components/EditPost.vue'; //Editar Producto
 import PanelUsuarios from '../components/PanelUsuarios.vue'; //Editar Producto
 import AddUser from '../components/AddUser.vue'; //Añadir Usuario desde panel de usuarios
 import EditUser from '../components/EditUser.vue'; //Editar Usuario
+import Tienda from '../components/Tienda.vue'; //Tienda de productos
+import PsPlus from '../components/PsPlus.vue'; //Mostrar Información sobre psplus
 export const routes = [
    {
        name: 'home',
@@ -42,8 +44,8 @@ export const routes = [
         component: AddPost
     },
     {
-        name: 'EditPost',
-        path: '/posts/edit',
+        path: "/edit/:id",
+        name: "EditPost",
         component: EditPost
     },
     {
@@ -60,7 +62,17 @@ export const routes = [
         name: 'EditUser',
         path: '/users/edit',
         component: EditUser
-    }
+    },
+    {
+        name: 'Tienda',
+        path: '/tienda',
+        component: Tienda
+    },
+    {
+        name: 'PsPlus',
+        path: '/PsPlus',
+        component: PsPlus
+    },
 
 
 ];
