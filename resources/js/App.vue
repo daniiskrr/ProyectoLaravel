@@ -6,7 +6,7 @@
                     aria-expanded="false" aria-label="Toggle navigation"></button>
             <div class="navbar-nav" v-if="isLoggedin">
                 <router-link to="/" class="nav-item nav-link">Inicio</router-link>
-                <router-link to="/dashboard" class="nav-item nav-link">Datos</router-link>
+                <router-link to="/dashboard" class="nav-item nav-link">Pedidos</router-link>
                 <router-link to="/tienda" class="nav-item nav-link">Tienda</router-link>
                 <router-link to="/psplus" class="nav-item nav-link">PsPlus</router-link>
                 <router-link to="/posts" class="nav-item nav-link">Panel Productos</router-link>
