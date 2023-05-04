@@ -1,6 +1,6 @@
 <template>
-    <p>fcgc  tcttctcf </p>
-    
+    <p>Pagina inicio </p>
+
 </template>
 
 <script>

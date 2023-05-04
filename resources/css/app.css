@@ -1,0 +1,123 @@
+/** CABECERA */
+header {
+    background-color: white !important;
+    color: #fff;
+    align-items: center;
+    font-family: "sst";
+    z-index: 999;
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+.menuEstatico{
+    position: static;
+}
+
+.menuFijo{
+    position: fixed;
+}
+
+.header-left{
+    margin-left: auto;
+}
+
+.logo{
+    width: 5.5rem;
+}
+
+/* FONTS */
+@font-face {
+    font-family: "sst";
+    src: url(sst/SSTMedium.TTF);
+}
+
+@font-face {
+    font-family: "sst-light";
+    src: url(sst/SSTLight.TTF);
+}
+
+body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    font-family: "sst";
+    text-align: center;
+}
+/* Botones */
+
+.boton, .boton-blanco {
+    display: inline-block;
+    padding: 11px 20px;
+    border-radius: 33px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-family: "sst";
+}
+
+.boton {
+    background-color: #0a76cd;
+    color: #fff;
+}
+
+.boton-blanco {
+    background-color: white;
+    color: black;
+}
+
+.boton-login {
+    display: inline-block;
+    background-color: #0a76cd;
+    color: #fff;
+    padding: 0px 14px 2px;
+    border-radius: 33px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-size: 1.25rem;
+    font-family: "sst";
+    margin-right: 1rem;
+}
+
+.boton-login:hover {
+    background-color: #005ba4;
+}
+
+.boton-login:active {
+    background-color: #005ba4;
+    color: white;
+    box-shadow: 0px 0px 0px 2px #fff, 0 0 0 5px #005ba4;
+}
+
+.btn-outline-success{
+    background-color:  #0a76cd !important;
+    color: white !important;
+    border: 1px solid white !important;
+}
+
+.btn-outline-success:hover{
+    border: 1px solid black !important;
+    color: black !important;
+    background-color: white !important;
+}
+
+.boton:hover {
+    background-color: #005ba4;
+    color: white;
+    box-shadow: 0px 0px 0px 3px #fff, 0 0 0 6px #0a76cd;
+}
+
+.ofertas .boton-blanco:hover {
+    box-shadow: 0px 0px 0px 3px #00b3e8, 0 0 0 6px white;
+    background-color: white;
+    color: black;
+}
+
+.jedi .boton-blanco:hover, .horizon .boton-blanco:hover {
+    box-shadow: 0px 0px 0px 3px black, 0 0 0 6px white;
+    background-color: white;
+    color: black;
+}
