@@ -1,3 +1,13 @@
+/* FONTS */
+@font-face {
+    font-family: "sst";
+    src: url(../fonts/sst/SSTMedium.TTF);
+}
+
+@font-face {
+    font-family: "sst-light";
+    src: url(../fonts/sst/SSTLight.TTF);
+}
 /** CABECERA */
 header {
     background-color: white !important;
@@ -23,17 +33,6 @@ header {
 
 .logo{
     width: 5.5rem;
-}
-
-/* FONTS */
-@font-face {
-    font-family: "sst";
-    src: url(sst/SSTMedium.TTF);
-}
-
-@font-face {
-    font-family: "sst-light";
-    src: url(sst/SSTLight.TTF);
 }
 
 body {
@@ -120,4 +119,28 @@ body {
     box-shadow: 0px 0px 0px 3px black, 0 0 0 6px white;
     background-color: white;
     color: black;
+}
+.logo-carrito {
+    width: 100%;
+    height: 38px;
+    padding-right: 1.5rem;
+}
+
+.nav-link{
+    background-color: #ffffff!important;
+    border: none;
+    color: black!important;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.nav-link:hover{
+    color: #0a76cd!important;
+}
+.navbar-nav > :not(:last-child) {
+    margin-right: 1.5rem;
 }

@@ -13,7 +13,7 @@
     <header class="menuEstatico">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <router-link to="/Home"> <img class="logo" src="PsGames.svg" alt="Logo de PsGames"></router-link>
+                <router-link to="/Home"> <img class="logo" src="../images/PsGames.svg" alt="Logo de PsGames"></router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -28,19 +28,21 @@
                         <li class="nav-item">
                             <router-link to="/psplus" class="nav-item nav-link">PsPlus</router-link>
                         </li>
+                        <li v-if="isLoggedin" class="nav-item">
+                            <router-link to="/posts" class="nav-item nav-link">Panel Productos</router-link>
+                        </li>
+                        <li v-if="isLoggedin" class="nav-item">
+                            <router-link to="/panelusuarios" class="nav-item nav-link">Panel Usuarios</router-link>
+                        </li>
                     </ul>
                     <div v-if="isLoggedin" class="navbar-nav">
-                        <router-link to="/posts" class="nav-item nav-link">Panel Productos</router-link>
-                        <router-link to="/panelusuarios" class="nav-item nav-link">Panel Usuarios</router-link>
-                        <router-link to="/dashboard" class="nav-item nav-link">Pedidos</router-link>
-                        <button class="btn boton-login">Daniel Rayo</button>
-                        <a href="carrito.html"><img class="logo-carrito" src="carrito.svg" alt="Carrito de la compra"></a>
-                        <a class="btn boton-login" style="cursor: pointer;" @click="logout">Logout</a>
+                        <a href="carrito.html"><img class="logo-carrito" src="../images/carrito.svg" alt="Carrito de la compra"></a>
+                        <router-link to="/dashboard"><button class="boton-login">Daniel Rayo</button></router-link>
+                        <router-link to="/"><button class="boton-login" @click="logout">Cerrar Sesión</button></router-link>
                     </div>
                     <div v-else class="navbar-nav">
-                        <button class="btn boton-login">Iniciar sesión</button>
-                        <router-link to="/login" class="btn boton-login nav-link">Login</router-link>
-                        <router-link to="/register" class="btn boton-login nav-link">Register</router-link>
+                        <router-link to="/login"><button class="boton-login">Iniciar sesión</button></router-link>
+                        <router-link to="/register"><button class="boton-login">Registrarse</button></router-link>
                     </div>
                 </div>
             </div>
@@ -52,6 +54,16 @@
     </html>
 </template>
 <script>
+var elemento = document.querySelector('header');
+window.addEventListener("scroll", function() {
+    if (window.pageYOffset > 100) {
+        elemento.classList.remove("menuEstatico");
+        elemento.classList.add("menuFijo");
+    }else{
+        elemento.classList.remove("menuFijo");
+        elemento.classList.add("menuEstatico");
+    }
+});
  export default {
     variable: "A",
     name: "App",
