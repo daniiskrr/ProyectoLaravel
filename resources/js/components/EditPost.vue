@@ -18,7 +18,7 @@
                 <strong>{{strError}}</strong>
             </div>
 
-            <form @submit.prevent="editarProducto" enctype="multipart/form-data">
+            <form @submit.prevent="updatePost" enctype="multipart/form-data">
 
                 <input type="hidden" name="id" v-model="postData.id" />
                 <div class="form-group mb-2">
@@ -62,59 +62,96 @@
 </template>
 
 <script>
-export default {
+export default{
     data() {
         return {
-            postData: {
-                id: '',
-                nombre: '',
-                descripcion: '',
-                id_suscripcion: '',
-                image: '',
-                precio: ''
-            },
+            id:'',
+            nombre: '',
+            descripcion: '',
+            id_suscripcion: '',
+            img: '',
+            precio: '',
             strSuccess: '',
-            strError: ''
+            strError: '',
+            imgPreview: null
         }
     },
+
+
     created() {
-        // Obtener el id del producto desde la URL
-        const id = this.$route.params.id;
-        this.obtenerProducto(id);
-    },
-    methods: {
-        obtenerProducto(id) {
-            // Hacer la petición al servidor para obtener los datos del producto
-                this.$axios.get('http://127.0.0.1:8000/posts/' + id).then(response => {
-                    // Asignar los datos del producto al objeto postData
-                    this.postData.id = response.data.id;
-                    this.postData.nombre = response.data.nombre;
-                    this.postData.descripcion = response.data.descripcion;
-                    this.postData.id_suscripcion = response.data.id_suscripcion;
-                    this.postData.image = response.data.image;
-                    this.postData.precio = response.data.precio;
-                    console.log(this.postData.id);
-                    console.log(this.postData.nombre);
-                    console.log(this.postData.descripcion);
-                }).catch(error => {
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get(`/api/posts/edit/${this.$route.params.id}`)
+                .then(response => {
+                    this.nombre = response.data['nombre'];
+                    this.descripcion = response.data['descripcion'];
+                    this.id_descripcion = response.data['id_descripcion'];
+                    this.img = "/img/"+response.data['img'];
+                    this.imgPreview = this.image;
+                    this.precio = response.data['precio'];
+                })
+                .catch(function(error) {
                     console.log(error);
                 });
-        },
-        onFileChange(e) {
-            let files = e.target.files || e.dataTransfer.files;
-            if (!files.length) return;
-            this.createImage(files[0]);
-        },
-        createImage(file) {
+        })
+    },
+    methods: {
+        onChange(e) {
+            this.img = e.target.files[0];
             let reader = new FileReader();
-            reader.onload = (e) => {
-                this.postData.image = e.target.result;
+            reader.addEventListener("load", function () {
+                this.imgPreview = reader.result;
+            }.bind(this), false);
+
+
+            if (this.img) {
+                if ( /\.(jpe?g|png|gif)$/i.test( this.img.name ) ) {
+                    reader.readAsDataURL( this.img );
+                }
             }
-            reader.readAsDataURL(file);
+        },
+        updatePost(e) {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                let existingObj = this;
+                const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    }
+                }
+
+
+                const formData = new FormData();
+                formData.append('nombre', this.nombre);
+                formData.append('descripcion', this.descripcion);
+                formData.append('id_suscripcion', this.id_suscripcion);
+                formData.append('precio', this.precio);
+                formData.append('file', this.img);
+
+
+                this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
+                    .then(response => {
+                        existingObj.strError = "";
+                        existingObj.strSuccess = response.data.success;
+                    })
+                    .catch(function(error) {
+                        existingObj.strSuccess ="";
+                        existingObj.strError = error.response.data.message;
+                    });
+            });
         }
+
+
+    },
+    beforeRouteEnter(to, from, next) {
+        if (!window.Laravel.isLoggedin) {
+            window.location.href = "/";
+        }
+        next();
     }
 }
+
+
 </script>
+
 
 
 

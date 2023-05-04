@@ -46,15 +46,41 @@ class PostController extends Controller
         return response()->json(['success' => 'Producto eliminado correctamente']);
     }
 
-    public function obtenerProducto($id)
+    public function edit($id)
     {
-        $producto = Posts::find($id);
-        return view('EditPost', ['producto' => $producto]);
+        $post = Posts::find($id);
+        return response()->json($post);
     }
 
 
-    public function editarProducto(Request $request, $id)
+    public function update($id, Request $request)
     {
+        $post = Posts::find($id);
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'id_suscripcion' => 'required',
+            'img' => 'required',
+            'precio' => 'required',
+            'strSuccess' => 'required',
+            'strError' => 'required',
+            'imgPreview' => 'null'
+        ]);
 
+
+        $input = $request->all();
+        $imageName = NULL;
+        if ($image = $request->file('file')) {
+            $destinationPath = 'img/';
+            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $imageName);
+            $input['image'] = $imageName;
+            unlink('img/'.$post->image);
+        }
+        $post->update($input);
+
+
+        return response()->json(['success'=> 'Post update successfully']);
     }
+
 }

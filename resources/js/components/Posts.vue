@@ -35,7 +35,7 @@
                         </div>
                     </td>
                     <td class="text-center">
-                        <router-link :to="{ name: 'EditPost', params: { id: post.id } }" class="btn btn-warning">Edit</router-link>
+                        <router-link :to="{name:'EditPost'}" class="btn btn-warning">Edit</router-link>
                         <button class="btn btn-danger" @click="eliminaProducto(post.id)">Delete</button>
                     </td>
                 </tr>
@@ -92,6 +92,4 @@
     }
  }
 }
-
-
  </script>
