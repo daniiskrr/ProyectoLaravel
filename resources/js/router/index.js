@@ -44,9 +44,9 @@ export const routes = [
         component: AddPost
     },
     {
-        name: "EditPost",
-        path: "/posts/edit",
-        component: EditPost
+        name: 'EditPost',
+        path: '/posts/edit/:id',
+        component: EditPost,
     },
     {
         name: 'PanelUsuarios',

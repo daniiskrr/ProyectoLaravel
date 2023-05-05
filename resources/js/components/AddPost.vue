@@ -9,29 +9,29 @@
                     <router-link :to="{name: 'posts'}" class="btn btn-success">Go Back</router-link>
                 </div>
             </div>
- 
- 
+
+
             <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <strong>{{strSuccess}}</strong>
             </div>
- 
- 
+
+
             <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <strong>{{strError}}</strong>
             </div>
- 
- 
- 
- 
+
+
+
+
             <form @submit.prevent="addPost" enctype="multipart/form-data">
                 <div class="form-group mb-2">
                     <label>Nombre</label><span class="text-danger"> *</span>
                     <input type="text" class="form-control" v-model="nombre" placeholder="Introduce el nombre">
                 </div>
- 
- 
+
+
                 <div class="form-group mb-2">
                     <label>Descripcion</label><span class="text-danger"> *</span>
                     <textarea class="form-control" rows="3" v-model="descripcion" placeholder="Introduce la descripcion"></textarea>
@@ -51,30 +51,30 @@
                     <label>Precio</label><span class="text-danger"> *</span>
                     <textarea class="form-control" rows="3" v-model="precio" placeholder="Introduce el precio"></textarea>
                 </div>
- 
- 
+
+
                 <div class="form-group mb-2">
                     <label>Image</label><span class="text-danger"> *</span>
                     <input type="file" class="form-control mb-2" v-on:change="onChangeImg">
- 
- 
+
+
                     <div v-if="img">
                         <img v-bind:src="imgPreview" width="100" height="100"/>
                     </div>
                 </div>
- 
- 
+
+
                 <button type="submit" class="btn btn-primary mt-4 mb-4"> Add Post</button>
- 
- 
+
+
             </form>
- 
- 
+
+
         </div>
     </div>
  </template>
- 
- 
+
+
  <script>
  export default {
     data() {
@@ -96,18 +96,18 @@
             reader.addEventListener("load", function () {
                 this.imgPreview = reader.result;
             }.bind(this), false);
- 
- 
+
+
             if (this.img) {
-                if ( /\.(jpe?g|png|gif)$/i.test( this.img.name ) ) {
+                if ( /\.(jpe?g|png|gif|webp)$/i.test( this.img.name ) ) {
                     reader.readAsDataURL( this.img );
                 }
             }
         },
- 
- 
- 
- 
+
+
+
+
         /*Inicio*/
         addPost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
@@ -117,17 +117,17 @@
                         'content-type': 'multipart/form-data'
                     }
                 }
- 
- 
+
+
                 const formData = new FormData();
                 formData.append('nombre', this.nombre);
                 formData.append('descripcion', this.descripcion);
                 formData.append('id_suscripcion', this.id_suscripcion);
                 formData.append('precio', this.precio);
                 formData.append('file', this.img);
-                
- 
- 
+
+
+
                 this.$axios.post('/api/posts/add', formData, config)
                     .then(response => {
                         existObj.strError = "";
@@ -141,9 +141,9 @@
                     );
             });
         }
- 
+
     }
  }
- 
- 
- </script> 
+
+
+ </script>

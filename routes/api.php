@@ -25,8 +25,8 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::group(['prefix' => 'posts'], function(){
         Route::get('/', [PostController::class, 'index']);
         Route::post('add', [PostController::class, 'add']);
-        Route::post('update/{id}', [PostsController::class,'update']);
-        Route::get('edit/{id}', [PostsController::class,'edit']);
+        Route::get('edit/{id}', [PostController::class,'edit']);
+        Route::post('update/{id}', [PostController::class,'update']);
         Route::delete('{id}', [PostController::class, 'eliminaProducto']);
     });
 

@@ -53,20 +53,20 @@ class PostController extends Controller
     }
 
 
-    public function update($id, Request $request)
+    public function update(Request $request, $id)
     {
         $post = Posts::find($id);
+        if (!$post) {
+            return response()->json(['error' => 'El post no existe'], 404);
+        }
         $request->validate([
             'nombre' => 'required',
             'descripcion' => 'required',
             'id_suscripcion' => 'required',
-            'img' => 'required',
             'precio' => 'required',
-            'strSuccess' => 'required',
-            'strError' => 'required',
-            'imgPreview' => 'null'
-        ]);
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
 
+        ]);
 
         $input = $request->all();
         $imageName = NULL;
@@ -78,9 +78,6 @@ class PostController extends Controller
             unlink('img/'.$post->image);
         }
         $post->update($input);
-
-
         return response()->json(['success'=> 'Post update successfully']);
     }
-
 }

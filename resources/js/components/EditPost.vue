@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+<div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Editar Producto</h5>
@@ -18,22 +18,20 @@
                 <strong>{{strError}}</strong>
             </div>
 
-            <form @submit.prevent="updatePost" enctype="multipart/form-data">
-
-                <input type="hidden" name="id" v-model="postData.id" />
+            <form @submit.prevent="updatePost" enctype="multipart/form-data" method="PUT">
                 <div class="form-group mb-2">
-                    <label>Nombre</label><span class="text-danger"> *</span>
-                    <input type="text" class="form-control" v-model="postData.nombre">
+                    <label>Nombre</label><span class="text-danger">*</span>
+                    <input type="text" class="form-control" v-model="nombre">
                 </div>
 
                 <div class="form-group mb-2">
-                    <label>Descripcion</label><span class="text-danger"> *</span>
-                    <textarea class="form-control" rows="3" v-model="postData.descripcion"></textarea>
+                    <label>Descripcion</label><span class="text-danger" > *</span>
+                    <textarea class="form-control" rows="3" v-model="descripcion"></textarea>
                 </div>
 
                 <div class="form-group mb-2">
-                    <label for="suscripcion">Suscripción</label><span class="text-danger"> *</span>
-                    <select class="form-control" v-model="postData.id_suscripcion" id="suscripcion">
+                    <label for="suscripcion">Suscripción</label><span class="text-danger" > *</span>
+                    <select class="form-control" id="suscripcion" v-model="id_suscripcion">
                         <option value="1">No tiene Suscripcion</option>
                         <option value="2">Playstation Plus Essential</option>
                         <option value="3">Playstation Plus Extra</option>
@@ -43,17 +41,20 @@
 
                 <div class="form-group mb-2">
                     <label>Precio</label><span class="text-danger"> *</span>
-                    <input type="text" class="form-control" v-model="postData.precio">
+                    <input type="text" class="form-control" v-model="precio">
+                </div>
+
+                <div class="form-group mb-2">
+                    <label>Imagen</label><span class="text-danger">*</span>
+                    <input type="file" class="form-control mb-2" v-on:change="onChange" name="file">
+                    <img v-bind:src="'/img/' + imgPreview">
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Image</label><span class="text-danger"> *</span>
-                    <input type="file" class="form-control mb-2" v-on:change="onChangeImg" name="file">
-
-                    <div v-if="imgPreview">
-                        <img v-bind:src="imgPreview" width="100" height="100"/>
-                    </div>
-                </div>
+                    <input type="file" class="form-control mb-2" v-on:change="onChangeImg">
+                        <img v-bind:src="imgPreview" width="200" height="200"/>
+        </div>
 
                 <button type="submit" class="btn btn-primary mt-4 mb-4">Editar publicación</button>
             </form>
@@ -65,7 +66,7 @@
 export default{
     data() {
         return {
-            id:'',
+            id: '',
             nombre: '',
             descripcion: '',
             id_suscripcion: '',
@@ -73,26 +74,26 @@ export default{
             precio: '',
             strSuccess: '',
             strError: '',
-            imgPreview: null
+            imgPreview: ''
         }
     },
 
 
     created() {
-        this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get(`/api/posts/edit/${this.$route.params.id}`)
-                .then(response => {
-                    this.nombre = response.data['nombre'];
-                    this.descripcion = response.data['descripcion'];
-                    this.id_descripcion = response.data['id_descripcion'];
-                    this.img = "/img/"+response.data['img'];
-                    this.imgPreview = this.image;
-                    this.precio = response.data['precio'];
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        })
+        const id = this.$route.params.id;
+        this.$axios.get(`/api/posts/edit/${id}`)
+            .then(response => {
+                const post = response.data;
+                this.id = post.id;
+                this.nombre = post.nombre;
+                this.descripcion = post.descripcion;
+                this.id_suscripcion = post.id_suscripcion;
+                this.precio = post.precio;
+                this.imgPreview = post.image;
+            })
+            .catch(error => {
+                console.log(error);
+            });
     },
     methods: {
         onChange(e) {
@@ -104,7 +105,21 @@ export default{
 
 
             if (this.img) {
-                if ( /\.(jpe?g|png|gif)$/i.test( this.img.name ) ) {
+                if ( /\.(jpe?g|png|gif|webp)$/i.test( this.img.name ) ) {
+                    reader.readAsDataURL( this.img );
+                }
+            }
+        },
+        onChangeImg(e) {
+            this.img = e.target.files[0];
+            let reader = new FileReader();
+            reader.addEventListener("load", function () {
+                this.imgPreview = reader.result;
+            }.bind(this), false);
+
+
+            if (this.img) {
+                if ( /\.(jpe?g|png|gif|webp)$/i.test( this.img.name ) ) {
                     reader.readAsDataURL( this.img );
                 }
             }
@@ -124,7 +139,7 @@ export default{
                 formData.append('descripcion', this.descripcion);
                 formData.append('id_suscripcion', this.id_suscripcion);
                 formData.append('precio', this.precio);
-                formData.append('file', this.img);
+                formData.append('image', this.img);
 
 
                 this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
@@ -148,8 +163,6 @@ export default{
         next();
     }
 }
-
-
 </script>
 
 
