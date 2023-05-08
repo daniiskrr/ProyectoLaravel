@@ -10,13 +10,23 @@
 
 
     </head>
+
     <header class="menuEstatico">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <router-link to="/Home"> <img class="logo" src="../images/PsGames.svg" alt="Logo de PsGames"></router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <router-link to="/Home"> <img class="logo" src="../images/PsGames.svg" alt="Logo de PsGames"></router-link>
+                <div v-if="!isLoggedin" class="navbar-nav-botones">
+                    <router-link to="/login"><button class="boton-login movil">Iniciar sesión</button></router-link>
+                    <router-link to="/register"><button class="boton-login movil">Registrarse</button></router-link>
+                </div>
+                <div v-if="isLoggedin" class="navbar-nav-botones">
+                    <router-link to="/dashboard"><button class="boton-login movil">Daniel Rayo</button></router-link>
+                    <router-link to="/"><button class="boton-login movil" @click="logout">Cerrar Sesión</button></router-link>
+
+                </div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -28,21 +38,21 @@
                         <li class="nav-item">
                             <router-link to="/psplus" class="nav-item nav-link">PsPlus</router-link>
                         </li>
-                        <li v-if="isLoggedin" class="nav-item">
+                        <li v-if="isLoggedin && rol == 'Administrador'" class="nav-item">
                             <router-link to="/posts" class="nav-item nav-link">Productos</router-link>
                         </li>
-                        <li v-if="isLoggedin" class="nav-item">
+                        <li v-if="isLoggedin && rol == 'Administrador'" class="nav-item">
                             <router-link to="/panelusuarios" class="nav-item nav-link">Usuarios</router-link>
                         </li>
                     </ul>
                     <div v-if="isLoggedin" class="navbar-nav">
+                        <router-link to="/dashboard"><button class="boton-login ordenador">Daniel Rayo</button></router-link>
+                        <router-link to="/"><button class="boton-login ordenador" @click="logout">Cerrar Sesión</button></router-link>
                         <a href="carrito.html"><img class="logo-carrito" src="../images/carrito.svg" alt="Carrito de la compra"></a>
-                        <router-link to="/dashboard"><button class="boton-login">Daniel Rayo</button></router-link>
-                        <router-link to="/"><button class="boton-login" @click="logout">Cerrar Sesión</button></router-link>
                     </div>
                     <div v-else class="navbar-nav">
-                        <router-link to="/login"><button class="boton-login">Iniciar sesión</button></router-link>
-                        <router-link to="/register"><button class="boton-login">Registrarse</button></router-link>
+                        <router-link to="/login"><button class="boton-login ordenador">Iniciar sesión</button></router-link>
+                        <router-link to="/register"><button class="boton-login ordenador">Registrarse</button></router-link>
                     </div>
                 </div>
             </div>
