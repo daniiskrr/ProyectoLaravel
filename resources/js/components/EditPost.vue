@@ -4,18 +4,8 @@
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Editar Producto</h5>
                 <div>
-                    <router-link :to="{name: 'posts'}" class="btn btn-success">Go Back</router-link>
+                    <router-link :to="{name: 'posts'}" class="btn btn-success">Atrás</router-link>
                 </div>
-            </div>
-
-            <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{strSuccess}}</strong>
-            </div>
-
-            <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{strError}}</strong>
             </div>
 
             <form @submit.prevent="updatePost" enctype="multipart/form-data" method="PUT">
@@ -45,44 +35,37 @@
                 </div>
 
                 <div class="form-group mb-2">
-                    <label>Imagen</label><span class="text-danger">*</span>
-                    <input type="file" class="form-control mb-2" v-on:change="onChange" name="file">
-                    <img v-bind:src="'/img/' + imgPreview">
+                    <label>Image</label><span class="text-danger"> *</span>
+                    <input type="file" class="form-control mb-2" v-on:change="onChange">
+                        <img v-bind:src="imgPreview" width="200" height="200"/>
                 </div>
 
-                <div class="form-group mb-2">
-                    <label>Image</label><span class="text-danger"> *</span>
-                    <input type="file" class="form-control mb-2" v-on:change="onChangeImg">
-                        <img v-bind:src="imgPreview" width="200" height="200"/>
-        </div>
-
-                <button type="submit" class="btn btn-primary mt-4 mb-4">Editar publicación</button>
+                <button type="submit" class="btn btn-primary mt-4 mb-4">Editar Producto</button>
             </form>
         </div>
     </div>
 </template>
 
 <script>
-export default{
+export default {
     data() {
         return {
-            id: '',
-            nombre: '',
-            descripcion: '',
-            id_suscripcion: '',
-            img: '',
-            precio: '',
-            strSuccess: '',
-            strError: '',
-            imgPreview: ''
-        }
+            id: "",
+            nombre: "",
+            descripcion: "",
+            id_suscripcion: "",
+            img: "",
+            precio: "",
+            strSuccess: "",
+            strError: "",
+            imgPreview: "",
+        };
     },
-
-
     created() {
         const id = this.$route.params.id;
-        this.$axios.get(`/api/posts/edit/${id}`)
-            .then(response => {
+        this.$axios
+            .get(`/api/posts/edit/${id}`)
+            .then((response) => {
                 const post = response.data;
                 this.id = post.id;
                 this.nombre = post.nombre;
@@ -91,7 +74,7 @@ export default{
                 this.precio = post.precio;
                 this.imgPreview = post.image;
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error);
             });
     },
@@ -99,71 +82,70 @@ export default{
         onChange(e) {
             this.img = e.target.files[0];
             let reader = new FileReader();
-            reader.addEventListener("load", function () {
-                this.imgPreview = reader.result;
-            }.bind(this), false);
-
-
-            if (this.img) {
-                if ( /\.(jpe?g|png|gif|webp)$/i.test( this.img.name ) ) {
-                    reader.readAsDataURL( this.img );
-                }
-            }
-        },
-        onChangeImg(e) {
-            this.img = e.target.files[0];
-            let reader = new FileReader();
-            reader.addEventListener("load", function () {
-                this.imgPreview = reader.result;
-            }.bind(this), false);
-
+            reader.addEventListener(
+                "load",
+                function () {
+                    this.imgPreview = reader.result;
+                }.bind(this),
+                false
+            );
 
             if (this.img) {
-                if ( /\.(jpe?g|png|gif|webp)$/i.test( this.img.name ) ) {
-                    reader.readAsDataURL( this.img );
+                if (/\.(jpe?g|png|gif|webp)$/i.test(this.img.name)) {
+                    reader.readAsDataURL(this.img);
                 }
             }
         },
         updatePost(e) {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                let existingObj = this;
-                const config = {
-                    headers: {
-                        'content-type': 'multipart/form-data'
-                    }
-                }
-
-
+            // Comprueba si el usuario ha seleccionado una nueva imagen
+            const id = this.$route.params.id;
+            if (this.img) {
+                // Si se ha seleccionado una nueva imagen, envía la solicitud con la nueva imagen
                 const formData = new FormData();
                 formData.append('nombre', this.nombre);
                 formData.append('descripcion', this.descripcion);
                 formData.append('id_suscripcion', this.id_suscripcion);
                 formData.append('precio', this.precio);
-                formData.append('image', this.img);
-
-
-                this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
-                    .then(response => {
-                        existingObj.strError = "";
-                        existingObj.strSuccess = response.data.success;
+                formData.append('file', this.img);
+                this.$axios.post(`/api/posts/update/${id}`, formData)
+                    .then((response) => {
+                        notie.alert({type: 'success', text: response.data.success, time: 3 });
+                        this.strError = "";
+                        this.strSuccess = response.data.success;
                     })
-                    .catch(function(error) {
-                        existingObj.strSuccess ="";
-                        existingObj.strError = error.response.data.message;
+                    .catch((error) => {
+                        this.strSuccess = "";
+                        this.strError = error.response.data.message;
                     });
-            });
-        }
-
-
+            } else {
+                // Si no se ha seleccionado una nueva imagen, envía la solicitud sin la imagen
+                this.$axios.post(`/api/posts/update/${id}`, {
+                    nombre: this.nombre,
+                    descripcion: this.descripcion,
+                    id_suscripcion: this.id_suscripcion,
+                    precio: this.precio,
+                })
+                    .then((response) => {
+                        notie.alert({type: 'success', text: response.data.success, time: 3 });
+                        this.strError = "";
+                        this.strSuccess = response.data.success;
+                    })
+                    .catch((error) => {
+                        this.strSuccess = "";
+                        this.strError = error.response.data.message;
+                    });
+            }
+        },
+        beforeRouteEnter(to, from, next) {
+            if (!window.Laravel.isLoggedin) {
+                window.location.href = "/";
+            }
+            next();
+        },
     },
-    beforeRouteEnter(to, from, next) {
-        if (!window.Laravel.isLoggedin) {
-            window.location.href = "/";
-        }
-        next();
-    }
-}
+};
 </script>
+
 
 
 

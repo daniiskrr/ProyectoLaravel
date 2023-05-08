@@ -29,10 +29,10 @@
                             <router-link to="/psplus" class="nav-item nav-link">PsPlus</router-link>
                         </li>
                         <li v-if="isLoggedin" class="nav-item">
-                            <router-link to="/posts" class="nav-item nav-link">Panel Productos</router-link>
+                            <router-link to="/posts" class="nav-item nav-link">Productos</router-link>
                         </li>
                         <li v-if="isLoggedin" class="nav-item">
-                            <router-link to="/panelusuarios" class="nav-item nav-link">Panel Usuarios</router-link>
+                            <router-link to="/panelusuarios" class="nav-item nav-link">Usuarios</router-link>
                         </li>
                     </ul>
                     <div v-if="isLoggedin" class="navbar-nav">

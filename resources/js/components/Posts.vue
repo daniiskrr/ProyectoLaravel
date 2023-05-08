@@ -3,9 +3,9 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
-                <h5 class="card-title">All Posts Data</h5>
+                <h5 class="card-title">Lista de Productos</h5>
                 <div>
-                    <button class="btn btn-success" type="button" @click="this.$router.push('/posts/add')">New Post</button>
+                    <button class="btn btn-success" type="button" @click="this.$router.push('/posts/add')">Nuevo Producto</button>
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
             .then(response => {
                 const index = this.posts.findIndex(post => post.id === id);
                 this.posts.splice(index, 1);
-                alert('¡Producto eliminado con éxito!');
+                notie.alert({type: 'success', text: 'Producto eliminado con éxito', time: 3 });
             })
             .catch(error => {
                 console.log(error);

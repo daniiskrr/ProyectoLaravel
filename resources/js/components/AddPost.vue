@@ -4,26 +4,11 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
-                <h5 class="card-title">Add New Post Data</h5>
+                <h5 class="card-title">Crear Nuevo Producto</h5>
                 <div>
-                    <router-link :to="{name: 'posts'}" class="btn btn-success">Go Back</router-link>
+                    <router-link :to="{name: 'posts'}" class="btn btn-success">Atrás</router-link>
                 </div>
             </div>
-
-
-            <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{strSuccess}}</strong>
-            </div>
-
-
-            <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{strError}}</strong>
-            </div>
-
-
-
 
             <form @submit.prevent="addPost" enctype="multipart/form-data">
                 <div class="form-group mb-2">
@@ -64,7 +49,7 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-primary mt-4 mb-4"> Add Post</button>
+                <button type="submit" class="btn btn-primary mt-4 mb-4"> Crear Producto</button>
 
 
             </form>
@@ -130,6 +115,7 @@
 
                 this.$axios.post('/api/posts/add', formData, config)
                     .then(response => {
+                        notie.alert({type: 'success', text: response.data.success, time: 3});
                         existObj.strError = "";
                         existObj.strSuccess = response.data.success;
                         }

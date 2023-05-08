@@ -5,6 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
+
 
 class PostController extends Controller
 {
@@ -42,6 +45,10 @@ class PostController extends Controller
     public function eliminaProducto($id)
     {
         $producto = Posts::findOrFail($id);
+        $image_path = public_path('img/' . $producto->image);
+        if (File::exists($image_path)) {
+            File::delete($image_path); // Elimina la foto del producto
+        }
         $producto->delete();
         return response()->json(['success' => 'Producto eliminado correctamente']);
     }
@@ -64,8 +71,7 @@ class PostController extends Controller
             'descripcion' => 'required',
             'id_suscripcion' => 'required',
             'precio' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-
+            'img' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $input = $request->all();
@@ -75,9 +81,11 @@ class PostController extends Controller
             $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $imageName);
             $input['image'] = $imageName;
-            unlink('img/'.$post->image);
+            if ($post->image) {
+                unlink('img/'.$post->image);
+            }
         }
         $post->update($input);
-        return response()->json(['success'=> 'Post update successfully']);
+        return response()->json(['success'=> 'Producto Actualizado']);
     }
 }

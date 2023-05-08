@@ -60,7 +60,7 @@ export const routes = [
     },
     {
         name: 'EditUser',
-        path: '/users/edit',
+        path: '/users/edit/:id',
         component: EditUser
     },
     {
