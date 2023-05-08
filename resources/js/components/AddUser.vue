@@ -8,7 +8,6 @@
                     <strong>{{error}}</strong>
                 </div>
 
-
                 <div class="card card-default">
                     <div class="card-header d-flex justify-content-between pb-2 mb-2">
                         <h5>Crear Nuevo Usuario</h5>

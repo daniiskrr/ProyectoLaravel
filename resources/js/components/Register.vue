@@ -7,8 +7,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <strong>{{error}}</strong>
                 </div>
- 
- 
+
+
                 <div class="card card-default">
                     <div class="card-header"><h5>Registrarme</h5></div>
                     <div class="card-body">
@@ -20,7 +20,7 @@
                                         autofocus autocomplete="off"  placeholder="Introduce tu nombre">
                                 </div>
                             </div>
- 
+
                             <div class="form-group row mt-1">
                                 <label for="apellidos" class="col-sm-4 col-form-label text-md-right">Apellidos</label>
                                 <div class="col-md-8">
@@ -28,7 +28,7 @@
                                            autofocus autocomplete="off" placeholder="Introduce tus apellidos">
                                 </div>
                             </div>
- 
+
                             <div class="form-group row mt-1">
                                 <label for="fecha_nacimiento" class="col-sm-4 col-form-label text-md-right">Fecha de nacimiento</label>
                                 <div class="col-md-8">
@@ -36,7 +36,7 @@
                                            autofocus autocomplete="off" placeholder="Introduce tu fecha de nacimiento">
                                 </div>
                             </div>
- 
+
                             <div class="form-group row mt-1">
                                 <label for="direccion" class="col-sm-4 col-form-label text-md-right">Direccion</label>
                                 <div class="col-md-8">
@@ -44,7 +44,7 @@
                                            autofocus autocomplete="off" placeholder="Introduce tu direccion">
                                 </div>
                             </div>
- 
+
                             <div class="form-group row mt-1">
                                 <label for="telefono" class="col-sm-4 col-form-label text-md-right">Telefono</label>
                                 <div class="col-md-8">
@@ -52,8 +52,8 @@
                                            autofocus autocomplete="off" placeholder="Introduce tu número de teléfono">
                                 </div>
                             </div>
- 
- 
+
+
                             <div class="form-group row mt-1">
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">Correo electrónico</label>
                                 <div class="col-md-8">
@@ -61,10 +61,10 @@
                                            autofocus autocomplete="off" placeholder="Introduce tu correo electrónico">
                                 </div>
                             </div>
- 
- 
- 
- 
+
+
+
+
                             <div class="form-group row mt-1">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-8">
@@ -72,8 +72,8 @@
                                            required autocomplete="off" placeholder="Introduce tu contraseña">
                                 </div>
                             </div>
- 
- 
+
+
                             <div class="form-group row mt-1 mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-success" @click="register">
@@ -81,8 +81,8 @@
                                     </button>
                                 </div>
                             </div>
- 
- 
+
+
                             <div class="row mt-1">
                                 <div class="col-md-8 offset-md-4">
                                     <small class="text-muted">
@@ -94,14 +94,14 @@
                         </form>
                     </div>
                 </div>
- 
- 
+
+
             </div>
         </div>
     </div>
  </template>
- 
- 
+
+
  <script>
 export default {
   name: "Register",
@@ -156,7 +156,6 @@ export default {
 </script>
 
  <style scoped>
- 
- 
+
+
  </style>
- 

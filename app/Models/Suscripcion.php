@@ -12,4 +12,5 @@ class Suscripcion extends Model
 
     protected $table = 'suscripcion';
 
+
 }

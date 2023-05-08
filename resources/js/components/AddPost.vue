@@ -92,7 +92,6 @@
 
 
 
-
         /*Inicio*/
         addPost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
