@@ -1,6 +1,6 @@
 <template>
 
-    <div class="card">
+    <div v-if="isLoggedin && user.role === 'Administrador'" class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Lista de Productos</h5>
@@ -27,7 +27,7 @@
                     <td class="text-center">{{index}}</td>
                     <td>{{post.nombre}}</td>
                     <td>{{post.descripcion}}</td>
-                    <td>{{post.id_suscripcion}}</td>
+                    <td>{{ nombreSuscripcion(post.id_suscripcion) }}</td>
                     <td>{{post.precio}}€</td>
                     <td class="text-center">
                         <div v-if="post.image">
@@ -41,11 +41,11 @@
                 </tr>
                 </tbody>
             </table>
-
-
         </div>
     </div>
-
+    <div v-else>
+        <p>No tienes permisos para acceder a esta página.</p>
+    </div>
 
 
 
@@ -58,9 +58,16 @@
         return {
             posts: [],
             strSuccess: '',
-            strError: ''
-        }
+            strError: '',
+            isLoggedin: false,
+            user: window.Laravel.user
+        };
     },
+     mounted() {
+         if (window.Laravel && window.Laravel.isLoggedin) {
+             this.isLoggedin = true;
+         }
+     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/posts')
@@ -87,7 +94,21 @@
                 // Aquí puedes mostrar un mensaje de error si lo deseas
             });
         })
-    }
+    },
+    nombreSuscripcion(idSus) {
+        switch (idSus) {
+            case 1:
+                return 'No tiene suscripción';
+            case 2:
+                return 'PlayStation Plus Essential';
+            case 3:
+                return 'PlayStation Plus Extra';
+            case 4:
+                return 'PlayStation Plus Premium';
+            default:
+                return '';
+                }
+            }
  }
 }
  </script>

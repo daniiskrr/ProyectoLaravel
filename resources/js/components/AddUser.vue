@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div v-if="isLoggedin && user.role === 'Administrador'" class="container">
         <div class="row jutify-content-center">
             <div class="col-md-8">
                 {{name}}
@@ -109,6 +109,9 @@
             </div>
         </div>
     </div>
+    <div v-else>
+        <p>No tienes permisos para acceder a esta página.</p>
+    </div>
  </template>
 
 
@@ -125,8 +128,15 @@ export default {
             duracion: "",
             email: "",
             password: "",
-            error: null
+            error: null,
+            isLoggedin: false,
+            user: window.Laravel.user
         };
+    },
+    mounted() {
+        if (window.Laravel && window.Laravel.isLoggedin) {
+            this.isLoggedin = true;
+        }
     },
     methods: {
         addUser(e) {
