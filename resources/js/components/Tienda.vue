@@ -1,17 +1,19 @@
 <template>
+    <html>
     <body>
     <div class="titulo-tienda">
         <h1>Catálogo de juegos de PlayStation</h1>
     </div>
 
-    <form action="#" method="get" class="formJuegos">
-        <input class="my-0 me-1" type="text" name="busqueda" placeholder="Buscar juegos...">
+    <form @submit.prevent="buscarJuegos" class="formJuegos">
+    <input class="my-0 me-1" type="text" v-model="busqueda" name="busqueda" placeholder="Buscar juegos...">
         <button class="btn btn-outline-success" type="submit">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
             </svg>
         </button>
     </form>
+
     <div class="row">
         <div v-for="(post, index) in posts" :key="post.id" class="col-juegos">
             <div v-if="post.image">
@@ -25,7 +27,7 @@
     </div>
 
     <div v-if="isLoggedin && (user.tipo_suscripcion === 'PsPlus Premium' || user.tipo_suscripcion === 'PsPlus Essential' || user.tipo_suscripcion === 'PsPlus Extra')">
-        <h5>OFERTAS</h5>
+        <h2 class="titulo-tienda">Ofertas</h2>
         <div class="row row-oferta">
             <div v-for="(post, index) in ofertas" :key="post.id" class="col-juegos">
                 <div v-if="post.image">
@@ -41,6 +43,7 @@
 
 
     </body>
+    </html>
 </template>
 
 <script>
@@ -52,7 +55,8 @@ export default {
             strSuccess: '',
             strError: '',
             isLoggedin: false,
-            user: window.Laravel.user
+            user: window.Laravel.user,
+            busqueda: ''
         };
     },
     mounted() {
@@ -62,30 +66,60 @@ export default {
     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.get('/api/tienda')
-                    .then(response => {
-                        this.posts = response.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
-        );
+            this.$axios.get('/api/tienda')
+                .then(response => {
+                    this.posts = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.get('/api/posts/ofertas')
-                    .then(response => {
-                        this.ofertas = response.data;
-                        console.log(this.ofertas);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
-        );
+            this.$axios.get('/api/posts/ofertas')
+                .then(response => {
+                    this.ofertas = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
     },
     methods: {
-
+        buscarJuegos: function () {
+            if (!this.busqueda) {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.get('/api/tienda')
+                        .then(response => {
+                            this.posts = response.data;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                });
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.get('/api/posts/ofertas')
+                        .then(response => {
+                            this.ofertas = response.data;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                });
+            } else {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.get('/api/buscar' + this.busqueda)
+                        .then(response => {
+                            this.posts = response.data.posts;
+                            this.ofertas = response.data.ofertas;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                });
+            }
+        }
     }
 }
 
 </script>
+

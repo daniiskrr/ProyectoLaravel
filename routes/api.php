@@ -21,6 +21,8 @@ Route::post('login',[UserController::class,'login']);
 Route::post('register',[UserController::class,'register']);
 Route::post('logout',[UserController::class,'logout'])->middleware(middleware:'auth:sanctum');
 Route::get('tienda', [PostController::class,'tienda']);
+Route::post('buscar', [PostController::class, 'buscar']);
+
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::group(['prefix' => 'posts'], function(){

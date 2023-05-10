@@ -122,6 +122,13 @@ class PostController extends Controller
         return $ofertas;
     }
 
+    public function buscar(Request $request) {
+        $query = $request->input('busqueda');
+        $posts = Posts::where('nombre', 'LIKE', "%$query%")->get();
+
+        return response()->json($posts);
+    }
+
 
 
 
