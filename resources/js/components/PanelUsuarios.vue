@@ -1,6 +1,6 @@
 <template>
 
-    <div v-if="isLoggedin && user.role === 'Administrador'" class="card">
+    <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Lista de Usuarios</h5>
@@ -40,9 +40,10 @@
 
         </div>
     </div>
-    <div v-else>
-        <p>No tienes permisos para acceder a esta página.</p>
-    </div>
+
+
+
+
  </template>
 
 
@@ -53,16 +54,9 @@
         return {
             users: [],
             strSuccess: '',
-            strError: '',
-            isLoggedin: false,
-            user: window.Laravel.user
-        };
+            strError: ''
+        }
     },
-     mounted() {
-         if (window.Laravel && window.Laravel.isLoggedin) {
-             this.isLoggedin = true;
-         }
-     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/users')

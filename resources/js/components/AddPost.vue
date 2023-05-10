@@ -1,5 +1,7 @@
 <template>
-    <div v-if="isLoggedin && user.role === 'Administrador'" class="card">
+
+
+    <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Crear Nuevo Producto</h5>
@@ -55,9 +57,6 @@
 
         </div>
     </div>
-    <div v-else>
-        <p>No tienes permisos para acceder a esta página.</p>
-    </div>
  </template>
 
 
@@ -72,16 +71,9 @@
             precio: '',
             strSuccess: '',
             strError: '',
-            imgPreview: null,
-            isLoggedin: false,
-            user: window.Laravel.user
+            imgPreview: null
         }
     },
-     mounted() {
-         if (window.Laravel && window.Laravel.isLoggedin) {
-             this.isLoggedin = true;
-         }
-     },
     methods: {
         onChangeImg(e) {
             this.img = e.target.files[0];

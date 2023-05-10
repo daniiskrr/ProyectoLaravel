@@ -10,27 +10,20 @@
         @vite(['resources/js/app.js','resources/css/app.css'])
     </head>
     <body>
-    @if (Auth::check())
+        @if (Auth::check())
         <script>
-            window.Laravel = {
-                isLoggedin: true,
-                user: {
-                    id: {{ Auth::user()->id }},
-                    nombre: "{{ Auth::user()->nombre }}",
-                    tipo_suscripcion: "{{ Auth::user()->tipo_suscripcion}}",
-                    duracion: "{{ Auth::user()->duracion}}",
-                    email: "{{ Auth::user()->email }}",
-                    role: "{{ Auth::user()->roles()->first()->nombre }}"
-                }
-            }
+            window.Laravel = {!!json_encode([
+                'isLoggedin' => true,
+                'user' => Auth::user()
+            ])!!}
         </script>
-    @else
+        @else
         <script>
-            window.Laravel = {
-                isLoggedin: false
-            }
+            window.Laravel = {!!json_encode([
+                    'isLoggedin' => false
+                ])!!}
         </script>
-    @endif
+        @endif
         <div id="app"></div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/notie/4.3.1/notie.min.js"></script>
