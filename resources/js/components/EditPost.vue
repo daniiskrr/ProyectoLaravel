@@ -1,5 +1,5 @@
 <template>
-<div class="card">
+<div v-if="isLoggedin && user.role === 'Administrador'" class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Editar Producto</h5>
@@ -44,6 +44,9 @@
             </form>
         </div>
     </div>
+    <div v-else>
+        <p>No tienes permisos para acceder a esta página.</p>
+    </div>
 </template>
 
 <script>
@@ -59,7 +62,14 @@ export default {
             strSuccess: "",
             strError: "",
             imgPreview: "",
+            isLoggedin: false,
+            user: window.Laravel.user
         };
+    },
+    mounted() {
+        if (window.Laravel && window.Laravel.isLoggedin) {
+            this.isLoggedin = true;
+        }
     },
     created() {
         const id = this.$route.params.id;

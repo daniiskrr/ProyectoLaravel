@@ -88,4 +88,15 @@ class PostController extends Controller
         $post->update($input);
         return response()->json(['success'=> 'Producto Actualizado']);
     }
+    public function tienda(){
+        $posts = Posts::all()->toArray();
+        return $posts;
+    }
+
+    public function ofertas()
+    {
+        $ofertas = Posts::whereIn('id_suscripcion', [2, 3, 4])->get()->toArray();
+        return $ofertas;
+    }
+
 }

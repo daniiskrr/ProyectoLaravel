@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('descripcion')->nullable(); //para que no sea obligatorio
             $table->unsignedBigInteger('id_suscripcion');
             $table->string('image');
-            $table->integer('precio');
+            $table->double('precio');
             $table->timestamps();
 
             $table->foreign('id_suscripcion')->references('id')->on('suscripcion');
