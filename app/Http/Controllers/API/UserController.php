@@ -25,7 +25,6 @@ class UserController extends Controller{
         return $users;
     }
 
-
     public function login(Request $request){
         $credentials=[
             'email' => $request->email,

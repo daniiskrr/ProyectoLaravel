@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('image');
             $table->double('precio');
             $table->timestamps();
-
             $table->foreign('id_suscripcion')->references('id')->on('suscripcion');
         });
     }

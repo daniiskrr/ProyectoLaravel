@@ -16,7 +16,6 @@ class PostController extends Controller
         $posts = Posts::all()->toArray();
         return $posts;
     }
-
     public function add(Request $request){
 
         $request->validate([

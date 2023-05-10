@@ -18,4 +18,5 @@ class Posts extends Model
         'image',
         'precio',
     ];
+
 }

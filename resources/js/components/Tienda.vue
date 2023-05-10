@@ -111,17 +111,6 @@ export default {
     methods: {
         calcularPrecio(post2) {
 
-            const descuento = post2.descuento ? post2.descuento : 0;
-            let precionuevo = post2.precio;
-
-            if (descuento > 0) {
-                const descuentito = post2.precio * descuento / 100;
-                precionuevo -= descuentito;
-                console.log(`Descuento aplicado a ${post2.nombre}: ${descuento}%`);
-                console.log(`Nuevo precio de ${post2.nombre}: ${precionuevo}`);
-            }
-
-            return precionuevo.toFixed(2);
         }
     }
 }
