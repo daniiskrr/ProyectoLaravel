@@ -1,6 +1,6 @@
 <template>
 
-    <div class="card">
+    <div v-if="isLoggedin && user.role === 'Administrador'" class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Lista de Usuarios</h5>
@@ -8,6 +8,7 @@
                     <button class="btn btn-success" type="button" @click="this.$router.push('/adduser')">Nuevo Usuario</button>
                 </div>
             </div>
+
 
             <table class="table table-hover table-sm">
                 <thead class="bg-dark text-light">
@@ -40,32 +41,38 @@
 
         </div>
     </div>
+    <div v-else>
+        <p>No tienes permisos para acceder a esta página.</p>
+    </div>
+</template>
 
 
+<script>
 
-
- </template>
-
-
- <script>
-
- export default {
+export default {
     data() {
         return {
             users: [],
             strSuccess: '',
-            strError: ''
+            strError: '',
+            isLoggedin: false,
+            user: window.Laravel.user
+        };
+    },
+    mounted() {
+        if (window.Laravel && window.Laravel.isLoggedin) {
+            this.isLoggedin = true;
         }
     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/users')
-                .then(response => {
-                    this.users = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                this.$axios.get('/api/users')
+                    .then(response => {
+                        this.users = response.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             }
         );
     },
@@ -84,7 +91,7 @@
             });
         }
     }
- }
+}
 
- </script>
+</script>
 

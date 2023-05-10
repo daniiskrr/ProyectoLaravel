@@ -1,7 +1,5 @@
 <template>
-
-
-    <div class="card">
+    <div v-if="isLoggedin && user.role === 'Administrador'" class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Crear Nuevo Producto</h5>
@@ -57,11 +55,14 @@
 
         </div>
     </div>
- </template>
+    <div v-else>
+        <p>No tienes permisos para acceder a esta página.</p>
+    </div>
+</template>
 
 
- <script>
- export default {
+<script>
+export default {
     data() {
         return {
             nombre: '',
@@ -71,7 +72,14 @@
             precio: '',
             strSuccess: '',
             strError: '',
-            imgPreview: null
+            imgPreview: null,
+            isLoggedin: false,
+            user: window.Laravel.user
+        }
+    },
+    mounted() {
+        if (window.Laravel && window.Laravel.isLoggedin) {
+            this.isLoggedin = true;
         }
     },
     methods: {
@@ -114,21 +122,21 @@
 
                 this.$axios.post('/api/posts/add', formData, config)
                     .then(response => {
-                        notie.alert({type: 'success', text: response.data.success, time: 3});
-                        existObj.strError = "";
-                        existObj.strSuccess = response.data.success;
+                            notie.alert({type: 'success', text: response.data.success, time: 3});
+                            existObj.strError = "";
+                            existObj.strSuccess = response.data.success;
                         }
                     )
                     .catch(function (error){
-                        existObj.strError = error.response.data.message;
-                        existObj.strSuccess = "";
+                            existObj.strError = error.response.data.message;
+                            existObj.strSuccess = "";
                         }
                     );
             });
         }
 
     }
- }
+}
 
 
- </script>
+</script>

@@ -8,6 +8,7 @@
                     <strong>{{error}}</strong>
                 </div>
 
+
                 <div class="card card-default">
                     <div class="card-header"><h5>Registrarme</h5></div>
                     <div class="card-body">
@@ -16,7 +17,7 @@
                                 <label for="nombre" class="col-sm-4 col-form-label text-md-right">Nombre</label>
                                 <div class="col-md-8">
                                     <input id="nombre" type="text" class="form-control" v-model="nombre" required
-                                        autofocus autocomplete="off"  placeholder="Introduce tu nombre">
+                                           autofocus autocomplete="off"  placeholder="Introduce tu nombre">
                                 </div>
                             </div>
 
@@ -98,63 +99,63 @@
             </div>
         </div>
     </div>
- </template>
+</template>
 
 
- <script>
+<script>
 export default {
-  name: "Register",
-  data() {
-    return {
-      nombre: "",
-      apellidos: "",
-      fecha_nacimiento: "",
-      direccion: "",
-      telefono: "",
-      tipo_suscripcion: "",
-      duracion: "",
-      email: "",
-      password: "",
-      //rol: "",
-      error: null
-    };
-  },
-  methods: {
-    register(e) {
-      e.preventDefault();
-      if (this.password.length > 0) {
-        this.$axios.get("/sanctum/csrf-cookie").then(response => {
-          this.$axios
-            .post("api/register", {
-              nombre: this.nombre,
-              apellidos: this.apellidos,
-              fecha_nacimiento: this.fecha_nacimiento,
-              direccion: this.direccion,
-              telefono: this.telefono,
-              tipo_suscripcion: this.tipo_suscripcion,
-              duracion: this.duracion,
-              email: this.email,
-              password: this.password,
-              //rol: "cliente"
-            })
-            .then(response => {
-              if (response.data.success) {
-                window.location.href = "/login";
-              } else {
-                this.error = response.data.message;
-              }
-            })
-            .catch(function(error) {
-              console.error(error);
-            });
-        });
-      }
+    name: "Register",
+    data() {
+        return {
+            nombre: "",
+            apellidos: "",
+            fecha_nacimiento: "",
+            direccion: "",
+            telefono: "",
+            tipo_suscripcion: "",
+            duracion: "",
+            email: "",
+            password: "",
+            //rol: "",
+            error: null
+        };
+    },
+    methods: {
+        register(e) {
+            e.preventDefault();
+            if (this.password.length > 0) {
+                this.$axios.get("/sanctum/csrf-cookie").then(response => {
+                    this.$axios
+                        .post("api/register", {
+                            nombre: this.nombre,
+                            apellidos: this.apellidos,
+                            fecha_nacimiento: this.fecha_nacimiento,
+                            direccion: this.direccion,
+                            telefono: this.telefono,
+                            tipo_suscripcion: this.tipo_suscripcion,
+                            duracion: this.duracion,
+                            email: this.email,
+                            password: this.password,
+                            //rol: "cliente"
+                        })
+                        .then(response => {
+                            if (response.data.success) {
+                                window.location.href = "/login";
+                            } else {
+                                this.error = response.data.message;
+                            }
+                        })
+                        .catch(function(error) {
+                            console.error(error);
+                        });
+                });
+            }
+        }
     }
-  }
 };
 </script>
 
- <style scoped>
+<style scoped>
 
 
- </style>
+</style>

@@ -56,11 +56,11 @@
             </div>
         </div>
     </div>
- </template>
+</template>
 
 
- <script>
- export default {
+<script>
+export default {
     data() {
         return {
             email: "",
@@ -99,5 +99,5 @@
         }
         next();
     }
- }
- </script>
+}
+</script>
