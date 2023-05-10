@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Editar Producto</h5>
                 <div>
-                    <router-link :to="{name: 'posts'}" class="btn btn-success">Atrás</router-link>
+                    <router-link :to="{name: 'PanelUsuarios'}" class="btn btn-success">Atrás</router-link>
                 </div>
             </div>
 

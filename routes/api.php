@@ -20,7 +20,7 @@ use App\Http\Controllers\API\PostController;
 Route::post('login',[UserController::class,'login']);
 Route::post('register',[UserController::class,'register']);
 Route::post('logout',[UserController::class,'logout'])->middleware(middleware:'auth:sanctum');
-//Route::get('app', [UserController::class,'app']);
+Route::get('tienda', [PostController::class,'tienda']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::group(['prefix' => 'posts'], function(){
@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::get('edit/{id}', [PostController::class,'edit']);
         Route::post('update/{id}', [PostController::class,'update']);
         Route::delete('{id}', [PostController::class, 'eliminaProducto']);
+        Route::get('ofertas', [PostController::class,'ofertas']);
     });
 
     Route::group(['prefix' => 'users'], function(){

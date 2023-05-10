@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use App\Models\User;
+use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -95,8 +100,29 @@ class PostController extends Controller
     public function ofertas()
     {
         $ofertas = Posts::whereIn('id_suscripcion', [2, 3, 4])->get()->toArray();
-        return $ofertas;
 
+        // Obtener el usuario autenticado
+        $user = auth()->user();
+
+        // Aplicar descuento según el tipo de suscripción
+        if ($user->tipo_suscripcion == 'PsPlus Essential') {
+            foreach ($ofertas as &$oferta) {
+                $oferta['precio_descuento'] = $oferta['precio'] * 0.8;
+            }
+        } elseif ($user && $user->tipo_suscripcion == 'PsPlus Extra') {
+            foreach ($ofertas as &$oferta) {
+                $oferta['precio_descuento'] = $oferta['precio'] * 0.7;
+            }
+        } elseif ($user && $user->tipo_suscripcion == 'PsPlus Premium') {
+            foreach ($ofertas as &$oferta) {
+                $oferta['precio_descuento'] = $oferta['precio'] * 0.4;
+            }
+        }
+
+        return $ofertas;
     }
+
+
+
 
 }

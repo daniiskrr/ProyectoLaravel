@@ -24,19 +24,21 @@
         </div>
     </div>
 
-    <h5>ofertitas</h5>
-    <div class="row row-oferta">
-        <div v-for="(post2, index) in ofertas" :key="post2.id" class="col-juegos">
-            <div v-if="post2.image">
-                <img alt="post-img" width="100" v-bind:src="'/img/' + post2.image">
+    <div v-if="isLoggedin && (user.tipo_suscripcion === 'PsPlus Premium' || user.tipo_suscripcion === 'PsPlus Essential' || user.tipo_suscripcion === 'PsPlus Extra')">
+        <h5>OFERTAS</h5>
+        <div class="row row-oferta">
+            <div v-for="(post, index) in ofertas" :key="post.id" class="col-juegos">
+                <div v-if="post.image">
+                    <img alt="post-img" width="100" :src="'/img/' + post.image">
+                </div>
+                <h5>{{ post.nombre }}</h5>
+                <p>PS5</p>
+                <p>{{ post.precio_descuento ? post.precio_descuento.toFixed(2) + '€' : post.precio.toFixed(2) + '€' }}</p>
+                <a href="#" class="boton">Comprar ahora</a>
             </div>
-            <h5>{{ post2.nombre }}</h5>
-            <p>Precio: {{ calcularPrecio(post2) }}</p>
-            <p v-if="post2.precio > 0">Precio original: {{ post2.precio }}</p>
-            <p v-else>¡Gratis con PsPlus Premium!</p>
-            <a href="#" class="boton">Comprar ahora</a>
         </div>
     </div>
+
 
     </body>
 </template>
@@ -47,7 +49,6 @@ export default {
         return {
             posts: [],
             ofertas: [],
-            descuentoporcentaje: 0,
             strSuccess: '',
             strError: '',
             isLoggedin: false,
@@ -58,60 +59,33 @@ export default {
         if (window.Laravel && window.Laravel.isLoggedin) {
             this.isLoggedin = true;
         }
-
+    },
+    created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/tienda')
-                .then(response => {
-                    this.posts = response.data;
-
-                    if (this.user && this.user.role) {
-                        const suscripcion = this.user.tipo_suscripcion;
-
-                        if (suscripcion === 'PsPlus Essential') {
-                            this.descuentoporcentaje = 20;
-                        } else if (suscripcion === 'PsPlus Extra') {
-                            console.log("soy extra");
-                            this.descuentoporcentaje = 30;
-                        } else if (suscripcion === 'PsPlus Premium') {
-                            this.descuentoporcentaje = 30;
-                            this.posts.forEach(post2 => {
-                                if (post2.id_suscripcion === 4) {
-                                    post2.descuento = 100;
-                                } else {
-                                    post2.descuento = this.descuentoporcentaje;
-                                }
-                            });
-
-                            this.ofertas.forEach(oferta => {
-                                if (oferta.id_suscripcion === 4) {
-                                    oferta.descuento = 100;
-                                } else {
-                                    oferta.descuento = this.descuentoporcentaje;
-                                }
-                            });
-
-                        }
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        });
-
+                this.$axios.get('/api/tienda')
+                    .then(response => {
+                        this.posts = response.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        );
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/posts/ofertas')
-                .then(response => {
-                    this.ofertas = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        });
+                this.$axios.get('/api/posts/ofertas')
+                    .then(response => {
+                        this.ofertas = response.data;
+                        console.log(this.ofertas);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        );
     },
     methods: {
-        calcularPrecio(post2) {
 
-        }
     }
 }
+
 </script>
