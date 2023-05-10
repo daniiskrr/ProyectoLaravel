@@ -18,7 +18,7 @@ class UserController extends Controller{
         $users = array_map(function($user) {
             // Se agrega el nombre del rol al array del usuario
             $user['rol'] = $user['roles'][0]['nombre'];
-            // Se elimina la propiedad 'roles' del array del usuario para evitar redundancias
+            // Se elimina la propiedad 'roles' del array del usuario
             unset($user['roles']);
             return $user;
         }, $users);

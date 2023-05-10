@@ -8,7 +8,6 @@
                     <strong>{{error}}</strong>
                 </div>
 
-
                 <div class="card card-default">
                     <div class="card-header"><h5>Registrarme</h5></div>
                     <div class="card-body">
