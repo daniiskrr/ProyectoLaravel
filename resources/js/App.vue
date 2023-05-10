@@ -8,8 +8,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <link href="app.css" rel="stylesheet" type="text/css">
 
-    </head>
 
+    </head>
     <header class="menuEstatico">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
@@ -22,7 +22,7 @@
                     <router-link to="/register"><button class="boton-login movil">Registrarse</button></router-link>
                 </div>
                 <div v-if="isLoggedin" class="navbar-nav-botones">
-                    <router-link to="/dashboard"><button class="boton-login movil">Daniel Rayo</button></router-link>
+                    <router-link to="/dashboard"><button class="boton-login movil">Hola, {{ user.nombre}}!</button></router-link>
                     <router-link to="/"><button class="boton-login movil" @click="logout">Cerrar Sesión</button></router-link>
 
                 </div>
@@ -37,15 +37,15 @@
                         <li class="nav-item">
                             <router-link to="/psplus" class="nav-item nav-link">PsPlus</router-link>
                         </li>
-                        <li v-if="isLoggedin && rol == 'Administrador'" class="nav-item">
+                        <li v-if="isLoggedin && user.role == 'Administrador'" class="nav-item">
                             <router-link to="/posts" class="nav-item nav-link">Productos</router-link>
                         </li>
-                        <li v-if="isLoggedin && rol == 'Administrador'" class="nav-item">
+                        <li v-if="isLoggedin && user.role == 'Administrador'" class="nav-item">
                             <router-link to="/panelusuarios" class="nav-item nav-link">Usuarios</router-link>
                         </li>
                     </ul>
                     <div v-if="isLoggedin" class="navbar-nav">
-                        <router-link to="/dashboard"><button class="boton-login ordenador">Daniel Rayo</button></router-link>
+                        <router-link to="/dashboard"><button class="boton-login ordenador">Hola, {{ user.nombre }}!</button></router-link>
                         <router-link to="/"><button class="boton-login ordenador" @click="logout">Cerrar Sesión</button></router-link>
                         <a href="carrito.html"><img class="logo-carrito" src="../images/carrito.svg" alt="Carrito de la compra"></a>
                     </div>
@@ -68,27 +68,29 @@ window.addEventListener("scroll", function() {
     if (window.pageYOffset > 100) {
         elemento.classList.remove("menuEstatico");
         elemento.classList.add("menuFijo");
-    }else{
+    } else {
         elemento.classList.remove("menuFijo");
         elemento.classList.add("menuEstatico");
     }
 });
- export default {
-    variable: "A",
+
+export default {
     name: "App",
     data() {
         return {
             isLoggedin: false,
+            user: {}
         }
     },
     created() {
-        if(window.Laravel.isLoggedin){
-            this.isLoggedin =true;
+        if (window.Laravel.isLoggedin) {
+            this.isLoggedin = true;
+            this.user = window.Laravel.user;
         }
     },
     methods: {
         logout(e) {
-            e.preventDefault()
+            e.preventDefault();
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('api/logout')
                     .then(response => {
@@ -102,9 +104,8 @@ window.addEventListener("scroll", function() {
                         console.error(error);
                     });
             })
-
-
         }
-    },
- }
- </script>
+    }
+}
+</script>
+

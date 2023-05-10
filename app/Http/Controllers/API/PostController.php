@@ -96,6 +96,7 @@ class PostController extends Controller
     {
         $ofertas = Posts::whereIn('id_suscripcion', [2, 3, 4])->get()->toArray();
         return $ofertas;
+
     }
 
 }
