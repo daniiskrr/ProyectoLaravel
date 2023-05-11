@@ -5,7 +5,7 @@
         <div class="carrito">
             <div class="titulo_carrito">
                 <h1>Carrito</h1>
-                <hr>
+                <hr style="color: #060b53">
             </div>
             <div class="row">
                 <div class="col-1 d-flex justify-content-end">

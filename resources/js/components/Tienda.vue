@@ -21,7 +21,9 @@
                 <h5>{{post.nombre}}</h5>
                 <p>PS5</p>
                 <p>{{post.precio}}€</p>
-                <a href="#" class="boton">Comprar ahora</a>
+                <a v-if="isLoggedin" href="#" class="boton" @click="agregarProducto(post)">Comprar ahora</a>
+                <router-link to="/login"><a v-if="!isLoggedin" href="#" class="boton">Inicia sesión para comprar</a></router-link>
+
             </div>
         </div>
 
@@ -35,7 +37,7 @@
                     <h5>{{ post.nombre }}</h5>
                     <p>PS5</p>
                     <p>{{ post.precio_descuento ? post.precio_descuento.toFixed(2) + '€' : post.precio.toFixed(2) + '€' }}</p>
-                    <a href="#" class="boton">Comprar ahora</a>
+                    <a href="#" class="boton" @click="agregarProductoOferta(post)">Comprar ahora</a>
                 </div>
             </div>
         </div>
@@ -60,6 +62,9 @@ export default {
     mounted() {
         if (window.Laravel && window.Laravel.isLoggedin) {
             this.isLoggedin = true;
+        }else{
+            this.isLoggedin = false;
+            localStorage.removeItem('productos');
         }
     },
     created() {
@@ -95,8 +100,60 @@ export default {
                 return post.nombre.toLowerCase().includes(this.busqueda.toLowerCase());
             });
         }
+    },
+    methods: {
+        agregarProducto(producto) {
+            const productosEnCarrito = JSON.parse(localStorage.getItem('productos')) || [];
+            const productoExistente = productosEnCarrito.find(p => parseInt(p.id) === parseInt(producto.id));
+
+            if (productoExistente) {
+                // El producto ya está en el carrito
+                notie.alert({type: 'error', text: 'Ya existe este producto en tu carrito', time: 3 });
+                return;
+            }
+
+            // Agregar el producto al carrito
+            productosEnCarrito.push({
+                id: producto.id,
+                nombre: producto.nombre,
+                image: producto.image,
+                precio: producto.precio
+            });
+
+            localStorage.setItem('productos', JSON.stringify(productosEnCarrito));
+
+            console.log(JSON.parse(localStorage.getItem('productos')));
+
+            // Mostrar mensaje de éxito
+            notie.alert({type: 'success', text: 'Producto agregado al carrito', time: 3 });
+        },
+        agregarProductoOferta(producto) {
+            const productosEnCarrito = JSON.parse(localStorage.getItem('productos')) || [];
+            const productoExistente = productosEnCarrito.find(p => parseInt(p.id) === parseInt(producto.id));
+
+            if (productoExistente) {
+                // El producto ya está en el carrito
+                notie.alert({type: 'error', text: 'Ya existe este producto en tu carrito', time: 3 });
+                return;
+            }
+
+            // Agregar el producto al carrito
+            productosEnCarrito.push({
+                id: producto.id,
+                nombre: producto.nombre,
+                image: producto.image,
+                precio_descuento: producto.precio_descuento
+            });
+
+            localStorage.setItem('productos', JSON.stringify(productosEnCarrito));
+
+            console.log(JSON.parse(localStorage.getItem('productos')));
+
+            // Mostrar mensaje de éxito
+            notie.alert({type: 'success', text: 'Producto agregado al carrito', time: 3 });
+        },
     }
-}
+};
 </script>
 
 
