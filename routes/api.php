@@ -23,7 +23,6 @@ Route::post('logout',[UserController::class,'logout'])->middleware(middleware:'a
 Route::get('tienda', [PostController::class,'tienda']);
 Route::post('buscar', [PostController::class, 'buscar']);
 
-
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::group(['prefix' => 'posts'], function(){
         Route::get('/', [PostController::class, 'index']);

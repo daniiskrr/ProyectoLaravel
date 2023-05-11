@@ -4,7 +4,6 @@
     <div class="titulo-tienda">
         <h1>Catálogo de juegos de PlayStation</h1>
     </div>
-
         <form class="formJuegos" method="GET">
             <input class="my-0 me-1" type="text" v-model="busqueda" placeholder="Buscar juegos...">
             <button class="btn btn-outline-success" type="submit">

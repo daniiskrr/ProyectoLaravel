@@ -42,7 +42,6 @@ class PostController extends Controller
         }
 
         Posts::create($input);
-
         return response()->json(['success' => 'Producto creado correctamente']);
     }
 
