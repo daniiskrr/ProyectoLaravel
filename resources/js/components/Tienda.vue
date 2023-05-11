@@ -62,9 +62,6 @@ export default {
     mounted() {
         if (window.Laravel && window.Laravel.isLoggedin) {
             this.isLoggedin = true;
-        }else{
-            this.isLoggedin = false;
-            localStorage.removeItem('productos');
         }
     },
     created() {
