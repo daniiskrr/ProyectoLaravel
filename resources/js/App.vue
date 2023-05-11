@@ -47,7 +47,7 @@
                     <div v-if="isLoggedin" class="navbar-nav">
                         <router-link to="/dashboard"><button class="boton-login ordenador">Hola, {{ user.nombre }}!</button></router-link>
                         <router-link to="/"><button class="boton-login ordenador" @click="logout">Cerrar Sesión</button></router-link>
-                        <a href="carrito.html"><img class="logo-carrito" src="../images/carrito.svg" alt="Carrito de la compra"></a>
+                        <router-link to="/carrito"><img class="logo-carrito" src="../images/carrito.svg" alt="Carrito de la compra"></router-link>
                     </div>
                     <div v-else class="navbar-nav">
                         <router-link to="/login"><button class="boton-login ordenador">Iniciar sesión</button></router-link>
@@ -61,6 +61,64 @@
     <router-view></router-view>
     </body>
     </html>
+
+    <footer>
+        <div class="logoFooter">
+            <img src="../images/logoFooter.png" alt="logoBlanco">
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg col-12">
+                <h5>Acerca de</h5>
+                <p>Sobre SIE</p>
+                <p>Trabajos</p>
+                <p>PlayStation Studios</p>
+                <p>Empresa</p>
+            </div>
+            <hr class="movil">
+            <div class="col-lg col-12">
+                <h5>Productos</h5>
+                <p>PS5</p>
+                <p>PS4</p>
+                <p>PSVR2</p>
+                <p>PsPlus</p>
+            </div>
+            <hr class="movil">
+            <div class="col-lg col-12">
+                <h5>Valores</h5>
+                <p>Medioambiente</p>
+                <p>Accesibilidad</p>
+                <p>Seguridad online</p>
+                <p>Diversidad, equidad e inclusión.</p>
+            </div>
+            <hr class="movil">
+            <div class="col-lg col-12">
+                <h5>Atención al cliente</h5>
+                <p>Conectar</p>
+                <p>Seguridad en PlayStation</p>
+                <p>Estado de PSN</p>
+                <p>Reparaciones de PlayStation</p>
+            </div>
+            <hr class="movil">
+            <div class="col-lg col-12">
+                <h5>Recursos</h5>
+                <p>Centro de atención al cliente</p>
+                <p>Política de cancelación</p>
+                <p>Clasificaciones por edad</p>
+                <p>Aviso de salud</p>
+            </div>
+            <hr class="movil">
+            <div class="col-lg col-12">
+                <h5>Conectar</h5>
+                <p>Términos de servicio de PSN</p>
+                <p>Aplicación de iOS</p>
+                <p>Aplicación de Android</p>
+                <p>Términos de uso de la web</p>
+            </div>
+        </div>
+        <hr>
+    </footer>
+
 </template>
 <script>
 var elemento = document.querySelector('header');

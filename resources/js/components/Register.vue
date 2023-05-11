@@ -1,103 +1,58 @@
 <template>
-    <div class="container">
-        <div class="row jutify-content-center">
-            <div class="col-md-8">
-                {{name}}
-                <div v-if="error !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <strong>{{error}}</strong>
-                </div>
-
-                <div class="card card-default">
-                    <div class="card-header"><h5>Registrarme</h5></div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group row">
-                                <label for="nombre" class="col-sm-4 col-form-label text-md-right">Nombre</label>
-                                <div class="col-md-8">
-                                    <input id="nombre" type="text" class="form-control" v-model="nombre" required
-                                           autofocus autocomplete="off"  placeholder="Introduce tu nombre">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-1">
-                                <label for="apellidos" class="col-sm-4 col-form-label text-md-right">Apellidos</label>
-                                <div class="col-md-8">
-                                    <input id="apellidos" type="text" class="form-control" v-model="apellidos" required
-                                           autofocus autocomplete="off" placeholder="Introduce tus apellidos">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-1">
-                                <label for="fecha_nacimiento" class="col-sm-4 col-form-label text-md-right">Fecha de nacimiento</label>
-                                <div class="col-md-8">
-                                    <input id="fecha_nacimiento" type="date" class="form-control" v-model="fecha_nacimiento" required
-                                           autofocus autocomplete="off" placeholder="Introduce tu fecha de nacimiento">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-1">
-                                <label for="direccion" class="col-sm-4 col-form-label text-md-right">Direccion</label>
-                                <div class="col-md-8">
-                                    <input id="direccion" type="text" class="form-control" v-model="direccion" required
-                                           autofocus autocomplete="off" placeholder="Introduce tu direccion">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-1">
-                                <label for="telefono" class="col-sm-4 col-form-label text-md-right">Telefono</label>
-                                <div class="col-md-8">
-                                    <input id="telefono" type="text" class="form-control" v-model="telefono" required
-                                           autofocus autocomplete="off" placeholder="Introduce tu número de teléfono">
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row mt-1">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">Correo electrónico</label>
-                                <div class="col-md-8">
-                                    <input id="email" type="email" class="form-control" v-model="email" required
-                                           autofocus autocomplete="off" placeholder="Introduce tu correo electrónico">
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="form-group row mt-1">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                <div class="col-md-8">
-                                    <input id="password" type="password" class="form-control" v-model="password"
-                                           required autocomplete="off" placeholder="Introduce tu contraseña">
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row mt-1 mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-success" @click="register">
-                                        Register
-                                    </button>
-                                </div>
-                            </div>
-
-
-                            <div class="row mt-1">
-                                <div class="col-md-8 offset-md-4">
-                                    <small class="text-muted">
-                                        Ya tienes cuenta? Haz clic
-                                        <router-link to="/login" >aquí</router-link>
-                                    </small>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
+    <html>
+    <body>
+    {{name}}
+    <div v-if="error !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong>{{error}}</strong>
     </div>
+
+    <div class="registrar">
+        <form class="formulario-registrar">
+            <h2>Crea una nueva cuenta</h2>
+            <hr style="color: #060b53">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" v-model="nombre" required
+                   autofocus autocomplete="off" placeholder="Introduce tu nombre">
+
+            <label for="apellidos">Apellidos</label>
+            <input id="apellidos" type="text" v-model="apellidos" required
+                   autofocus autocomplete="off" placeholder="Introduce tus apellidos">
+
+            <label for="fecha_nacimiento">Fecha de nacimiento</label>
+            <input id="fecha_nacimiento" type="date" v-model="fecha_nacimiento" required
+                   autofocus autocomplete="off" placeholder="Introduce tu fecha de nacimiento">
+
+            <label for="direccion">Direccion</label>
+            <input id="direccion" type="text" v-model="direccion" required
+                   autofocus autocomplete="off" placeholder="Introduce tu direccion">
+
+            <label for="telefono">Telefono</label>
+            <input id="telefono" type="text" v-model="telefono" required
+                   autofocus autocomplete="off" placeholder="Introduce tu número de teléfono">
+
+            <label for="email">Correo electrónico</label>
+            <input id="email" type="email" v-model="email" required
+                   autofocus autocomplete="off" placeholder="Introduce tu correo electrónico">
+
+
+            <label for="password">Password</label>
+            <input id="password" type="password" v-model="password"
+                   required autocomplete="off" placeholder="Introduce tu contraseña">
+
+            <button class="boton-login" type="submit" @click="register">
+                Registrarse
+            </button>
+            <br>
+            <br>
+            <small>
+                Ya tienes cuenta? Haz clic en
+                <router-link to="/login">Iniciar sesión</router-link>
+            </small>
+        </form>
+    </div>
+    </body>
+    </html>
 </template>
 
 

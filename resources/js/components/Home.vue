@@ -8,7 +8,7 @@
             <div class="slide-item">
                 <img src="../../images/Ofertas.webp">
                 <div class="row">
-                    <div class="col-lg-12 d-flex flex-column align-items-center ofertas">
+                    <div class="col-lg-12 d-flex flex-column align-items-center ofertas" style="z-index: 0;">
                         <img src="../../images/Texto-rebajas.webp" alt="rebajas">
                         <h2>Paga menos. Juega mas.</h2>
                         <p>Hemos añadido muchos más juegos a las increíbles rebajas de PlayStation Store. No te los pierdas.</p>
@@ -22,9 +22,10 @@
                 <img src="../../images/horizon.webp">
                 <div class="row">
                     <div class="col-lg-1 d-none d-lg-block"></div>
-                    <div class="col-lg-4 col-12 d-flex flex-column horizon">
-                        <img src="../../images/Lletra-Horizon.webp" alt="horizon">
-                        <h2 style="text-align: left;">Viaja más allá del Oeste Prohibido.</h2>
+                    <div class="col-lg-4 col-12 d-flex flex-column horizon" style="z-index: 0;">
+                        <img src="../../images/Lletra Horizon.webp" alt="horizon">
+                        <h2 class= "ordenador" style="text-align: left;">Viaja más allá del Oeste Prohibido.</h2>
+                        <h2 class= "movil" style="text-align: center;">Viaja más allá del Oeste Prohibido.</h2>
                         <p style="text-align: left;">Experimenta el siguiente capítulo de Horizon Forbidden West, donde Aloy se enfrenta a una siniestra nueva amenaza en el DLC Burning Shores, ya disponible para PS5.</p>
                         <a href="" class="boton-blanco">Obten mas información</a>
                     </div>
@@ -36,8 +37,8 @@
                 <img src="../../images/jedi.webp">
                 <div class="row">
                     <div class="col-lg-1 d-none d-lg-block"></div>
-                    <div class="col-lg-4 col-12 d-flex flex-column jedi">
-                        <img src="../../images/Lletra-Star-Wars.webp" alt="jedi"/>
+                    <div class="col-lg-4 col-12 d-flex flex-column jedi" style="z-index: 0;">
+                        <img src="../../images/Lletra Star Wars.webp" alt="jedi"/>
                         <h2 style="text-align: left;">Enfréntate al Imperio</h2>
                         <p style="text-align: left;">Regresa a una galaxia muy, muy lejana y sigue a Cal Kestis en su lucha contra la oscuridad en STAR WARS Jedi: Survivor™, ya disponible para PS5.</p>
                         <a href="" class="boton-blanco">Obten mas información</a>
@@ -76,18 +77,16 @@
     </section>
 
     <section class="banner">
-
         <img class="ordenador" src="../../images/god-of-war.webp" alt="Juego Destacado">
         <img class="movil" src="../../images/god-of-war-movil.webp" alt="Juego Destacado">
         <div class="row">
             <div class="col-lg-1 d-none d-lg-block"></div>
-            <div class="col-lg-4 col-12 d-flex flex-column god">
+            <div class="col-lg-4 col-12 d-flex flex-column god" style="z-index: 1">
                 <img src="../../images/god-of-war-lletra.webp" alt="god-of-war">
                 <div class="fondoMovil">
                     <h2>La saga nórdica continúa</h2>
                     <p>Emprende un viaje épico y conmovedor en el que ayudarás a Kratos y Atreus a permanecer unidos, disponible para PS4 y PS5</p>
                     <div class="d-flex"><a href="" class="boton-naranja">Comprar Ahora</a></div>
-
                 </div>
             </div>
         </div>

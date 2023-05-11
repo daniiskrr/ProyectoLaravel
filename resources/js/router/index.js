@@ -12,6 +12,7 @@ import AddUser from '../components/AddUser.vue'; //Añadir Usuario desde panel d
 import EditUser from '../components/EditUser.vue'; //Editar Usuario
 import Tienda from '../components/Tienda.vue'; //Tienda de productos
 import PsPlus from '../components/PsPlus.vue'; //Mostrar Información sobre psplus
+import Carrito from '../components/Carrito.vue'; //Mostrar Carrito
 export const routes = [
    {
        name: 'home',
@@ -72,6 +73,11 @@ export const routes = [
         name: 'PsPlus',
         path: '/PsPlus',
         component: PsPlus
+    },
+    {
+        name: 'Carrito',
+        path: '/Carrito',
+        component: Carrito
     },
 
 

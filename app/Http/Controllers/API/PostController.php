@@ -121,9 +121,6 @@ class PostController extends Controller
         return $ofertas;
     }
 
-    public function buscar(Request $request) {
-
-    }
 
 
 

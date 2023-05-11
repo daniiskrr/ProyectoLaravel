@@ -1,61 +1,35 @@
 <template>
-    <div class="container">
-        <div class="row jutify-content-center">
-            <div class="col-md-8">
-                <div v-if="error !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
-
-                    <strong>{{error}}</strong>
-                </div>
-
-                <div class="card card-default">
-                    <div class="card-header"><h5>Login</h5></div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group row">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
-                                <div class="col-md-8">
-                                    <input id="email" type="email" class="form-control" v-model="email" required
-                                           autofocus autocomplete="off" placeholder="Enter your email">
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="form-group row mt-1">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                <div class="col-md-8">
-                                    <input id="password" type="password" class="form-control" v-model="password"
-                                           required autocomplete="off" placeholder="Enter your password">
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row mt-1 mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-success" @click="doLogin">
-                                        Login
-                                    </button>
-                                </div>
-                            </div>
-
-
-                            <div class="row mt-1">
-                                <div class="col-md-8 offset-md-4">
-                                    <small class="text-muted">
-                                        Don't have any account yet? Please
-                                        <router-link to="/register" >Register</router-link>
-                                    </small>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <html>
+    <body>
+    <div v-if="error !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong>{{error}}</strong>
     </div>
+    <div class="login">
+        <form class="formulario-registrar">
+            <h2>Iniciar sesión</h2>
+            <hr style="color: #060b53">
+            <label for="email">Correo electrónico</label>
+            <input id="email" type="email" v-model="email" required
+                   autofocus autocomplete="off" placeholder="Introduce tu dirección de correo">
+
+            <label for="password">Contraseña</label>
+            <input id="password" type="password" v-model="password"
+                   required autocomplete="off" placeholder="Introduce tu contraseña">
+
+            <button class="boton-login" type="submit" @click="doLogin">
+                Iniciar sesión
+            </button>
+            <br>
+            <br>
+            <small class="text-muted">
+                No tienes cuenta aún? Por favor
+                <router-link to="/register" >Registrate</router-link>
+            </small>
+        </form>
+    </div>
+    </body>
+    </html>
 </template>
 
 
