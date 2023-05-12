@@ -12,5 +12,11 @@ class Suscripcion extends Model
 
     protected $table = 'suscripcion';
 
+    protected $fillable = [
+        'id',
+        'nombre_suscripcion',
+        'precio_suscripcion',
+        'duracion'
+    ];
 
 }

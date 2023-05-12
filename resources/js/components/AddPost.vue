@@ -56,7 +56,7 @@
         </div>
     </div>
     <div v-else>
-        <p>No tienes permisos para acceder a esta página.</p>
+        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues</h2>
     </div>
 </template>
 
@@ -125,11 +125,15 @@ export default {
                             notie.alert({type: 'success', text: response.data.success, time: 3});
                             existObj.strError = "";
                             existObj.strSuccess = response.data.success;
+                        setTimeout(() => {
+                            window.location.href = '/posts';
+                        }, 3000);
                         }
                     )
                     .catch(function (error){
                             existObj.strError = error.response.data.message;
                             existObj.strSuccess = "";
+                            notie.alert({ type: 'error', text: "Revisa bien los campos, por favor" });
                         }
                     );
             });

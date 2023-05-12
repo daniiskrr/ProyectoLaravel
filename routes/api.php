@@ -21,7 +21,8 @@ Route::post('login',[UserController::class,'login']);
 Route::post('register',[UserController::class,'register']);
 Route::post('logout',[UserController::class,'logout'])->middleware(middleware:'auth:sanctum');
 Route::get('tienda', [PostController::class,'tienda']);
-//Route::post('buscar', [PostController::class, 'buscar']);
+Route::get('tiendaall', [PostController::class,'tiendaall']);
+Route::get('suscripciones', [PostController::class,'suscripciones']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::group(['prefix' => 'posts'], function(){
@@ -31,6 +32,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::post('update/{id}', [PostController::class,'update']);
         Route::delete('{id}', [PostController::class, 'eliminaProducto']);
         Route::get('ofertas', [PostController::class,'ofertas']);
+        Route::post('finalizarPedido', [PostController::class,'finalizarPedido']);
     });
 
     Route::group(['prefix' => 'users'], function(){

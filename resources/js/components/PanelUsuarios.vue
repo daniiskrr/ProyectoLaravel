@@ -42,7 +42,7 @@
         </div>
     </div>
     <div v-else>
-        <p>No tienes permisos para acceder a esta página.</p>
+        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues</h2>
     </div>
 </template>
 

@@ -102,7 +102,7 @@
         </div>
     </div>
     <div v-else>
-        <p>No tienes permisos para acceder a esta página.</p>
+        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues</h2>
     </div>
 </template>
 
@@ -175,6 +175,9 @@ export default {
                     notie.alert({type: 'success', text: response.data.success, time: 3 });
                     this.strError = "";
                     this.strSuccess = response.data.success;
+                    setTimeout(() => {
+                        window.location.href = '/panelusuarios';
+                    }, 3000);
                 })
                 .catch(error => {
                     this.strSuccess = "";

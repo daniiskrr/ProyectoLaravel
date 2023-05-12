@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Editar Producto</h5>
                 <div>
-                    <router-link :to="{name: 'PanelUsuarios'}" class="btn btn-success">Atrás</router-link>
+                    <router-link :to="{name: 'posts'}" class="btn btn-success">Atrás</router-link>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
         </div>
     </div>
     <div v-else>
-        <p>No tienes permisos para acceder a esta página.</p>
+        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues</h2>
     </div>
 </template>
 
@@ -122,6 +122,9 @@ export default {
                         notie.alert({type: 'success', text: response.data.success, time: 3 });
                         this.strError = "";
                         this.strSuccess = response.data.success;
+                        setTimeout(() => {
+                            window.location.href = '/posts';
+                        }, 3000);
                     })
                     .catch((error) => {
                         this.strSuccess = "";
@@ -139,6 +142,9 @@ export default {
                         notie.alert({type: 'success', text: response.data.success, time: 3 });
                         this.strError = "";
                         this.strSuccess = response.data.success;
+                        setTimeout(() => {
+                            window.location.href = '/posts';
+                        }, 3000);
                     })
                     .catch((error) => {
                         this.strSuccess = "";

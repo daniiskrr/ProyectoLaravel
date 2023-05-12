@@ -855,44 +855,52 @@ li:nth-child(3) .slide-circulo {
     color: white;
 }
 
-.juegoCarrito{
-    background-color: #060b53;
+.juegoCarrito, .suscripcionCarrito{
+
     opacity: 0.8;
     color: white;
     border: 2px solid transparent;
     transition: all 0.3s ease;
 }
 
-.juegoCarrito .info{
+.juegoCarrito{
+    background-color: #060b53;
+}
+
+.suscripcionCarrito{
+    background-color: #060b53;
+}
+
+.juegoCarrito .info, .suscripcionCarrito .info{
     padding: 1rem;
 }
 
-.juegoCarrito img{
+.juegoCarrito img, .suscripcionCarrito img{
     width: 8rem;
     margin: 0;
     padding: 0.2rem;
 }
 
-.juegoCarrito h2{
+.juegoCarrito h2, .suscripcionCarrito h2{
     text-align: left;
     font-size: 1.8rem;
     margin: 0;
 }
 
-.juegoCarrito p{
+.juegoCarrito p, .suscripcionCarrito p{
     text-align: left;
     font-size: 1.2rem;
 }
 
-.juegoCarrito .info .d-flex{
+.juegoCarrito .info .d-flex, .suscripcionCarrito .info .d-flex{
     height: 50%;
 }
 
-.juegoCarrito .infoJuego{
+.juegoCarrito .infoJuego, .suscripcionCarrito .infoJuego{
     font-family: "sst-light";
 }
 
-.juegoCarrito .precio{
+.juegoCarrito .precio, .suscripcionCarrito .precio{
     font-size: 1.5rem;
     font-weight: bold;
 }
@@ -928,13 +936,15 @@ li:nth-child(3) .slide-circulo {
     border-color: #fff;
 }
 
-.juegoCarrito:hover{
+.juegoCarrito:hover, .suscripcionCarrito:hover{
     border-color: #fff;
 }
 
 .cruz{
     border: 2px solid transparent;
     transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
 }
 
 .cruz:hover{
