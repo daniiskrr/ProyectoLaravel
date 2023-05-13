@@ -185,6 +185,40 @@ class UserController extends Controller{
         $usuario->delete();
     }
 
+    public function mostrarDatos($id)
+    {
+        $user = User::find($id);
+        return response()->json($user);
+    }
+
+    public function datosActualizados(Request $request, $id)
+    {
+        $usuario = User::find($id);
+        if (!$usuario) {
+            return response()->json(['error' => 'El usuario no existe'], 404);
+        }
+        $request->validate([
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'fecha_nacimiento' => 'required|date',
+            'direccion' => 'required',
+            'telefono' => 'required|numeric',
+            'tipo_suscripcion' => 'required',
+            'duracion' => 'nullable',
+            'email' => 'required',
+            'password' => 'nullable',
+        ]);
+
+        $input = $request->all();
+
+        if($request->has('password')){
+            $input['password'] = bcrypt($input['password']);
+            //Session::flush();
+        }
+
+        $usuario->update($input);
+        return response()->json(['success'=> 'Datos del usuario actualizados']);
+    }
 
 }
 
