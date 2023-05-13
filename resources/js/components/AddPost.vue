@@ -1,58 +1,38 @@
 <template>
     <div v-if="isLoggedin && user.role === 'Administrador'" class="card">
-        <div class="card-body">
-            <div class="d-flex justify-content-between pb-2 mb-2">
-                <h5 class="card-title">Crear Nuevo Producto</h5>
-                <div>
-                    <router-link :to="{name: 'posts'}" class="btn btn-success">Atrás</router-link>
+        <div class="registrar">
+            <form @submit.prevent="addPost" enctype="multipart/form-data" class="formulario-registrar">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <h2 style="margin: 0;">Crear Nuevo Producto</h2>
+                    <router-link :to="{name: 'posts'}" style="margin-left: auto;">Atrás</router-link>
                 </div>
-            </div>
+                <hr style="color: #060b53">
+                <label>Nombre *</label>
+                <input type="text" class="form-control" v-model="nombre" placeholder="Introduce el nombre">
 
-            <form @submit.prevent="addPost" enctype="multipart/form-data">
-                <div class="form-group mb-2">
-                    <label>Nombre</label><span class="text-danger"> *</span>
-                    <input type="text" class="form-control" v-model="nombre" placeholder="Introduce el nombre">
-                </div>
+                <label>Descripcion *</label>
+                <textarea class="form-control" rows="3" v-model="descripcion" placeholder="Introduce la descripcion"></textarea>
 
+                <label for="suscripcion">Suscripción *</label>
+                <select style="background-color: #e7e9ee;" v-model="id_suscripcion" id="suscripcion">
+                    <option value="1">No tiene Suscripcion</option>
+                    <option value="2">Playstation Plus Essential</option>
+                    <option value="3">Playstation Plus Extra</option>
+                    <option value="4">Playstation Plus Premium</option>
+                </select>
 
-                <div class="form-group mb-2">
-                    <label>Descripcion</label><span class="text-danger"> *</span>
-                    <textarea class="form-control" rows="3" v-model="descripcion" placeholder="Introduce la descripcion"></textarea>
-                </div>
+                <label>Precio *</label>
+                <textarea rows="3" v-model="precio" placeholder="Introduce el precio" style="background-color: #e7e9ee;"></textarea>
 
-                <div class="form-group mb-2">
-                    <label for="suscripcion">Suscripción</label><span class="text-danger"> *</span>
-                    <select class="form-control" v-model="id_suscripcion" id="suscripcion">
-                        <option value="1">No tiene Suscripcion</option>
-                        <option value="2">Playstation Plus Essential</option>
-                        <option value="3">Playstation Plus Extra</option>
-                        <option value="4">Playstation Plus Premium</option>
-                    </select>
-                </div>
+                <label>Imagen *</label>
+                <input type="file" v-on:change="onChangeImg">
 
-                <div class="form-group mb-2">
-                    <label>Precio</label><span class="text-danger"> *</span>
-                    <textarea class="form-control" rows="3" v-model="precio" placeholder="Introduce el precio"></textarea>
+                <div v-if="img">
+                    <img v-bind:src="imgPreview" width="100" height="100"/><br><br>
                 </div>
 
-
-                <div class="form-group mb-2">
-                    <label>Image</label><span class="text-danger"> *</span>
-                    <input type="file" class="form-control mb-2" v-on:change="onChangeImg">
-
-
-                    <div v-if="img">
-                        <img v-bind:src="imgPreview" width="100" height="100"/>
-                    </div>
-                </div>
-
-
-                <button type="submit" class="btn btn-primary mt-4 mb-4"> Crear Producto</button>
-
-
+                <button type="submit" class="boton-login">Crear Producto</button>
             </form>
-
-
         </div>
     </div>
     <div v-else>

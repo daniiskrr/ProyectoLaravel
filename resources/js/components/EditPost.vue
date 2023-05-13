@@ -1,46 +1,33 @@
 <template>
     <div v-if="isLoggedin && user.role === 'Administrador'" class="card">
-        <div class="card-body">
-            <div class="d-flex justify-content-between pb-2 mb-2">
-                <h5 class="card-title">Editar Producto</h5>
-                <div>
-                    <router-link :to="{name: 'posts'}" class="btn btn-success">Atrás</router-link>
+        <div class="registrar">
+            <form @submit.prevent="updatePost" enctype="multipart/form-data" method="PUT" class="formulario-registrar">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <h2 style="margin: 0;">Editar Producto</h2>
+                    <router-link :to="{name: 'posts'}" style="margin-left: auto;">Atrás</router-link>
                 </div>
-            </div>
+                <label>Nombre </label>
+                <input type="text" class="form-control" v-model="nombre">
 
-            <form @submit.prevent="updatePost" enctype="multipart/form-data" method="PUT">
-                <div class="form-group mb-2">
-                    <label>Nombre</label><span class="text-danger">*</span>
-                    <input type="text" class="form-control" v-model="nombre">
-                </div>
+                <label>Descripcion</label>
+                <textarea class="form-control" rows="3" v-model="descripcion"></textarea>
 
-                <div class="form-group mb-2">
-                    <label>Descripcion</label><span class="text-danger" > *</span>
-                    <textarea class="form-control" rows="3" v-model="descripcion"></textarea>
-                </div>
+                <label for="suscripcion">Suscripción </label>
+                <select style="background-color: #e7e9ee;" id="suscripcion" v-model="id_suscripcion">
+                    <option value="1">No tiene Suscripcion</option>
+                    <option value="2">Playstation Plus Essential</option>
+                    <option value="3">Playstation Plus Extra</option>
+                    <option value="4">Playstation Plus Premium</option>
+                </select>
 
-                <div class="form-group mb-2">
-                    <label for="suscripcion">Suscripción</label><span class="text-danger" > *</span>
-                    <select class="form-control" id="suscripcion" v-model="id_suscripcion">
-                        <option value="1">No tiene Suscripcion</option>
-                        <option value="2">Playstation Plus Essential</option>
-                        <option value="3">Playstation Plus Extra</option>
-                        <option value="4">Playstation Plus Premium</option>
-                    </select>
-                </div>
+                <label>Precio</label>
+                <input type="text" v-model="precio">
 
-                <div class="form-group mb-2">
-                    <label>Precio</label><span class="text-danger"> *</span>
-                    <input type="text" class="form-control" v-model="precio">
-                </div>
+                <label>Imagen *</label>
+                <input type="file" v-on:change="onChange">
+                <img v-bind:src="imgPreview" width="200" height="200"/> <br><br>
 
-                <div class="form-group mb-2">
-                    <label>Image</label><span class="text-danger"> *</span>
-                    <input type="file" class="form-control mb-2" v-on:change="onChange">
-                    <img v-bind:src="imgPreview" width="200" height="200"/>
-                </div>
-
-                <button type="submit" class="btn btn-primary mt-4 mb-4">Editar Producto</button>
+                <button type="submit" class="boton-login">Editar Producto</button>
             </form>
         </div>
     </div>

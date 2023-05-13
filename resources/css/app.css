@@ -82,9 +82,12 @@ header {
 }
 
 input[type="text"],
+input[type="number"],
+input[type="file"],
 input[type="email"],
 input[type="date"],
-input[type="password"] {
+input[type="password"],
+select {
     flex-grow: 1;
     min-width: 200px;
     padding: 10px;
@@ -141,7 +144,6 @@ input[type="submit"]:hover {
 
 .col-juegos img:hover {
     box-shadow: 0px 0px 0px 2px #fff, 0 0 0 5px #005ba4;
-    /** CANVIAR */
     filter: brightness(0.9);
 }
 
@@ -191,7 +193,6 @@ footer {
     cursor: pointer;
     border: none;
     font-size: 1.25rem;
-    /** CANVIADO TREURE FONT-WEIGHT: BOLD */
     font-family: "sst";
 }
 
@@ -322,10 +323,9 @@ footer h5{
     display: block;
     position: absolute;
     width: 100%;
-    max-width: none;
-    max-height: none;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: cover;
-    /** CANVIADO */
     z-index: 0;
     top: 0;
     left: 0;
@@ -524,6 +524,7 @@ footer h5{
 .plan p {
     font-size: 18px;
     margin-bottom: 20px;
+    color: #333;
 }
 
 .precio {
@@ -647,7 +648,6 @@ footer h5{
     display: none;
     font-size: 40px;
     height: 40px;
-    /** Canviado */
     line-height: 29px;
     position: absolute;
     top: 50%;
@@ -733,9 +733,21 @@ li:nth-child(3) .slide-circulo {
 
 .titulo-seccion-psplus {
     text-align: center;
-    padding: 2%;
+    padding: 3%;
     background-color: #fcc404;
     padding-top: 6%;
+}
+
+.titulo-seccion-psplus h1{
+    font-size: 2.7rem;
+    margin-bottom: 10px;
+}
+
+.titulo-seccion-psplus p{
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0;
+    font-weight: 500;
 }
 
 .info-section-horizon{
@@ -750,6 +762,7 @@ li:nth-child(3) .slide-circulo {
     width: 100%;
     height: auto;
     padding-left: 1.5rem;
+    margin-left: -2vw;
 }
 
 .info-text-horizon {
@@ -855,52 +868,44 @@ li:nth-child(3) .slide-circulo {
     color: white;
 }
 
-.juegoCarrito, .suscripcionCarrito{
-
+.juegoCarrito{
+    background-color: #060b53;
     opacity: 0.8;
     color: white;
     border: 2px solid transparent;
     transition: all 0.3s ease;
 }
 
-.juegoCarrito{
-    background-color: #060b53;
-}
-
-.suscripcionCarrito{
-    background-color: #060b53;
-}
-
-.juegoCarrito .info, .suscripcionCarrito .info{
+.juegoCarrito .info{
     padding: 1rem;
 }
 
-.juegoCarrito img, .suscripcionCarrito img{
+.juegoCarrito img{
     width: 8rem;
     margin: 0;
     padding: 0.2rem;
 }
 
-.juegoCarrito h2, .suscripcionCarrito h2{
+.juegoCarrito h2{
     text-align: left;
     font-size: 1.8rem;
     margin: 0;
 }
 
-.juegoCarrito p, .suscripcionCarrito p{
+.juegoCarrito p{
     text-align: left;
     font-size: 1.2rem;
 }
 
-.juegoCarrito .info .d-flex, .suscripcionCarrito .info .d-flex{
+.juegoCarrito .info .d-flex{
     height: 50%;
 }
 
-.juegoCarrito .infoJuego, .suscripcionCarrito .infoJuego{
+.juegoCarrito .infoJuego{
     font-family: "sst-light";
 }
 
-.juegoCarrito .precio, .suscripcionCarrito .precio{
+.juegoCarrito .precio{
     font-size: 1.5rem;
     font-weight: bold;
 }
@@ -936,7 +941,7 @@ li:nth-child(3) .slide-circulo {
     border-color: #fff;
 }
 
-.juegoCarrito:hover, .suscripcionCarrito:hover{
+.juegoCarrito:hover{
     border-color: #fff;
 }
 
@@ -945,6 +950,20 @@ li:nth-child(3) .slide-circulo {
     transition: all 0.3s ease;
     width: 40px;
     height: 40px;
+}
+
+.cruzz{
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+}
+
+.editar{
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    width: 30px;
+    height: 30px;
 }
 
 .cruz:hover{
@@ -993,9 +1012,12 @@ li:nth-child(3) .slide-circulo {
 }
 
 .formulario-registrar input[type="text"],
+.formulario-registrar input[type="number"],
+.formulario-registrar input[type="file"],
 .formulario-registrar input[type="email"],
 .formulario-registrar input[type="date"],
-.formulario-registrar input[type="password"] {
+.formulario-registrar input[type="password"],
+.formulario-registrar select {
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 1rem;
@@ -1018,6 +1040,84 @@ li:nth-child(3) .slide-circulo {
 
 .formulario-registrar input[type="submit"]:hover {
     background-color: #005ba4;
+}
+
+/** TABLA */
+
+.tabla{
+    margin: 0 auto;
+    max-width: 90%;
+    width: 100%;
+    overflow-x: auto;
+    font-family: "sst-light";
+}
+
+.tabla h5 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.tabla button {
+    background-color: #0072c6;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.tabla button:hover {
+    background-color: #005ba4;
+}
+
+.tabla table {
+    background-color: #fff;
+    border-collapse: collapse;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.tabla th, .carrito td {
+    border: 1px solid #0072c6;
+    color: #fff;
+    padding: 10px;
+    text-align: left !important;
+}
+
+.tabla th {
+    background-color: #0072c6;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.tabla td {
+    background-color: #04449c;
+    transition: background-color 0.3s ease;
+}
+
+.tabla td:hover {
+    background-color: #0072c6;
+}
+
+.tabla img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100px;
+}
+
+.tabla .editar, .tabla .cruzz {
+    display: inline-block;
+}
+
+.tabla table td a {
+    margin-right: 15px;
 }
 
 
@@ -1258,11 +1358,12 @@ li:nth-child(3) .slide-circulo {
 
     .info-section-horizon{
         display: block;
-        margin-top: 42vw;
+        margin-top: 25vw;
     }
 
     .info-text-horizon{
-        margin-left: 1rem;
+        margin-left: 1.4rem;
+        padding-right: 3rem !important;
     }
 
     .info-text-horizon h2{
@@ -1272,6 +1373,10 @@ li:nth-child(3) .slide-circulo {
 
     .info-text-horizon p{
         font-size: 1.1rem;
+    }
+
+    .info-image-horizon img {
+        margin-left: -1.0rem;
     }
 
     .registrar{
@@ -1290,5 +1395,18 @@ li:nth-child(3) .slide-circulo {
 
     .juegoCarrito img{
         margin-left: -214%;
+    }
+
+    .titulo-seccion-psplus h1{
+        font-size: 2.5rem;
+    }
+
+    .titulo-seccion-psplus p{
+        font-size: 1.25rem;
+    }
+
+    .carrito table td,
+    .carrito table th {
+        font-size: 1.0rem;
     }
 }

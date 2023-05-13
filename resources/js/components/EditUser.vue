@@ -1,104 +1,51 @@
 <template>
-    <div v-if="isLoggedin && user.role === 'Administrador'" class="container">
-        <div class="row jutify-content-center">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between pb-2 mb-2">
-                        <h5 class="card-title">Editar Producto</h5>
-                        <div>
-                            <router-link :to="{name: 'PanelUsuarios'}" class="btn btn-success">Atrás</router-link>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <form @submit.prevent="updateUser" method="POST">
-                            <div class="form-group row">
-                                <label for="nombre" class="col-sm-4 col-form-label text-md-right">Nombre</label>
-                                <div class="col-md-8">
-                                    <input id="nombre" type="text" class="form-control" v-model="nombre">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-1">
-                                <label for="apellidos" class="col-sm-4 col-form-label text-md-right">Apellidos</label>
-                                <div class="col-md-8">
-                                    <input id="apellidos" type="text" class="form-control" v-model="apellidos">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-1">
-                                <label for="fecha_nacimiento" class="col-sm-4 col-form-label text-md-right">Fecha de nacimiento</label>
-                                <div class="col-md-8">
-                                    <input id="fecha_nacimiento" type="date" class="form-control" v-model="fecha_nacimiento" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-1">
-                                <label for="direccion" class="col-sm-4 col-form-label text-md-right">Direccion</label>
-                                <div class="col-md-8">
-                                    <input id="direccion" type="text" class="form-control" v-model="direccion" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-1">
-                                <label for="telefono" class="col-sm-4 col-form-label text-md-right">Telefono</label>
-                                <div class="col-md-8">
-                                    <input id="telefono" type="text" class="form-control" v-model="telefono" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group mb-2">
-                                <label for="tipo_suscripcion">Suscripción</label><span class="text-danger" > *</span>
-                                <select class="form-control" id="tipo_suscripcion" v-model="tipo_suscripcion">
-                                    <option value="free" selected>No tiene Suscripcion</option>
-                                    <option value="PsPlus Essential">Playstation Plus Essential</option>
-                                    <option value="PsPlus Extra">Playstation Plus Extra</option>
-                                    <option value="PsPlus Premium">Playstation Plus Premium</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group row mt-1">
-                                <label for="duracion" class="col-sm-4 col-form-label text-md-right">Duracion</label>
-                                <div class="col-md-8">
-                                    <input id="duracion" type="text" class="form-control" v-model="duracion">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mt-1">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">Correo electrónico</label>
-                                <div class="col-md-8">
-                                    <input id="email" type="email" class="form-control" v-model="email" required>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row mt-1">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                <div class="col-md-8">
-                                    <input id="password" type="password" class="form-control" v-model="password">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="rol">Rol</label>
-                                <select class="form-control" id="rol" v-model="rol">
-                                    <option>Selecciona un rol</option>
-                                    <option value="Administrador">Administrador</option>
-                                    <option value="Usuario">Usuario</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group row mt-1 mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary mt-4 mb-4">Editar Usuario</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+    <div v-if="isLoggedin && user.role === 'Administrador'">
+        <div class="registrar">
+            <form @submit.prevent="updateUser" method="POST" class="formulario-registrar">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <h2 style="margin: 0;">Editar Usuario</h2>
+                    <router-link :to="{name: 'PanelUsuarios'}" style="margin-left: auto;">Atrás</router-link>
                 </div>
+                <label for="nombre">Nombre</label>
+                <input id="nombre" type="text" v-model="nombre">
 
+                <label for="apellidos">Apellidos</label>
+                <input id="apellidos" type="text" class="form-control" v-model="apellidos">
 
-            </div>
+                <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                <input id="fecha_nacimiento" type="date" v-model="fecha_nacimiento" required>
+
+                <label for="direccion">Direccion</label>
+                <input id="direccion" type="text" v-model="direccion" required>
+
+                <label for="telefono">Telefono</label>
+                <input id="telefono" type="text" v-model="telefono" required>
+
+                <label for="tipo_suscripcion">Suscripción *</label>
+                <select class="form-control" id="tipo_suscripcion" style="background-color: #e7e9ee;" v-model="tipo_suscripcion">
+                    <option value="free" selected>No tiene Suscripcion</option>
+                    <option value="PsPlus Essential">Playstation Plus Essential</option>
+                    <option value="PsPlus Extra">Playstation Plus Extra</option>
+                    <option value="PsPlus Premium">Playstation Plus Premium</option>
+                </select>
+
+                <label>Duracion</label>
+                <input id="duracion" type="text" v-model="duracion">
+
+                <label for="email" class="col-sm-4 col-form-label text-md-right">Correo electrónico</label>
+                <input id="email" type="email" v-model="email" required>
+
+                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                <input id="password" type="password" v-model="password">
+
+                <label for="rol">Rol</label>
+                <select id="rol" style="background-color: #e7e9ee;" v-model="rol">
+                    <option>Selecciona un rol</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Usuario">Usuario</option>
+                </select>
+                <button type="submit" class="boton-login">Editar usuario</button>
+            </form>
         </div>
     </div>
     <div v-else>

@@ -1,46 +1,46 @@
 <template>
 
     <div v-if="isLoggedin && user.role === 'Administrador'" class="card">
-        <div class="card-body">
-            <div class="d-flex justify-content-between pb-2 mb-2">
-                <h5 class="card-title">Lista de Productos</h5>
-                <div>
-                    <button class="btn btn-success" type="button" @click="this.$router.push('/posts/add')">Nuevo Producto</button>
+        <div class="carrito" style="padding-top: 2.3rem">
+            <div class="tabla">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <h5 style="margin: 0;">Lista de Productos</h5>
+                    <button style="margin-left: auto;" type="button" @click="this.$router.push('/posts/add')">Nuevo Producto</button>
                 </div>
-            </div>
+                <hr style="color: white">
 
-
-            <table class="table table-hover table-sm">
-                <thead class="bg-dark text-light">
+            <table>
+                <thead>
                 <tr>
-                    <th width="50" class="text-center">#</th>
+                    <th width="50">#</th>
                     <th>Nombre</th>
                     <th>Descripcion</th>
                     <th>Suscripcion</th>
                     <th>Precio</th>
-                    <th class="text-center" width="120">Imagen</th>
-                    <th class="text-center" width="200">Acciones</th>
+                    <th>Imagen</th>
+                    <th width="1px">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="(post, index) in posts" :key="post.id">
-                    <td class="text-center">{{index}}</td>
+                    <td>{{index}}</td>
                     <td>{{post.nombre}}</td>
                     <td>{{post.descripcion}}</td>
                     <td>{{ nombreSuscripcion(post.id_suscripcion) }}</td>
                     <td>{{post.precio}}€</td>
-                    <td class="text-center">
+                    <td>
                         <div v-if="post.image">
                             <img alt="post-img" width="100" v-bind:src="'/img/' + post.image">
                         </div>
                     </td>
-                    <td class="text-center">
+                    <td>
                         <router-link :to="{ name: 'EditPost', params: { id: post.id }}" class="btn btn-warning">Edit</router-link>
                         <button class="btn btn-danger" @click="eliminaProducto(post.id)">Delete</button>
                     </td>
                 </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
     <div v-else>

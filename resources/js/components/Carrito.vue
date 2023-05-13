@@ -29,7 +29,7 @@
                             <div class="row juegoCarrito">
                                 <div class="col-2 d-fl
                                 ex">
-                                    <img alt="post-img" width="100" :src="'/img/' + producto.id + '.webp'">
+                                    <img alt="{{ producto.nombre_suscripcion }}" width="100" :src="'/img/' + producto.id + '.webp'">
                                 </div>
                                 <div class="col info">
                                     <h2>{{ producto.nombre_suscripcion }}</h2>
@@ -47,7 +47,7 @@
                         <div v-else >
                             <div class="row juegoCarrito">
                                 <div class="col-2 d-flex">
-                                    <img alt="post-img" width="100" :src="'/img/' + producto.image">
+                                    <img alt="{{producto.nombre}}" width="100" :src="'/img/' + producto.image">
                                 </div>
                                 <div class="col info">
                                     <h2>{{ producto.nombre }}</h2>
@@ -90,7 +90,7 @@ export default {
     data() {
         return {
             productos: JSON.parse(localStorage.getItem('productos')),
-            numProductos: JSON.parse(localStorage.getItem('productos')).length,
+            numProductos: JSON.parse(localStorage.getItem('productos')) ? JSON.parse(localStorage.getItem('productos')).length : 0,
             isLoggedin: false,
             user: window.Laravel.user
         }
@@ -103,8 +103,14 @@ export default {
     computed: {
         precioTotal() {
             let total = 0;
-            for (let i = 0; i < this.productos.length; i++) {
-                total += parseFloat(this.productos[i].precio);
+            if (this.productos !== null) {
+                for (let i = 0; i < this.productos.length; i++) {
+                    if ('precio' in this.productos[i]) {
+                        total += parseFloat(this.productos[i].precio);
+                    } else if ('precio_suscripcion' in this.productos[i]) {
+                        total += parseFloat(this.productos[i].precio_suscripcion);
+                    }
+                }
             }
             return total.toFixed(2);
         }
@@ -121,16 +127,36 @@ export default {
         finalizarPedido() {
             const precioTotal = this.precioTotal;
 
-            axios.post('/api/posts/finalizarPedido', {
-                precioTotal: precioTotal
-            })
+            // Actualizar suscripción en la base de datos
+            const tieneSuscripcion = this.productos.some(producto => producto.tipo === 'suscripcion');
+            if (tieneSuscripcion && this.isLoggedin) {
+                const suscripcion = this.productos.find(producto => producto.tipo === 'suscripcion');
+                const nombreSuscripcion = suscripcion.nombre_suscripcion;
+                axios.post('/api/posts/actualizarSuscripciones', {
+                    usuarioId: this.user.id,
+                    suscripcion: {
+                        id: suscripcion.id,
+                        nombre_suscripcion: nombreSuscripcion
+                    }
+                })
+                    .then(response => {
+                        // La suscripción se ha actualizado correctamente
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        // Se ha producido un error al actualizar la suscripción
+                        console.log(error.response.data);
+                    });
+            }
+
+            // Finalizar pedido y vaciar carrito
+            axios.post('/api/posts/finalizarPedido', { precioTotal })
                 .then(response => {
                     // Se ha completado la petición correctamente
                     notie.alert({type: 'success', text: "Compra Realizada con éxito", time: 3 });
                     setTimeout(() => {
-                        window.location.href = '/'; //
-                    }, 3000); //
-
+                        window.location.href = '/';
+                    }, 3000);
                 })
                 .catch(error => {
                     // Se ha producido un error
@@ -138,6 +164,7 @@ export default {
                 });
             localStorage.removeItem('productos');
         }
+
     }
 }
 </script>

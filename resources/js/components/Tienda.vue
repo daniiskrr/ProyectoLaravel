@@ -16,7 +16,7 @@
     <div v-if="!isLoggedin || (isLoggedin && user.tipo_suscripcion === 'free')" class="row">
         <div v-for="(post, index) in Juegosfiltrados3" :key="post.id" class="col-juegos">
             <div v-if="post.image">
-                <img alt="post-img" width="100" :src="'/img/' + post.image">
+                <img alt="{{post.nombre}}" width="100" :src="'/img/' + post.image">
             </div>
             <h5>{{ post.nombre }}</h5>
             <p>PS5</p>
@@ -29,7 +29,7 @@
         <div v-if="isLoggedin && (user.tipo_suscripcion === 'PsPlus Premium' || user.tipo_suscripcion === 'PsPlus Essential' || user.tipo_suscripcion === 'PsPlus Extra')" class="row">
             <div v-for="(post, index) in Juegosfiltrados" :key="post.id" class="col-juegos">
                 <div v-if="post.image">
-                    <img alt="post-img" width="100" v-bind:src="'/img/' + post.image">
+                    <img alt="{{post.nombre}}" width="100" v-bind:src="'/img/' + post.image">
                 </div>
                 <h5>{{post.nombre}}</h5>
                 <p>PS5</p>
@@ -41,14 +41,14 @@
 
         <div v-if="isLoggedin && (user.tipo_suscripcion === 'PsPlus Premium' || user.tipo_suscripcion === 'PsPlus Essential' || user.tipo_suscripcion === 'PsPlus Extra')">
             <h2 class="titulo-tienda">Ofertas</h2>
-            <div class="row row-oferta">
+            <div  style="margin-bottom: 2%" class="row row-oferta">
                 <div v-for="(post, index) in Juegosfiltrados2" :key="post.id" class="col-juegos">
                     <div v-if="post.image">
-                        <img alt="post-img" width="100" :src="'/img/' + post.image">
+                        <img alt="{{post.nombre}}" width="100" :src="'/img/' + post.image">
                     </div>
                     <h5>{{ post.nombre }}</h5>
                     <p>PS5</p>
-                    <p>{{ post.precio }}€</p>
+                    <p>{{ post.precio}}€</p>
                     <a href="#" class="boton" @click="agregarProducto(post)">Comprar ahora</a>
                 </div>
             </div>
@@ -58,7 +58,7 @@
         <h2 class="titulo-tienda">Suscripciones</h2>
         <div class="row">
         <div v-for="(susc, index) in Juegosfiltrados4" :key="susc.id" class="col-juegos">
-            <img alt="post-img" width="100" :src="'/img/' + susc.id + '.webp'">
+            <img alt="{{susc.nombre_suscripcion}}" width="100" :src="'/img/' + susc.id + '.webp'">
             <h5>{{ susc.nombre_suscripcion }}</h5>
             <p>PS5</p>
             <p>{{ susc.precio_suscripcion }}€</p>
@@ -203,7 +203,6 @@ export default {
             // Mostrar mensaje de éxito
             notie.alert({type: 'success', text: 'Suscripción agregada al carrito', time: 3 });
         }
-
     }
 };
 </script>

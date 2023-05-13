@@ -1,114 +1,61 @@
 <template>
     <div v-if="isLoggedin && user.role === 'Administrador'" class="container">
-        <div class="row jutify-content-center">
-            <div class="col-md-8">
-                {{name}}
-                <div v-if="error !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <strong>{{error}}</strong>
-                </div>
-
-                <div class="card card-default">
-                    <div class="card-header d-flex justify-content-between pb-2 mb-2">
-                        <h5>Crear Nuevo Usuario</h5>
-                        <div>
-                            <router-link :to="{name: 'PanelUsuarios'}" class="btn btn-success">Atrás</router-link>
+                <div class="registrar">
+                    <form class="formulario-registrar" @submit.prevent="addUser">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h2 style="margin: 0;">Crear un nuevo usuario</h2>
+                            <router-link :to="{name: 'PanelUsuarios'}" style="margin-left: auto;">Atrás</router-link>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <form @submit.prevent="addUser">
-                            <div class="form-group row">
-                                <label for="nombre" class="col-sm-4 col-form-label text-md-right">Nombre</label>
-                                <div class="col-md-8">
-                                    <input id="nombre" type="text" class="form-control" v-model="nombre" required
-                                           autofocus autocomplete="off"  placeholder="Introduce el nombre">
-                                </div>
-                            </div>
+                        <hr style="color: #060b53">
 
-                            <div class="form-group row mt-1">
-                                <label for="apellidos" class="col-sm-4 col-form-label text-md-right">Apellidos</label>
-                                <div class="col-md-8">
-                                    <input id="apellidos" type="text" class="form-control" v-model="apellidos" required
-                                           autofocus autocomplete="off" placeholder="Introduce los apellidos">
-                                </div>
-                            </div>
+                        <label for="nombre">Nombre</label>
+                        <input id="nombre" type="text" v-model="nombre" required
+                               autofocus autocomplete="off"  placeholder="Introduce el nombre">
 
-                            <div class="form-group row mt-1">
-                                <label for="fecha_nacimiento" class="col-sm-4 col-form-label text-md-right">Fecha de nacimiento</label>
-                                <div class="col-md-8">
-                                    <input id="fecha_nacimiento" type="date" class="form-control" v-model="fecha_nacimiento" required
-                                           autofocus autocomplete="off" placeholder="Introduce la fecha de nacimiento">
-                                </div>
-                            </div>
+                        <label for="apellidos" class="col-sm-4 col-form-label text-md-right">Apellidos</label>
+                        <input id="apellidos" type="text" v-model="apellidos" required
+                               autofocus autocomplete="off" placeholder="Introduce los apellidos">
 
-                            <div class="form-group row mt-1">
-                                <label for="direccion" class="col-sm-4 col-form-label text-md-right">Direccion</label>
-                                <div class="col-md-8">
-                                    <input id="direccion" type="text" class="form-control" v-model="direccion" required
-                                           autofocus autocomplete="off" placeholder="Introduce la direccion">
-                                </div>
-                            </div>
+                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                        <input id="fecha_nacimiento" type="date" v-model="fecha_nacimiento" required
+                               autofocus autocomplete="off" placeholder="Introduce la fecha de nacimiento">
 
-                            <div class="form-group row mt-1">
-                                <label for="telefono" class="col-sm-4 col-form-label text-md-right">Telefono</label>
-                                <div class="col-md-8">
-                                    <input id="telefono" type="text" class="form-control" v-model="telefono" required
-                                           autofocus autocomplete="off" placeholder="Introduce el número de teléfono">
-                                </div>
-                            </div>
+                        <label for="direccion">Direccion</label>
+                        <input id="direccion" type="text" v-model="direccion" required
+                               autofocus autocomplete="off" placeholder="Introduce la direccion">
 
-                            <div class="form-group mb-2">
-                                <label for="tipo_suscripcion">Suscripción</label><span class="text-danger" > *</span>
-                                <select class="form-control" id="tipo_suscripcion" v-model="tipo_suscripcion">
-                                    <option value="free" selected>No tiene Suscripcion</option>
-                                    <option value="PsPlus Essential">Playstation Plus Essential</option>
-                                    <option value="PsPlus Extra">Playstation Plus Extra</option>
-                                    <option value="PsPlus Premium">Playstation Plus Premium</option>
-                                </select>
-                            </div>
+                        <label for="telefono">Telefono</label>
+                        <input id="telefono" type="text" v-model="telefono" required
+                               autofocus autocomplete="off" placeholder="Introduce el número de teléfono">
 
-                            <div class="form-group row mt-1">
-                                <label for="duracion" class="col-sm-4 col-form-label text-md-right">Duracion</label>
-                                <div class="col-md-8">
-                                    <input id="duracion" type="text" class="form-control" v-model="duracion" required placeholder="Introduce la duración de la suscripción">
-                                </div>
-                            </div>
+                        <label for="tipo_suscripcion">Suscripción *</label>
+                        <select id="tipo_suscripcion" style="background-color: #e7e9ee;" v-model="tipo_suscripcion">
+                            <option value="free" selected>No tiene Suscripcion</option>
+                            <option value="PsPlus Essential">Playstation Plus Essential</option>
+                            <option value="PsPlus Extra">Playstation Plus Extra</option>
+                            <option value="PsPlus Premium">Playstation Plus Premium</option>
+                        </select>
 
-                            <div class="form-group row mt-1">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">Correo electrónico</label>
-                                <div class="col-md-8">
-                                    <input id="email" type="email" class="form-control" v-model="email" required
-                                           autofocus autocomplete="off" placeholder="Introduce el correo electrónico">
-                                </div>
-                            </div>
+                        <label for="duracion">Duracion</label>
+                        <input id="duracion" type="number" v-model="duracion" required placeholder="Introduce la duración de la suscripción">
 
-                            <div class="form-group row mt-1">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                <div class="col-md-8">
-                                    <input id="password" type="password" class="form-control" v-model="password"
-                                           required autocomplete="off" placeholder="Introduce la contraseña">
-                                </div>
-                            </div>
+                        <label for="email" class="">Correo electrónico</label>
+                        <input id="email" type="email" v-model="email" required
+                               autofocus autocomplete="off" placeholder="Introduce el correo electrónico">
 
-                            <div class="form-group mb-2">
-                                <label for="rol">Rol</label><span class="text-danger" > *</span>
-                                <select class="form-control" id="Rol" v-model="rol" required>
-                                    <option value="2">Usuario</option>
-                                    <option value="1">Administrador</option>
-                                </select>
-                            </div>
+                        <label for="password" class="">Password</label>
+                        <input id="password" type="password" v-model="password"
+                               required autocomplete="off" placeholder="Introduce la contraseña">
 
-                            <div class="form-group row mt-1 mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-success">Crear Usuario</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        <label for="rol">Rol *</label>
+                        <select id="Rol" style="background-color: #e7e9ee;" v-model="rol" required>
+                            <option value="2">Usuario</option>
+                            <option value="1">Administrador</option>
+                        </select>
+                        <button type="submit" class="boton-login">Crear Usuario</button>
+                    </form>
                 </div>
-            </div>
         </div>
-    </div>
     <div v-else>
         <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues</h2>
     </div>
@@ -161,8 +108,8 @@ export default {
                             existObj.strError = "";
                             existObj.strSuccess = response.data.success;
                             setTimeout(() => {
-                                window.location.href = '/panelusuarios'; //
-                            }, 3000); //
+                                window.location.href = '/panelusuarios';
+                            }, 3000);
                         })
                         .catch(function (error){
                             notie.alert({ type: 'error', text: "error.response.data.message" });

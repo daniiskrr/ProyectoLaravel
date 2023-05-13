@@ -33,6 +33,9 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::delete('{id}', [PostController::class, 'eliminaProducto']);
         Route::get('ofertas', [PostController::class,'ofertas']);
         Route::post('finalizarPedido', [PostController::class,'finalizarPedido']);
+        Route::post('actualizarSuscripciones', [PostController::class,'actualizarSuscripciones']);
+        Route::get('{id}', [PostController::class, 'obtenerPedidos']);
+
     });
 
     Route::group(['prefix' => 'users'], function(){
@@ -41,6 +44,8 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::get('edit/{id}', [UserController::class,'edit']);
         Route::post('update/{id}', [UserController::class,'update']);
         Route::delete('{id}', [UserController::class, 'eliminaUsuario']);
+        Route::get('{id}', [UserController::class, 'mostrarDatos']);
+        Route::post('{id}', [UserController::class, 'datosActualizados']);
     });
 });
 

@@ -148,7 +148,6 @@ class PostController extends Controller
         // Obtener la fecha actual
         $fechaPedido = now();
 
-
         // Insertar los datos en la tabla 'pedido'
         Pedido::create([
             'id_usuario' => $idusuario,
@@ -160,5 +159,47 @@ class PostController extends Controller
         // Redireccionar a una página de confirmación o enviar una respuesta JSON
         return response()->json(['success' => true]);
     }
+    public function actualizarSuscripciones(Request $request)
+    {
+        $usuarioId = auth()->id();
+        $suscripcion = $request->input('suscripcion');
+
+        if (!$usuarioId) {
+            return response()->json(['error' => 'Debe estar autenticado para actualizar su suscripción'], 401);
+        }
+
+        if (empty($suscripcion['nombre_suscripcion'])) {
+            return response()->json(['error' => 'Debe proporcionar el nombre de la suscripción'], 400);
+        }
+
+        $usuario = User::find($usuarioId);
+
+        if (!$usuario) {
+            return response()->json(['error' => 'No se ha encontrado el usuario'], 404);
+        }
+
+        $usuario->tipo_suscripcion = $suscripcion['nombre_suscripcion'];
+        $usuario->save();
+
+        // Actualizar suscripción en la sesión del usuario
+        session(['tipo_suscripcion' => $suscripcion['nombre_suscripcion']]);
+
+        return response()->json(['mensaje' => 'Suscripción actualizada correctamente.']);
+    }
+
+    public function obtenerPedidos($id) {
+        try {
+            $pedidos = Pedido::where('id_usuario', $id)
+                ->select('id', 'fecha_pedido', 'tipo_pago', 'precio_total')
+                ->get();
+            return response()->json($pedidos);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al obtener los pedidos del usuario.'], 500);
+        }
+    }
+
+
+
+
 
 }
