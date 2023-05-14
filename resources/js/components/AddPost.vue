@@ -6,7 +6,7 @@
                     <h2 style="margin: 0;">Crear Nuevo Producto</h2>
                     <router-link :to="{name: 'posts'}" style="margin-left: auto;">Atrás</router-link>
                 </div>
-                <hr style="color: #060b53">
+                <hr>
                 <label>Nombre *</label>
                 <input type="text" class="form-control" v-model="nombre" placeholder="Introduce el nombre">
 

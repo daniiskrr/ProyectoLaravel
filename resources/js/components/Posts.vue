@@ -18,7 +18,7 @@
                     <th>Suscripcion</th>
                     <th>Precio</th>
                     <th>Imagen</th>
-                    <th width="1px">Acciones</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,9 +33,9 @@
                             <img alt="post-img" width="100" v-bind:src="'/img/' + post.image">
                         </div>
                     </td>
-                    <td>
-                        <router-link :to="{ name: 'EditPost', params: { id: post.id }}" class="btn btn-warning">Edit</router-link>
-                        <button class="btn btn-danger" @click="eliminaProducto(post.id)">Delete</button>
+                    <td class="botones-accion">
+                        <router-link :to="{ name: 'EditPost', params: { id: post.id }}"><button style="margin-bottom: 10%"><img class="editar" src="../../images/boligrafo.svg" Editar/></button></router-link>
+                        <button @click="eliminaProducto(post.id)"><img class="cruzz" src="../../images/cruz.svg" Borrar/></button>
                     </td>
                 </tr>
                 </tbody>

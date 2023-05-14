@@ -6,6 +6,7 @@
                     <h2 style="margin: 0;">Editar Producto</h2>
                     <router-link :to="{name: 'posts'}" style="margin-left: auto;">Atrás</router-link>
                 </div>
+                <hr>
                 <label>Nombre </label>
                 <input type="text" class="form-control" v-model="nombre">
 

@@ -6,6 +6,7 @@
                     <h2 style="margin: 0;">Editar Usuario</h2>
                     <router-link :to="{name: 'PanelUsuarios'}" style="margin-left: auto;">Atrás</router-link>
                 </div>
+                <hr>
                 <label for="nombre">Nombre</label>
                 <input id="nombre" type="text" v-model="nombre">
 

@@ -6,7 +6,7 @@
                             <h2 style="margin: 0;">Crear un nuevo usuario</h2>
                             <router-link :to="{name: 'PanelUsuarios'}" style="margin-left: auto;">Atrás</router-link>
                         </div>
-                        <hr style="color: #060b53">
+                        <hr>
 
                         <label for="nombre">Nombre</label>
                         <input id="nombre" type="text" v-model="nombre" required

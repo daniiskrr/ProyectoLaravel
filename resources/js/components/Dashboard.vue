@@ -6,6 +6,7 @@
                     <h2 style="margin: 0;">Mis Datos</h2>
                     <router-link :to="{name: 'posts'}" style="margin-left: auto;">Atrás</router-link>
                 </div>
+                <hr>
                 <label for="nombre">Nombre</label>
                 <input id="nombre" type="text" v-model="nombre">
 
@@ -35,11 +36,9 @@
 
                 <button type="submit" class="boton-login">Editar usuario</button>
             </form>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+<div class="tabla-dashboard">
+            <div class="tabla">
                 <h4>Pedidos:</h4>
-                <div class="list-group">
                     <a class="list-group-item list-group-item-action text-dark" v-for="pedido in pedidos" :key="pedido.id" :value="pedido.id">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">Pedido {{pedido.id}}</h5>
@@ -48,8 +47,8 @@
                         <p class="mb-1">Tipo de pago: {{pedido.tipo_pago}}</p>
                         <p class="mb-1">Precio total: {{pedido.precio_total}}€</p>
                     </a>
-                </div>
             </div>
+</div>
         </div>
     </div>
     <div v-else>

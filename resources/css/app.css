@@ -267,6 +267,15 @@ footer {
 }
 
 /** SEPARACIÓN DE BOTONES */
+
+.botones-accion{
+
+    justify-content: space-between;
+    width: 13%;
+    height: 100%;
+;
+}
+
 .navbar-nav > :not(:last-child) {
     margin-right: 1.5rem;
 }
@@ -955,8 +964,8 @@ li:nth-child(3) .slide-circulo {
 .cruzz{
     border: 2px solid transparent;
     transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 }
 
 .editar{
@@ -1087,6 +1096,16 @@ li:nth-child(3) .slide-circulo {
     color: #fff;
     padding: 10px;
     text-align: left !important;
+}
+
+.tabla td:last-child{
+    padding-left: 2%;
+}
+
+.tabla-dashboard{
+    margin: 0 auto;
+    max-width: 35%;
+    width: 100%;
 }
 
 .tabla th {
@@ -1408,5 +1427,9 @@ li:nth-child(3) .slide-circulo {
     .carrito table td,
     .carrito table th {
         font-size: 1.0rem;
+    }
+
+    .tabla-dashboard{
+        max-width: 100%;
     }
 }
