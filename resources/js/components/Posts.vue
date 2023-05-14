@@ -44,7 +44,7 @@
         </div>
     </div>
     <div v-else>
-        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues</h2>
+        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues algún día</h2>
     </div>
 
 
@@ -70,6 +70,7 @@ export default {
     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            //Llamamos a la api con la ruta correspondiente para poder obtener los datos de los productos y mostrarlos en el panel
                 this.$axios.get('/api/posts')
                     .then(response => {
                         this.posts = response.data;
@@ -81,6 +82,7 @@ export default {
         );
     },
     methods: {
+        //Método para mandar a la api el id del producto que hemos seleccionado y eliminarlo.
         eliminaProducto(id) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 axios.delete('http://127.0.0.1:8000/api/posts/' + id)
@@ -94,6 +96,7 @@ export default {
                     });
             })
         },
+        //Switch para que al mostrar la suscripción en el form, no sea tan "soso" de ver
         nombreSuscripcion(idSus) {
             switch (idSus) {
                 case 1:

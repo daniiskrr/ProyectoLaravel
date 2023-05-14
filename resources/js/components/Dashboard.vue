@@ -52,7 +52,7 @@
         </div>
     </div>
     <div v-else>
-        <h2 class="titulo-tienda">Tendrás que iniciar sesión para ver esto ;)</h2>
+        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues algún día</h2>
     </div>
 </template>
 
@@ -80,7 +80,7 @@ export default {
         if (window.Laravel && window.Laravel.isLoggedin) {
             this.isLoggedin = true;
 
-            // Realizamos una petición GET para obtener los datos del usuario y rellenar el formulario
+            //Realizamos una petición GET para obtener los datos del usuario y rellenar el formulario
             axios.get(`/api/users/${this.user.id}`)
                 .then(response => {
                     const userData = response.data;
@@ -93,7 +93,7 @@ export default {
                     this.duracion = userData.duracion;
                     this.email = userData.email;
 
-                    this.obtenerPedidos(); // Llamar a la función obtenerPedidos() para obtener los pedidos del usuario
+                    this.obtenerPedidos(); //Llamamos a la función obtenerPedidos() para obtener los pedidos del usuario
                 })
                 .catch(error => {
                     console.log(error);
@@ -113,7 +113,7 @@ export default {
                 tipo_suscripcion: this.tipo_suscripcion,
                 duracion: this.duracion
             };
-            if (this.password !== '') { //verifica si la contraseña no está vacía
+            if (this.password !== '') { //verifica si la contraseña no está vacía para obtener el dato
                 datosActualizados.password = this.password;
             }
 
@@ -141,6 +141,7 @@ export default {
                     notie.alert({type: 'error', text: 'Error al actualizar', time: 3 });
                 });
         },
+        //Llamamos a la api con la ruta correspondiente para poder obtener los pedidos
         obtenerPedidos() {
             axios.get(`/api/posts/${this.user.id}`)
                 .then(response => {

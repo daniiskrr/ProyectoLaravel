@@ -16,7 +16,7 @@ use App\Http\Controllers\API\PostController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+//Llamadas a los controladores sin necesidad de estar autenticados (middleware), menos logout
 Route::post('login',[UserController::class,'login']);
 Route::post('register',[UserController::class,'register']);
 Route::post('logout',[UserController::class,'logout'])->middleware(middleware:'auth:sanctum');
@@ -24,6 +24,7 @@ Route::get('tienda', [PostController::class,'tienda']);
 Route::get('tiendaall', [PostController::class,'tiendaall']);
 Route::get('suscripciones', [PostController::class,'suscripciones']);
 
+//Llamadas al controlador PostController. Para que se ejecuten, el usuario debe de estar autenticado
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::group(['prefix' => 'posts'], function(){
         Route::get('/', [PostController::class, 'index']);
@@ -37,7 +38,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::get('{id}', [PostController::class, 'obtenerPedidos']);
 
     });
-
+    //Llamadas al controlador UserController
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', [UserController::class, 'index']);
         Route::post('add', [UserController::class, 'add']);

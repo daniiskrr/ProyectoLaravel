@@ -12,7 +12,7 @@
                         <img src="../../images/Texto-rebajas.webp" alt="rebajas">
                         <h2>Paga menos. Juega mas.</h2>
                         <p>Hemos añadido muchos más juegos a las increíbles rebajas de PlayStation Store. No te los pierdas.</p>
-                        <a href="" class="boton-blanco">Descubre las ofertas</a>
+                        <router-link to="/tienda"><a href="" class="boton-blanco">Descubre las ofertas</a></router-link>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                         <h2 class= "ordenador" style="text-align: left;">Viaja más allá del Oeste Prohibido.</h2>
                         <h2 class= "movil" style="text-align: center;">Viaja más allá del Oeste Prohibido.</h2>
                         <p style="text-align: left;">Experimenta el siguiente capítulo de Horizon Forbidden West, donde Aloy se enfrenta a una siniestra nueva amenaza en el DLC Burning Shores, ya disponible para PS5.</p>
-                        <a href="" class="boton-blanco">Obten mas información</a>
+                        <router-link to="/tienda"><a href="" class="boton-blanco">Obten mas información</a></router-link>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                         <img src="../../images/Lletra Star Wars.webp" alt="jedi"/>
                         <h2 style="text-align: left;">Enfréntate al Imperio</h2>
                         <p style="text-align: left;">Regresa a una galaxia muy, muy lejana y sigue a Cal Kestis en su lucha contra la oscuridad en STAR WARS Jedi: Survivor™, ya disponible para PS5.</p>
-                        <a href="" class="boton-blanco">Obten mas información</a>
+                        <router-link to="/tienda"><a href="" class="boton-blanco">Obten mas información</a></router-link>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
         <div class="info-text">
             <h2>Consola PlayStation 5</h2>
             <p>Descubre una nueva generación de juegos increíbles para PlayStation.</p>
-            <a href="#" class="boton">Más información</a>
+            <router-link to="/psplus"><a href="#" class="boton">Más información</a></router-link>
         </div>
         <div class="info-image">
             <img src="../../images/ps5.webp" alt="Imagen de información">
@@ -86,7 +86,7 @@
                 <div class="fondoMovil">
                     <h2>La saga nórdica continúa</h2>
                     <p>Emprende un viaje épico y conmovedor en el que ayudarás a Kratos y Atreus a permanecer unidos, disponible para PS4 y PS5</p>
-                    <div class="d-flex"><a href="" class="boton-naranja">Comprar Ahora</a></div>
+                    <div class="d-flex"><router-link to="/tienda"><a href="" class="boton-naranja">Comprar Ahora</a></router-link></div>
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
                     <img src="../../images/ps4.webp" alt="Consola Ps4">
                     <h3>PlayStation 4</h3>
                     <p>Dispones de juegos increíbles para PS4 con 1 TB de almacenamiento.</p>
-                    <a href="#" class="boton">Más información</a>
+                    <router-link to="/tienda"><a href="#" class="boton">Más información</a></router-link>
                 </div>
             </div>
             <div class="col">
@@ -112,7 +112,7 @@
                     <img src="../../images/psvr.webp" alt="Gafas de realidad virtual Ps4">
                     <h3>PlayStation VR</h3>
                     <p>Más de 500 juegos y experiencias, y subiendo. Verlos todos.</p>
-                    <a href="#" class="boton">Más información</a>
+                    <router-link to="/tienda"><a href="#" class="boton">Más información</a></router-link>
                 </div>
             </div>
             <div class="col">
@@ -120,7 +120,7 @@
                     <img src="../../images/accesorios.webp" alt="Accesorios Ps4">
                     <h3>Accesorios</h3>
                     <p>Mejora tu experiencia PS4 con una variedad de accesorios oficiales.</p>
-                    <a href="#" class="boton">Más información</a>
+                    <router-link to="/tienda"><a href="#" class="boton">Más información</a></router-link>
                 </div>
             </div>
         </div>

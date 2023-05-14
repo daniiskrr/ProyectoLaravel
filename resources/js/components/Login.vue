@@ -47,6 +47,7 @@ export default {
             e.preventDefault()
             if(this.password.length > 0) {
                 this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    ////Llamamos a la api con la ruta correspondiente para poder enviar los datos del usuario y en caso de existir en la BBDD, se inicia sesión
                     this.$axios.post('api/login', {
                         email: this.email,
                         password: this.password

@@ -36,7 +36,7 @@
         </div>
     </div>
     <div v-else>
-        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues</h2>
+        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues algún día</h2>
     </div>
 </template>
 
@@ -78,9 +78,6 @@ export default {
             }
         },
 
-
-
-        /*Inicio*/
         addPost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existObj = this;
@@ -90,7 +87,7 @@ export default {
                     }
                 }
 
-
+                //Recogemos los datos del formulario
                 const formData = new FormData();
                 formData.append('nombre', this.nombre);
                 formData.append('descripcion', this.descripcion);
@@ -99,7 +96,7 @@ export default {
                 formData.append('file', this.img);
 
 
-
+                //Llamamos a la api con la ruta correspondiente para poder mandar los datos
                 this.$axios.post('/api/posts/add', formData, config)
                     .then(response => {
                             notie.alert({type: 'success', text: response.data.success, time: 3});

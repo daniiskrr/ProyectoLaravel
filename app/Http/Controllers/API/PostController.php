@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
-    //Cojer todos los datos
+    //Mostrar todos los datos para Posts (Panel Productos)
     public function index(){
         $posts = Posts::all()->toArray();
         return $posts;
     }
+    //Funcion para poder añadir productos a la web
     public function add(Request $request){
 
         $request->validate([
@@ -46,7 +47,7 @@ class PostController extends Controller
         Posts::create($input);
         return response()->json(['success' => 'Producto creado correctamente']);
     }
-
+    //Función para eliminar productos de la web
     public function eliminaProducto($id)
     {
         $producto = Posts::findOrFail($id);
@@ -57,14 +58,14 @@ class PostController extends Controller
         $producto->delete();
         return response()->json(['success' => 'Producto eliminado correctamente']);
     }
-
+    //Función para obtener los datos de los productos y posteriormente, poderlos editar gracias a la función "update"
     public function edit($id)
     {
         $post = Posts::find($id);
         return response()->json($post);
     }
 
-
+    //Función para mandar los datos de los productos y actualizar los datos en la BBDD
     public function update(Request $request, $id)
     {
         $post = Posts::find($id);
@@ -94,23 +95,25 @@ class PostController extends Controller
         return response()->json(['success'=> 'Producto Actualizado']);
     }
 
+        //Función para mostrar los productos en la tienda
         public function tiendaall(){
             $productito = Posts::all()->toArray();
             return $productito;
         }
+        //Función para mostrar los productos que no tengan ninguna suscripción. Los productos se mostrarán a todos los usuarios incluso sin login
         public function tienda(){
             $posts = Posts::whereIn('id_suscripcion', [1])->get()->toArray();
             return response()->json($posts);
 
         }
-
+        //Función para mostrar los productos que tengan cualquier suscripción. Las ofertas solo se mostrarán a los usuarios que tengan plus.
         public function ofertas(){
         $ofertas = Posts::whereIn('id_suscripcion', [2, 3, 4])->get()->toArray();
 
-        // Obtener el usuario autenticado
+        //Obtenemos el usuario autenticado
         $user = auth()->user();
 
-        // Aplicar descuento según el tipo de suscripción
+        //Aplicamos descuento según el tipo de suscripción
         foreach ($ofertas as &$oferta) {
             if ($user->tipo_suscripcion == 'PsPlus Essential') { //Si usuario es Essential 20% descuento y juegos Essential gratis
                 $oferta['precio'] = number_format($oferta['precio'] * 0.8, 2);
@@ -131,24 +134,23 @@ class PostController extends Controller
                 }
             }
         }
-
         return $ofertas;
     }
-
+    //Función para mostrar las suscripciones a los usuarios que no tengan ninguna.
     public function suscripciones(){
         $susc = Suscripcion::whereIn('id', [2, 3, 4])->get()->toArray();
         return response()->json($susc);
     }
-
+    //Función para insertar los datos del pedido de los usuarios.
     public function finalizarPedido(Request $request)
     {
-        // Obtener el id del usuario actual
+        //Obtenemos el id del usuario actual
         $idusuario = auth()->id();
 
-        // Obtener la fecha actual
+        //Obtenemos la fecha actual
         $fechaPedido = now();
 
-        // Insertar los datos en la tabla 'pedido'
+        //Insertamos los datos en la tabla pedido
         Pedido::create([
             'id_usuario' => $idusuario,
             'fecha_pedido' => $fechaPedido,
@@ -156,9 +158,10 @@ class PostController extends Controller
             'precio_total' => $request->input('precioTotal'),
         ]);
 
-        // Redireccionar a una página de confirmación o enviar una respuesta JSON
+        //Redireccionar a una página de confirmación o enviar una respuesta JSON
         return response()->json(['success' => true]);
     }
+    //Si el usuario con sesión iniciada, compra una suscripción en su pedido, se actualizará su tipo_suscripción en la tabla users y en sus sesion iniciada actual.
     public function actualizarSuscripciones(Request $request)
     {
         $usuarioId = auth()->id();
@@ -179,6 +182,7 @@ class PostController extends Controller
         }
 
         $usuario->tipo_suscripcion = $suscripcion['nombre_suscripcion'];
+        $usuario->duracion = 365;
         $usuario->save();
 
         // Actualizar suscripción en la sesión del usuario
@@ -186,7 +190,7 @@ class PostController extends Controller
 
         return response()->json(['mensaje' => 'Suscripción actualizada correctamente.']);
     }
-
+    //Obtenemos los pedidos para mostrarlos en el dashboard del usuario
     public function obtenerPedidos($id) {
         try {
             $pedidos = Pedido::where('id_usuario', $id)

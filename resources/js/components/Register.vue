@@ -79,6 +79,7 @@ export default {
             e.preventDefault();
             if (this.password.length > 0) {
                 this.$axios.get("/sanctum/csrf-cookie").then(response => {
+                    ////Llamamos a la api con la ruta correspondiente para poder enviar los datos de registro del usuario
                     this.$axios
                         .post("api/register", {
                             nombre: this.nombre,
@@ -90,7 +91,6 @@ export default {
                             duracion: this.duracion,
                             email: this.email,
                             password: this.password,
-                            //rol: "cliente"
                         })
                         .then(response => {
                             if (response.data.success) {

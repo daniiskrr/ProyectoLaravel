@@ -50,7 +50,7 @@
         </div>
     </div>
     <div v-else>
-        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues</h2>
+        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues algún día</h2>
     </div>
 </template>
 
@@ -81,6 +81,7 @@ export default {
         }
     },
     created() {
+        //Llamamos a la api con la ruta correspondiente para poder obtener los datos del usuario y mostrarlos en el formulario
         const id = this.$route.params.id;
         this.$axios.get(`/api/users/edit/${id}`)
             .then((response) => {
@@ -118,6 +119,7 @@ export default {
                 formData.append('password', this.password);
             }
             formData.append('rol', this.rol);
+            //Llamamos a la api con la ruta correspondiente para poder enviar los datos del usuario y actualizarlos en la BBDD
             this.$axios.post(`/api/users/update/${id}`, formData)
                 .then(response => {
                     notie.alert({type: 'success', text: response.data.success, time: 3 });

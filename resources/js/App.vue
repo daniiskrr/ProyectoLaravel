@@ -32,10 +32,10 @@
                             <router-link to="/" aria-current="page" class="nav-link">Inicio</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/tienda" class="nav-link">Tienda</router-link>
+                            <router-link to="/psplus" class="nav-item nav-link">PsPlus</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/psplus" class="nav-item nav-link">PsPlus</router-link>
+                            <router-link to="/tienda" class="nav-link">Tienda</router-link>
                         </li>
                         <li v-if="isLoggedin && user.role == 'Administrador'" class="nav-item">
                             <router-link to="/posts" class="nav-item nav-link">Productos</router-link>

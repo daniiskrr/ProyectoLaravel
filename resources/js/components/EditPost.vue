@@ -24,7 +24,7 @@
                 <label>Precio</label>
                 <input type="text" v-model="precio">
 
-                <label>Imagen *</label>
+                <label>Imagen</label>
                 <input type="file" v-on:change="onChange">
                 <img v-bind:src="imgPreview" width="200" height="200"/> <br><br>
 
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div v-else>
-        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues</h2>
+        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues algún día</h2>
     </div>
 </template>
 
@@ -60,6 +60,7 @@ export default {
         }
     },
     created() {
+        //Llamamos a la api con la ruta correspondiente para poder obtener los datos del producto y mostrarlos en el formulario
         const id = this.$route.params.id;
         this.$axios
             .get(`/api/posts/edit/${id}`)

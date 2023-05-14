@@ -26,7 +26,7 @@ $suscripciones = [
 ],
 [
     'id' => 2,
-    'nombre_suscripcion' => 'PlayStation Plus Essential',
+    'nombre_suscripcion' => 'PsPlus Essential',
     'precio_suscripcion' => 8.99,
     'duracion' => 1,
     'created_at' => \Carbon\Carbon::now(),
@@ -34,7 +34,7 @@ $suscripciones = [
 ],
 [
     'id' => 3,
-    'nombre_suscripcion' => 'PlayStation Plus Extra',
+    'nombre_suscripcion' => 'PsPlus Extra',
     'precio_suscripcion' => 39.99,
     'duracion' => 3,
     'created_at' => \Carbon\Carbon::now(),
@@ -42,7 +42,7 @@ $suscripciones = [
 ],
 [
     'id' => 4,
-    'nombre_suscripcion' => 'PlayStation Plus Premium',
+    'nombre_suscripcion' => 'PsPlus Premium',
     'precio_suscripcion' => 119.99,
     'duracion' => 12,
     'created_at' => \Carbon\Carbon::now(),

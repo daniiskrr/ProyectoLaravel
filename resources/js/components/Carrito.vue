@@ -127,8 +127,9 @@ export default {
         finalizarPedido() {
             const precioTotal = this.precioTotal;
 
-            // Actualizar suscripción en la base de datos
+            // Actualiza la suscripción en la base de datos si el usuario tiene una suscripción en el carrito
             const tieneSuscripcion = this.productos.some(producto => producto.tipo === 'suscripcion');
+
             if (tieneSuscripcion && this.isLoggedin) {
                 const suscripcion = this.productos.find(producto => producto.tipo === 'suscripcion');
                 const nombreSuscripcion = suscripcion.nombre_suscripcion;
@@ -149,7 +150,7 @@ export default {
                     });
             }
 
-            // Finalizar pedido y vaciar carrito
+            // Finaliza el pedido y redirige al usuario a la página principal
             axios.post('/api/posts/finalizarPedido', { precioTotal })
                 .then(response => {
                     // Se ha completado la petición correctamente
@@ -162,6 +163,7 @@ export default {
                     // Se ha producido un error
                     console.log(error.response.data);
                 });
+            //Eliminados los datos del localstorage para vaciar el carrito
             localStorage.removeItem('productos');
         }
 

@@ -13,6 +13,7 @@
         </button>
     </form>
 
+    <!-- Si el usuario no está logueado o está logueado y no tiene suscripción -->
     <div v-if="!isLoggedin || (isLoggedin && user.tipo_suscripcion === 'free')" class="row">
         <div v-for="(post, index) in Juegosfiltrados3" :key="post.id" class="col-juegos">
             <div v-if="post.image">
@@ -25,7 +26,7 @@
             <router-link to="/login"><a v-if="!isLoggedin" href="#" class="boton">Inicia sesión para comprar</a></router-link>
         </div>
     </div>
-
+    <!-- Si el usuario no está logueado o está logueado y no tiene suscripción -->
         <div v-if="isLoggedin && (user.tipo_suscripcion === 'PsPlus Premium' || user.tipo_suscripcion === 'PsPlus Essential' || user.tipo_suscripcion === 'PsPlus Extra')" class="row">
             <div v-for="(post, index) in Juegosfiltrados" :key="post.id" class="col-juegos">
                 <div v-if="post.image">
@@ -38,7 +39,7 @@
                 <router-link to="/login"><a v-if="!isLoggedin" href="#" class="boton">Inicia sesión para comprar</a></router-link>
             </div>
         </div>
-
+    <!-- Si el usuario está logueado o está logueado y tiene alguna suscripción -->
         <div v-if="isLoggedin && (user.tipo_suscripcion === 'PsPlus Premium' || user.tipo_suscripcion === 'PsPlus Essential' || user.tipo_suscripcion === 'PsPlus Extra')">
             <h2 class="titulo-tienda">Ofertas</h2>
             <div  style="margin-bottom: 2%" class="row row-oferta">
@@ -53,7 +54,7 @@
                 </div>
             </div>
         </div>
-
+    <!-- Si el usuario no está logueado o está logueado y no tiene suscripción -->
     <div v-if="!isLoggedin || (isLoggedin && user.tipo_suscripcion === 'free')" class="row">
         <h2 class="titulo-tienda">Suscripciones</h2>
         <div class="row">
@@ -94,6 +95,7 @@ export default {
     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            //Llamamos a la api con la ruta correspondiente para poder obtener los datos de los productos y mostrarlos en la tienda
             axios.get('/api/tiendaall')
                 .then(response => {
                     this.productos = response.data;
@@ -102,6 +104,7 @@ export default {
                     console.log(error);
                 });
         });
+        //Llamamos a la api con la ruta correspondiente para poder obtener los datos de los juegos que no están asignados a ninguna suscripción.
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/tienda')
                 .then(response => {
@@ -111,6 +114,7 @@ export default {
                     console.log(error);
                 });
         });
+        //Llamamos a la api con la ruta correspondiente para poder obtener los datos de los juegos que están asignados a cualquier suscripción.
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/posts/ofertas')
                 .then(response => {
@@ -120,6 +124,7 @@ export default {
                     console.log(error);
                 });
         });
+        //Llamamos a la api con la ruta correspondiente para poder obtener los datos de las suscripciones.
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             axios.get('/api/suscripciones')
                 .then(response => {
@@ -153,6 +158,7 @@ export default {
         },
     },
     methods: {
+        //Función para añadir los productos al carrito gracias al localstorage
         agregarProducto(producto) {
             const productosEnCarrito = JSON.parse(localStorage.getItem('productos')) || [];
             const productoExistente = productosEnCarrito.find(p => parseInt(p.id) === parseInt(producto.id));
@@ -178,6 +184,7 @@ export default {
             // Mostrar mensaje de éxito
             notie.alert({type: 'success', text: 'Producto agregado al carrito', time: 3 });
         },
+        //Función para añadir las suscripciones al carrito gracias al localstorage
         agregarSusc(producto) {
             const productosEnCarrito = JSON.parse(localStorage.getItem('productos')) || [];
             const suscripcionesEnCarrito = productosEnCarrito.filter(p => p.tipo === 'suscripcion');

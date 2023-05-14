@@ -12,19 +12,19 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller{
     public function index(){
-        // Se recuperan todos los usuarios y sus roles con el método with de Eloquent
+        //Se recuperan todos los usuarios y sus roles con el método with de Eloquent
         $users = User::with('roles')->get()->toArray();
-        // Se utiliza array_map para aplicar una función a cada usuario
+        //Se utiliza array_map para aplicar una función a cada usuario
         $users = array_map(function($user) {
-            // Se agrega el nombre del rol al array del usuario
+            //Se agrega el nombre del rol al array del usuario
             $user['rol'] = $user['roles'][0]['nombre'];
-            // Se elimina la propiedad 'roles' del array del usuario
+            //Se elimina la propiedad 'roles' del array del usuario
             unset($user['roles']);
             return $user;
         }, $users);
         return $users;
     }
-
+    //Función para poder hacer login
     public function login(Request $request){
         $credentials=[
             'email' => $request->email,
@@ -44,10 +44,9 @@ class UserController extends Controller{
             'success' => $success,
             'message' => $message
         ];
-
         return response()->json($response);
     }
-
+    //Función para poder registrarse en la web. Guardará los datos del usuario en la tabla correspondiente y guardará el rol gracias a la relación N/M (beLongsToMany)
     public function register(Request $request){
         try{
             $user = new User();
@@ -75,7 +74,7 @@ class UserController extends Controller{
 
         return response()->json($response);
     }
-
+    //Función para cerrar la sesión
     public function logout(){
         try{
             Session::flush();
@@ -95,7 +94,7 @@ class UserController extends Controller{
 
         return response()->json($response);
     }
-
+    //Función para poder añadir usuarios desde el panel de usuarios
     public function add(Request $request)
     {
         $request->validate([
@@ -123,7 +122,7 @@ class UserController extends Controller{
 
         return response()->json(['success' => 'Usuario creado correctamente']);
     }
-
+    //Función para poder mostrar los datos del usuario en el formualario y después, poder actualizarlos gracias a la siguiente función
     public function edit($id)
     {
         $usuario = User::find($id);
@@ -140,8 +139,7 @@ class UserController extends Controller{
         return response()->json($usuario);
 
     }
-
-
+    //Función para actualizar los datos del usuario en la base de datos
     public function update(Request $request, $id)
     {
         $usuario = User::find($id);
@@ -174,7 +172,7 @@ class UserController extends Controller{
 
         return response()->json(['success'=> 'Usuario Actualizado!']);
     }
-
+    //Función para eliminar el usuario desde el panel usuarios
     public function eliminaUsuario($id)
     {
         $usuario = User::findOrFail($id);
@@ -184,7 +182,7 @@ class UserController extends Controller{
 
         $usuario->delete();
     }
-
+    //Función para mostrar los datos en el dashboard del usuario
     public function mostrarDatos($id)
     {
         $user = User::find($id);

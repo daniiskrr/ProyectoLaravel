@@ -57,7 +57,7 @@
                 </div>
         </div>
     <div v-else>
-        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues</h2>
+        <h2 class="titulo-tienda">Buen intento! Prueba de nuevo, quizás lo consigues algún día</h2>
     </div>
 </template>
 
@@ -86,6 +86,7 @@ export default {
         }
     },
     methods: {
+        //Obtenemos los datos del formulario y llamamos a la api con la ruta correspondiente para poder mandar los datos
         addUser(e) {
             e.preventDefault();
             if (this.password.length > 0) {
@@ -123,9 +124,6 @@ export default {
 
 };
 </script>
-
-
-
 
 <style scoped>
 
