@@ -31,7 +31,7 @@
                         Rol: {{usuario.rol}} </td>
                     <td class="botones-accion">
                         <router-link :to="{ name: 'EditUser', params: { id: usuario.id }}"><button style="margin-bottom: 10%"><img class="editar" src="../../images/boligrafo.svg" Editar/></button></router-link>
-                        <button @click="eliminaUsuario(post.id)"><img class="cruzz" src="../../images/cruz.svg" Borrar/></button>
+                        <button @click="eliminaUsuario(usuario.id)"><img class="cruzz" src="../../images/cruz.svg" Borrar/></button>
                     </td>
                 </tr>
                 </tbody>

@@ -22,7 +22,7 @@
                 <label for="telefono">Telefono</label>
                 <input id="telefono" type="text" v-model="telefono" required>
 
-                <label for="tipo_suscripcion">Suscripción *</label>
+                <label for="tipo_suscripcion">Suscripción</label>
                 <select class="form-control" id="tipo_suscripcion" style="background-color: #e7e9ee;" v-model="tipo_suscripcion">
                     <option value="free" selected>No tiene Suscripcion</option>
                     <option value="PsPlus Essential">Playstation Plus Essential</option>
