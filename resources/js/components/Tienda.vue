@@ -85,7 +85,8 @@ export default {
             strError: '',
             isLoggedin: false,
             user: window.Laravel.user,
-            busqueda: ''
+            busqueda: '',
+            numProductos: JSON.parse(localStorage.getItem('productos')) ? JSON.parse(localStorage.getItem('productos')).length : 0
         };
     },
     mounted() {
@@ -183,6 +184,12 @@ export default {
 
             // Mostrar mensaje de éxito
             notie.alert({type: 'success', text: 'Producto agregado al carrito', time: 3 });
+            setTimeout(() => {
+                window.location.href = '/tienda';
+            }, 3000);
+
+            // Actualizar número de productos en el carrito
+            this.actualizarNumeroProductos();
         },
         //Función para añadir las suscripciones al carrito gracias al localstorage
         agregarSusc(producto) {
@@ -209,7 +216,17 @@ export default {
 
             // Mostrar mensaje de éxito
             notie.alert({type: 'success', text: 'Suscripción agregada al carrito', time: 3 });
+            setTimeout(() => {
+                window.location.href = '/tienda';
+            }, 3000);
+
+            // Actualizar número de productos en el carrito
+            this.actualizarNumeroProductos();
         }
+    },
+    actualizarNumeroProductos() {
+        const productosEnCarrito = JSON.parse(localStorage.getItem('productos')) || [];
+        this.numProductos = productosEnCarrito.length;
     }
 };
 </script>

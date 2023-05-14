@@ -47,7 +47,7 @@
                     <div v-if="isLoggedin" class="navbar-nav">
                         <router-link to="/dashboard"><button class="boton-login ordenador">Hola, {{ user.nombre }}!</button></router-link>
                         <router-link to="/"><button class="boton-login ordenador" @click="logout">Cerrar Sesión</button></router-link>
-                        <router-link to="/carrito"><img class="logo-carrito" src="../images/carrito.svg" alt="Carrito de la compra"></router-link>
+                        <router-link to="/carrito"><img class="logo-carrito" src="../images/carrito.svg" alt="Carrito de la compra">{{ numProductos }}</router-link>
                     </div>
                     <div v-else class="navbar-nav">
                         <router-link to="/login"><button class="boton-login ordenador">Iniciar sesión</button></router-link>
@@ -137,7 +137,8 @@ export default {
     data() {
         return {
             isLoggedin: false,
-            user: {}
+            user: {},
+            numProductos: JSON.parse(localStorage.getItem('productos')) ? JSON.parse(localStorage.getItem('productos')).length : 0
         }
     },
     created() {

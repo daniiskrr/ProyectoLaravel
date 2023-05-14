@@ -123,6 +123,7 @@ export default {
             productosEnLocalStorage.splice(indiceDelProductoAEliminar, 1);
             localStorage.setItem('productos', JSON.stringify(productosEnLocalStorage));
             this.productos = productosEnLocalStorage;
+            this.numProductos = productosEnLocalStorage.length; // actualiza el número de productos en el carrito
         },
         finalizarPedido() {
             const precioTotal = this.precioTotal;
