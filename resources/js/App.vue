@@ -19,10 +19,8 @@
                 <router-link to="/"> <img class="logo" src="../images/PsGames.svg" alt="Logo de PsGames"></router-link>
                 <div v-if="!isLoggedin" class="navbar-nav-botones">
                     <router-link to="/login"><button class="boton-login movil">Iniciar sesión</button></router-link>
-                    <router-link to="/register"><button class="boton-login movil">Registrarse</button></router-link>
                 </div>
                 <div v-if="isLoggedin" class="navbar-nav-botones">
-                    <router-link to="/dashboard"><button class="boton-login movil">Hola, {{ user.nombre}}!</button></router-link>
                     <router-link to="/"><button class="boton-login movil" @click="logout">Cerrar Sesión</button></router-link>
 
                 </div>
@@ -37,6 +35,9 @@
                         <li class="nav-item">
                             <router-link to="/tienda" class="nav-link">Tienda</router-link>
                         </li>
+                        <li v-if="isLoggedin" class="nav-item">
+                            <router-link to="/dashboard" class="nav-item nav-link"> Sobre mí</router-link>
+                        </li>
                         <li v-if="isLoggedin && user.role == 'Administrador'" class="nav-item">
                             <router-link to="/posts" class="nav-item nav-link">Productos</router-link>
                         </li>
@@ -45,13 +46,11 @@
                         </li>
                     </ul>
                     <div v-if="isLoggedin" class="navbar-nav">
-                        <router-link to="/dashboard"><button class="boton-login ordenador">Hola, {{ user.nombre }}!</button></router-link>
                         <router-link to="/"><button class="boton-login ordenador" @click="logout">Cerrar Sesión</button></router-link>
-                        <router-link to="/carrito"><img class="logo-carrito" src="../images/carrito.svg" alt="Carrito de la compra">{{ numProductos }}</router-link>
+                        <router-link to="/carrito"><img class="logo-carrito" src="../images/carrito.svg" alt="Carrito de la compra"></router-link>
                     </div>
                     <div v-else class="navbar-nav">
                         <router-link to="/login"><button class="boton-login ordenador">Iniciar sesión</button></router-link>
-                        <router-link to="/register"><button class="boton-login ordenador">Registrarse</button></router-link>
                     </div>
                 </div>
             </div>

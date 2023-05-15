@@ -803,6 +803,10 @@ li:nth-child(3) .slide-circulo {
     padding-right: 1.5rem;
 }
 
+.logo-carrito:hover{
+    content: url("../images/carrito-azul.svg");
+}
+
 /* CARRITO */
 
 .carrito{
@@ -1199,6 +1203,11 @@ li:nth-child(3) .slide-circulo {
     .logo-carrito{
         margin-left: 3%;
         margin-bottom: 3%;
+    }
+
+    .logo-carrito:hover{
+        width: 63px;
+        transform: translate(258%, 0%);
     }
 
     .navbar-toggler{

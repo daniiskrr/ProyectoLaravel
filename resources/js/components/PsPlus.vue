@@ -59,7 +59,7 @@
                 <div class="plan">
                     <img src="../../images/premium.webp" alt="Premium Plan">
                     <h3>Plan Premium</h3>
-                    <p>Disfruta de todos los beneficios principales de PlayStation Plus, cientos de juegos de catálogo de juegos, así como beneficios exclusivos como pruebas de juegos, streaming en la nube y el catálogo de clásicos.</p>
+                    <p>Disfruta de todos los beneficios principales de PlayStation Plus, cientos de juegos de catálogo de juegos, así como beneficios exclusivos como pruebas de juegos y streaming en la nube.</p>
                     <p class="precio">119,99€/ 12 meses</p>
                     <router-link to="/tienda"><a href="#" class="boton">Más información</a></router-link>
                 </div>

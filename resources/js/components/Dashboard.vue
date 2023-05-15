@@ -3,7 +3,7 @@
         <div class="registrar">
             <form @submit.prevent="updateUser" method="POST" class="formulario-registrar">
                 <div style="display: flex; align-items: center; justify-content: space-between;">
-                    <h2 style="margin: 0;">Mis Datos</h2>
+                    <h2 style="margin: 0;">Hola, {{ user.nombre}}!</h2>
                     <router-link :to="{name: 'posts'}" style="margin-left: auto;">Atrás</router-link>
                 </div>
                 <hr>

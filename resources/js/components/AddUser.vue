@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isLoggedin && user.role === 'Administrador'" class="container">
+    <div v-if="isLoggedin && user.role === 'Administrador'">
                 <div class="registrar">
                     <form class="formulario-registrar" @submit.prevent="addUser">
                         <div style="display: flex; align-items: center; justify-content: space-between;">
